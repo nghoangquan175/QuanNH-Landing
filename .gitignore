@@ -1,1 +1,8 @@
+# Reference material — third-party video and frames, never pushed.
 example/
+
+node_modules/
+.env*
+!.env.sample
+.DS_Store
+*.log

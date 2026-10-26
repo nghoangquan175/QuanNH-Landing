@@ -1,0 +1,6 @@
+# pnpm 10+ refuses to run a dependency's install scripts unless it is approved here.
+# Without it sharp never builds, and image optimisation degrades quietly.
+allowBuilds:
+  '@parcel/watcher': true
+  sharp: true
+  unrs-resolver: true

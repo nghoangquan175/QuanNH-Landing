@@ -1,0 +1,40 @@
+# Deploy stack: both apps as containers.
+#
+#     docker compose up -d --build
+#
+# Each app reads its secrets from its own .env (copy from .env.sample). The frontend's
+# NEXT_PUBLIC_* values are baked in at build time, so they are passed as build args.
+services:
+  backend:
+    build: ./backend
+    container_name: portfolio-backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    ports:
+      - "1337:1337"
+    volumes:
+      - portfolio-db:/app/.tmp
+      - portfolio-uploads:/app/public/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_SITE_ENV: ${NEXT_PUBLIC_SITE_ENV:-development}
+        NEXT_PUBLIC_STRAPI_API_URL: ${NEXT_PUBLIC_STRAPI_API_URL:-http://localhost:1337}
+        STRAPI_API_URL: ${STRAPI_API_URL:-http://localhost:1337}
+    container_name: portfolio-frontend
+    restart: unless-stopped
+    env_file: ./frontend/.env
+    environment:
+      # Server-side CMS calls go container-to-container.
+      STRAPI_API_URL: http://backend:1337
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  portfolio-db:
+  portfolio-uploads:
