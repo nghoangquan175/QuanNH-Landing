@@ -3,6 +3,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
+import { Personal } from "@/components/sections/Personal";
 import { Skills } from "@/components/sections/Skills";
 import { Work } from "@/components/sections/Work";
 import { getPortfolio } from "@/lib/api/portfolio";
@@ -16,6 +17,7 @@ export default async function Home() {
       <main>
         <Hero hero={data.hero} />
         <Work work={data.work} />
+        <Personal personal={data.personal} />
         <Skills skills={data.skills} />
         <Experience experience={data.experience} />
         <Contact contact={data.contact} />

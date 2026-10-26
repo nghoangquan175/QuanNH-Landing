@@ -4,9 +4,19 @@ export type Stat = { value: string; label: string };
 
 export type Project = {
   title: string;
+  period: string;
   description: string;
   role: string;
   /** Live sites; empty while a project is pre-launch. */
+  links: Link[];
+};
+
+export type PersonalProject = {
+  title: string;
+  period: string;
+  description: string;
+  tags: string;
+  /** Public links only; a private repo gets none. */
   links: Link[];
 };
 
@@ -27,6 +37,7 @@ export type Portfolio = {
     stats: Stat[];
   };
   work: SectionHeading & { projects: Project[] };
+  personal: SectionHeading & { projects: PersonalProject[] };
   skills: SectionHeading & { groups: SkillGroup[] };
   experience: SectionHeading & { jobs: Job[] };
   contact: SectionHeading & { links: (Link & { primary: boolean })[] };

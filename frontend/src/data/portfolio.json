@@ -8,6 +8,10 @@
         "href": "#work"
       },
       {
+        "label": "Personal",
+        "href": "#personal"
+      },
+      {
         "label": "Skills",
         "href": "#skills"
       },
@@ -69,13 +73,26 @@
   },
   "work": {
     "eyebrow": "01 / SELECTED WORK",
-    "title": "Each project, one step further.",
+    "title": "Client projects, newest first.",
     "projects": [
+      {
+        "title": "John Holland Group",
+        "description": "Monthly maintenance of a major Australian corporate site with 50+ CMS content types.",
+        "role": "Maintenance",
+        "links": [
+          {
+            "label": "johnholland.com.au",
+            "href": "https://johnholland.com.au"
+          }
+        ],
+        "period": "SEP 2026"
+      },
       {
         "title": "READY.QUIT.SOLID",
         "description": "Quit-smoking platform for Aboriginal communities in Australia. Next.js + Strapi, HubSpot CRM.",
         "role": "Full-stack",
-        "links": []
+        "links": [],
+        "period": "AUG — SEP 2026"
       },
       {
         "title": "House Nine & Nine and Found",
@@ -90,18 +107,8 @@
             "label": "nineandfound.com",
             "href": "https://www.nineandfound.com"
           }
-        ]
-      },
-      {
-        "title": "John Holland Group",
-        "description": "Monthly maintenance of a major Australian corporate site with 50+ CMS content types.",
-        "role": "Maintenance",
-        "links": [
-          {
-            "label": "johnholland.com.au",
-            "href": "https://johnholland.com.au"
-          }
-        ]
+        ],
+        "period": "JUL — SEP 2026"
       },
       {
         "title": "Flip The Vape",
@@ -112,7 +119,8 @@
             "label": "flipthevape.com",
             "href": "https://flipthevape.com"
           }
-        ]
+        ],
+        "period": "MAY — JUN 2026"
       },
       {
         "title": "Hatch Quarter",
@@ -123,23 +131,38 @@
             "label": "hatchquarter.com.au",
             "href": "https://hatchquarter.com.au"
           }
-        ]
-      },
+        ],
+        "period": "MAY — JUN 2026"
+      }
+    ]
+  },
+  "personal": {
+    "eyebrow": "02 / PERSONAL WORK",
+    "title": "Built on my own time.",
+    "projects": [
       {
         "title": "LoadForge",
-        "description": "AWS auto-scaling lab built with Terraform: 26.7 → 39.2 req/s under load.",
-        "role": "AWS lab",
+        "period": "SEP — OCT 2026",
+        "description": "AWS auto-scaling lab provisioned with Terraform. Load-tested with k6: throughput 26.7 → 39.2 req/s (+47%), health-check latency under load from ~20 s to 8 ms.",
+        "tags": "AWS · Terraform · NestJS · Next.js · k6",
         "links": [
           {
             "label": "loadforge.quannh.xyz",
             "href": "https://loadforge.quannh.xyz"
           }
         ]
+      },
+      {
+        "title": "Coding Guide",
+        "period": "IN DAILY USE",
+        "description": "Claude Code skills distilled from client work: a review checklist built from recurring bugs, ClickUp MCP bug-fix automation, Next.js + Strapi setup and EC2 deploy playbooks.",
+        "tags": "Claude Code · MCP · Next.js · Strapi · AWS",
+        "links": []
       }
     ]
   },
   "skills": {
-    "eyebrow": "02 / STACK",
+    "eyebrow": "03 / STACK",
     "title": "Tools I reach for.",
     "groups": [
       {
@@ -161,7 +184,7 @@
     ]
   },
   "experience": {
-    "eyebrow": "03 / EXPERIENCE",
+    "eyebrow": "04 / EXPERIENCE",
     "title": "Where I've worked.",
     "jobs": [
       {
@@ -185,7 +208,7 @@
     ]
   },
   "contact": {
-    "eyebrow": "04 / CONTACT",
+    "eyebrow": "05 / CONTACT",
     "title": "Let's build the next step.",
     "links": [
       {
