@@ -266,8 +266,56 @@
       }
     ]
   },
+  "language": {
+    "eyebrow": "05 / LANGUAGE",
+    "title": "Working in English, every day.",
+    "text": "Every client I've worked with so far has been abroad, so English is the language my work happens in — from the first call to the handover.",
+    "certificate": {
+      "name": "IELTS Academic",
+      "date": "DEC 2025",
+      "overall": "6.5",
+      "cefr": "B2",
+      "scores": [
+        {
+          "label": "Listening",
+          "value": "7.0"
+        },
+        {
+          "label": "Reading",
+          "value": "6.5"
+        },
+        {
+          "label": "Writing",
+          "value": "7.0"
+        },
+        {
+          "label": "Speaking",
+          "value": "5.5"
+        }
+      ],
+      "imageAlt": "IELTS Academic Test Report Form, overall band 6.5 (personal ID and date of birth hidden)"
+    },
+    "uses": [
+      {
+        "label": "WRITING",
+        "text": "Day-to-day work with clients in writing over Slack and ClickUp: clarifying requirements, raising questions early, reporting progress and answering UAT feedback."
+      },
+      {
+        "label": "MEETINGS",
+        "text": "Kick-offs, milestone reviews and UAT walkthroughs on Google Meet, where scope and priorities get agreed out loud."
+      },
+      {
+        "label": "DOCUMENTS",
+        "text": "Handover documentation and user guides written for the client's own team."
+      },
+      {
+        "label": "READING",
+        "text": "Working straight from English documentation, specs and design notes, without translation in between."
+      }
+    ]
+  },
   "contact": {
-    "eyebrow": "05 / CONTACT",
+    "eyebrow": "06 / CONTACT",
     "title": "Let's build the next step.",
     "text": "A project, a role or just a question about something on this page — write to me. Email is the fastest way to reach me.",
     "email": "nghoangquan1705@gmail.com",

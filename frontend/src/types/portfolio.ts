@@ -53,6 +53,18 @@ export type Portfolio = {
   personal: SectionHeading & { projects: PersonalProject[] };
   skills: SectionHeading & { groups: SkillGroup[] };
   experience: SectionHeading & { jobs: Job[] };
+  language: SectionHeading & {
+    text: string;
+    certificate: {
+      name: string;
+      date: string;
+      overall: string;
+      cefr: string;
+      scores: Stat[];
+      imageAlt: string;
+    };
+    uses: { label: string; text: string }[];
+  };
   contact: SectionHeading & {
     text: string;
     email: string;

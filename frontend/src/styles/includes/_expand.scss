@@ -50,3 +50,33 @@
     transition: none;
   }
 }
+
+// Certificate viewer (components/ui/CertificateViewer.tsx): fade the backdrop in and let
+// the scan settle from a hair smaller.
+.viewer {
+  animation: viewer-in 0.2s ease-out;
+}
+
+.viewer-image > img {
+  animation: viewer-image-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes viewer-image-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer,
+  .viewer-image > img {
+    animation: none;
+  }
+}
