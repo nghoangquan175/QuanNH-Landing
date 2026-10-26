@@ -26,6 +26,8 @@ ENV NODE_ENV=production \
     JWT_SECRET=build \
     ENCRYPTION_KEY=build
 RUN pnpm build
+# The admin is pre-built into dist/ — drop devDependencies so the image fits a small disk.
+RUN CI=true pnpm prune --prod --ignore-scripts
 
 FROM node:${NODE_VERSION}-bookworm-slim AS runner
 ENV NODE_ENV=production \

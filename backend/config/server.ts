@@ -4,6 +4,9 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
   url: env('PUBLIC_URL', `http://localhost:${env.int('PORT', 1337)}`),
+  // Behind Nginx in production: trust X-Forwarded-Proto so the admin's secure cookies
+  // are issued over the proxied HTTPS connection.
+  proxy: { koa: env.bool('IS_PROXIED', false) },
   app: {
     keys: env.array('APP_KEYS')!,
   },

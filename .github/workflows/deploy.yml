@@ -1,0 +1,108 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - "backend/**"
+      - "deploy/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+# One deploy at a time; a newer push waits rather than racing the server.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ghcr.io/nghoangquan175/portfolio
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        app: [frontend, backend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./${{ matrix.app }}
+          push: true
+          tags: |
+            ${{ env.IMAGE_PREFIX }}-${{ matrix.app }}:${{ github.sha }}
+            ${{ env.IMAGE_PREFIX }}-${{ matrix.app }}:latest
+          # Ignored by the backend Dockerfile, which declares no ARGs. Every NEXT_PUBLIC_*
+          # is baked into the frontend bundle here, and STRAPI_API_URL feeds the CSP.
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=https://quannh.xyz
+            NEXT_PUBLIC_SITE_ENV=production
+            NEXT_PUBLIC_STRAPI_API_URL=https://cms.quannh.xyz
+            STRAPI_API_URL=https://cms.quannh.xyz
+          cache-from: type=gha,scope=${{ matrix.app }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.app }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.EC2_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Upload compose file
+        run: scp -i ~/.ssh/deploy_key deploy/docker-compose.prod.yml "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/opt/portfolio/docker-compose.yml"
+
+      - name: Pull and restart
+        # GITHUB_TOKEN goes over stdin and is only valid for this job, so no long-lived
+        # registry credential is ever stored on the server.
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | ssh -i ~/.ssh/deploy_key "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" "
+            set -e
+            cd /opt/portfolio
+            docker login ghcr.io -u '${{ github.actor }}' --password-stdin
+            export TAG='${{ github.sha }}'
+            docker compose pull
+            docker compose up -d --remove-orphans
+            docker logout ghcr.io
+            # 8 GB disk: keep only the images in use.
+            docker image prune -af
+          "
+
+      - name: Smoke test
+        # Runs on the server through Nginx with the real hostnames: Cloudflare's bot
+        # challenge answers a runner's curl with 403, which would say nothing about the app.
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" '
+            for host in quannh.xyz cms.quannh.xyz; do
+              path=/; [ "$host" = cms.quannh.xyz ] && path=/_health
+              for i in $(seq 1 30); do
+                code=$(curl -s -o /dev/null -w "%{http_code}" --resolve "$host:443:127.0.0.1" "https://$host$path" || true)
+                case "$code" in 200|204) echo "$host$path -> $code"; continue 2;; esac
+                sleep 5
+              done
+              echo "$host$path never became healthy (last status $code)"; exit 1
+            done
+          '

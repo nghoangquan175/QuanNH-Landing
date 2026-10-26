@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "http", hostname: "localhost", port: "1337" },
       { protocol: "http", hostname: "127.0.0.1", port: "1337" },
-      // TODO: the production CMS hostname once it exists.
+      { protocol: "https", hostname: "cms.quannh.xyz" },
     ],
     dangerouslyAllowSVG: false,
     dangerouslyAllowLocalIP: isDev,
