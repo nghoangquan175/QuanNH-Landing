@@ -30,12 +30,12 @@
     }
   },
   "hero": {
-    "tag": "// FULL-STACK DEVELOPER · HANOI",
+    "tag": "// BASED IN HANOI, VIETNAM",
     "titleLines": [
-      "Built for real clients.",
-      "Shipped for real users."
+      "Nguyen Hoang Quan",
+      "Full-stack developer."
     ],
-    "description": "I build production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.",
+    "description": "Built for real clients, shipped for real users — production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.",
     "primaryCta": {
       "label": "See my work",
       "href": "#work"
@@ -261,23 +261,27 @@
   "contact": {
     "eyebrow": "05 / CONTACT",
     "title": "Let's build the next step.",
+    "text": "A project, a role or just a question about something on this page — write to me. Email is the fastest way to reach me.",
+    "email": "nghoangquan1705@gmail.com",
     "links": [
       {
-        "label": "Email me",
-        "href": "mailto:nghoangquan1705@gmail.com",
-        "primary": true
+        "label": "LinkedIn",
+        "value": "in/nghoangquan175",
+        "href": "https://www.linkedin.com/in/nghoangquan175/"
       },
       {
         "label": "GitHub",
-        "href": "https://github.com/nghoangquan175",
-        "primary": false
-      },
-      {
-        "label": "LinkedIn",
-        "href": "https://www.linkedin.com/in/nghoangquan175/",
-        "primary": false
+        "value": "nghoangquan175",
+        "href": "https://github.com/nghoangquan175"
       }
-    ]
+    ],
+    "location": "Hanoi, Vietnam",
+    "timeZone": "Asia/Ho_Chi_Minh"
   },
-  "footer": "© 2026 Nguyen Hoang Quan"
+  "footer": {
+    "name": "Nguyen Hoang Quan",
+    "tagline": "Full-stack developer building production websites with Next.js, Strapi, NestJS and AWS.",
+    "location": "Hanoi, Vietnam",
+    "credit": "Built with Next.js & Strapi · Deployed on AWS"
+  }
 }

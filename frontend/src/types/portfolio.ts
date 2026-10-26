@@ -47,6 +47,13 @@ export type Portfolio = {
   personal: SectionHeading & { projects: PersonalProject[] };
   skills: SectionHeading & { groups: SkillGroup[] };
   experience: SectionHeading & { jobs: Job[] };
-  contact: SectionHeading & { links: (Link & { primary: boolean })[] };
-  footer: string;
+  contact: SectionHeading & {
+    text: string;
+    email: string;
+    links: (Link & { value: string })[];
+    location: string;
+    /** IANA zone for the live local-time readout. */
+    timeZone: string;
+  };
+  footer: { name: string; tagline: string; location: string; credit: string };
 };
