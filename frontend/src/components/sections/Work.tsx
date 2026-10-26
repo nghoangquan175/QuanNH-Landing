@@ -1,30 +1,48 @@
 import { Container } from "@/components/ui/Container";
+import { Expandable } from "@/components/ui/Expandable";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { Timeline } from "@/components/ui/Timeline";
 import type { Portfolio, Project } from "@/types/portfolio";
 
 function ProjectCard({ project }: { project: Project }) {
-  // A div, not a link: some projects have two live sites, so each site gets its own link.
   return (
-    <div className="step-card rounded-[16px] border border-line bg-panel p-[20px] 768:p-[24px]">
-      <div className="flex flex-wrap items-start justify-between gap-x-[16px] gap-y-[8px]">
-        <h3 className="text-[18px] font-bold 768:text-[20px]">{project.title}</h3>
-        <span className="whitespace-nowrap rounded-full border border-line px-[10px] py-[4px] font-mono text-[12px] text-muted">
-          {project.role}
-        </span>
-      </div>
-      <p className="mt-[6px] text-[14px] text-muted">{project.description}</p>
-      <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
-        <SiteLinks links={project.links} empty="pre-launch" />
-      </div>
-    </div>
+    <Expandable
+      label={project.title}
+      className="step-card rounded-[16px] border border-line bg-panel p-[20px] 768:p-[24px]"
+      header={
+        <>
+          <span className="flex flex-wrap items-center gap-x-[12px] gap-y-[6px]">
+            <span className="text-[18px] font-bold transition-colors duration-300 group-hover:text-accent 768:text-[20px]">
+              {project.title}
+            </span>
+            <span className="whitespace-nowrap rounded-full border border-line px-[10px] py-[3px] font-mono text-[11px] text-muted">
+              {project.role}
+            </span>
+          </span>
+          <span className="mt-[6px] block text-[14px] text-muted">{project.summary}</span>
+          <span className="mt-[8px] block font-mono text-[12px] text-muted opacity-80">{project.tags}</span>
+        </>
+      }
+      panelClassName="pt-[14px]"
+      footer={
+        <div className="mt-[12px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
+          <SiteLinks links={project.links} empty="pre-launch" />
+        </div>
+      }
+    >
+      <ul className="ml-[18px] list-disc space-y-[6px] text-[14px] text-text marker:text-muted">
+        {project.details.map((detail) => (
+          <li key={detail}>{detail}</li>
+        ))}
+      </ul>
+    </Expandable>
   );
 }
 
 export function Work({ work }: { work: Portfolio["work"] }) {
   return (
-    <section id="work" className="border-t border-line py-[64px] 768:py-[88px] 1024:py-[110px]">
+    <section id="work" className="border-t border-line pb-[48px] pt-[64px] 768:pb-[64px] 768:pt-[88px] 1024:pb-[72px] 1024:pt-[110px]">
       <Container>
         <SectionHeading eyebrow={work.eyebrow} title={work.title} />
         <Timeline

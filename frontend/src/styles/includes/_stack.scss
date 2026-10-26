@@ -1,85 +1,16 @@
-// Stack section (sections/Skills.tsx): the hovered row's bottom rule lights up from the
-// left. Kept deliberately quiet.
+// Stack section (sections/Skills.tsx): hovering a row dims the others, so the row you
+// are reading comes forward without anything being drawn.
 
-.stack-row::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+.stack-row {
+  transition: opacity 0.35s ease;
 }
 
-.stack-row:hover::after {
-  transform: scaleX(1);
+.stack-list:hover .stack-row:not(:hover) {
+  opacity: 0.4;
 }
 
-// Personal work accordion (sections/PersonalList.tsx) — same quiet language as the stack
-// rows: the open row's rule is lit, the panel slides open, "+" turns into "×".
-
-.personal-row::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.personal-row.is-open::after {
-  transform: scaleX(1);
-}
-
-.personal-panel {
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition: grid-template-rows 0.45s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
-
-  .is-open > & {
-    grid-template-rows: 1fr;
+@media (hover: none) {
+  .stack-list:hover .stack-row:not(:hover) {
     opacity: 1;
-  }
-}
-
-// Two 1.5px bars: a "+" that rotates 45° into a "×" when open.
-.personal-toggle {
-  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 14px;
-    height: 1.5px;
-    background: currentColor;
-    transform: translate(-50%, -50%);
-  }
-
-  &::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-
-  .is-open & {
-    transform: rotate(45deg);
-    color: var(--accent);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .personal-panel,
-  .personal-toggle,
-  .personal-row::after,
-  .stack-row::after {
-    transition: none;
   }
 }

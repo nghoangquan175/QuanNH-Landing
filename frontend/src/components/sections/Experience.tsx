@@ -5,7 +5,7 @@ import type { Portfolio } from "@/types/portfolio";
 
 export function Experience({ experience }: { experience: Portfolio["experience"] }) {
   return (
-    <section id="experience" className="border-t border-line py-[64px] 768:py-[88px] 1024:py-[110px]">
+    <section id="experience" className="py-[48px] 768:py-[64px] 1024:py-[72px]">
       <Container>
         <SectionHeading eyebrow={experience.eyebrow} title={experience.title} />
         <Timeline

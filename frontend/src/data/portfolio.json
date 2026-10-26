@@ -25,7 +25,7 @@
       }
     ],
     "navCta": {
-      "label": "Hire me",
+      "label": "Contact me",
       "href": "#contact"
     }
   },
@@ -77,7 +77,6 @@
     "projects": [
       {
         "title": "John Holland Group",
-        "description": "Monthly maintenance of a major Australian corporate site with 50+ CMS content types.",
         "role": "Maintenance",
         "links": [
           {
@@ -85,18 +84,32 @@
             "href": "https://johnholland.com.au"
           }
         ],
-        "period": "SEP 2026"
+        "period": "SEP 2026",
+        "summary": "Corporate site of a major Australian infrastructure and construction company.",
+        "tags": "Next.js · React · TypeScript · Strapi 4",
+        "details": [
+          "Monthly maintenance cycle on the live site: bug fixes, small improvements and client change requests",
+          "Worked across the Next.js front end and a Strapi CMS with 50+ content types",
+          "Kept the editor setup the client's content team relies on working as the CMS changed"
+        ]
       },
       {
         "title": "READY.QUIT.SOLID",
-        "description": "Quit-smoking platform for Aboriginal communities in Australia. Next.js + Strapi, HubSpot CRM.",
         "role": "Full-stack",
         "links": [],
-        "period": "AUG — SEP 2026"
+        "period": "AUG — SEP 2026",
+        "summary": "Quit-smoking and vaping platform for Aboriginal and Torres Strait Islander communities.",
+        "tags": "Next.js 16 · TypeScript · Tailwind CSS · Strapi 5 · PostgreSQL · HubSpot API · Docker",
+        "details": [
+          "Main contributor on front end and CMS: built the Next.js site from Figma and designed the Strapi content models and APIs behind it",
+          "Integrated HubSpot CRM so contact and newsletter sign-ups flow straight into the client's marketing tools",
+          "Reached Lighthouse 86–99 performance and 96–100 accessibility on every page, mobile and desktop",
+          "Deployed staging with Docker on the company's self-hosted server and shipped client change requests",
+          "Worked directly with the Australian client over Slack and ClickUp: requirements, UAT feedback, fixes in short cycles"
+        ]
       },
       {
         "title": "House Nine & Nine and Found",
-        "description": "Portfolio site and headless Shopify store running from one custom NestJS CMS.",
         "role": "Full-stack",
         "links": [
           {
@@ -108,11 +121,19 @@
             "href": "https://www.nineandfound.com"
           }
         ],
-        "period": "JUL — SEP 2026"
+        "period": "JUL — SEP 2026",
+        "summary": "Rebuild for a UK interior design studio: portfolio site and headless Shopify store on one CMS.",
+        "tags": "Next.js 16 · NestJS · Prisma · PostgreSQL · Redis · Shopify",
+        "details": [
+          "Built features across 3 apps: 2 public Next.js sites (studio and Shopify store) and the NestJS + React CMS shared by both",
+          "Developed the CMS admin: content editors, media library, and user and role management",
+          "Integrated the Shopify Storefront API for product listings, filters and search",
+          "Made the sites faster and sturdier: lighter images, lazy loading, fewer API calls, pages that stay up when Shopify is down",
+          "Delivered in 3 milestones agreed with the client (UI, CMS, then docs and user guides), reviewed over Slack and Google Meet"
+        ]
       },
       {
         "title": "Flip The Vape",
-        "description": "National campaign site plus 8 state subsites from one component library.",
         "role": "Front-end",
         "links": [
           {
@@ -120,11 +141,17 @@
             "href": "https://flipthevape.com"
           }
         ],
-        "period": "MAY — JUN 2026"
+        "period": "MAY — JUN 2026",
+        "summary": "Public-health campaign site for Aboriginal communities, with a national site and regional subsites.",
+        "tags": "Next.js 14 · TypeScript · Tailwind CSS",
+        "details": [
+          "Turned Figma designs into a responsive front end that works across desktop, tablet and mobile",
+          "Built reusable UI components shared across the national site and 8 state and territory subsites",
+          "Built animated, interactive sections for the campaign content and delivered client change requests"
+        ]
       },
       {
         "title": "Hatch Quarter",
-        "description": "Venture-acceleration firm site: 6 pages on Strapi CMS, maintained after launch.",
         "role": "Front-end",
         "links": [
           {
@@ -132,7 +159,14 @@
             "href": "https://hatchquarter.com.au"
           }
         ],
-        "period": "MAY — JUN 2026"
+        "period": "MAY — JUN 2026",
+        "summary": "Corporate site for a venture-acceleration firm working between Australia and the Middle East.",
+        "tags": "Next.js 16 · TypeScript · Tailwind CSS · Strapi 5",
+        "details": [
+          "Built 6 responsive pages plus the header, footer and mobile navigation from the design",
+          "Connected the pages to the Strapi CMS and built interactive sections such as animated sliders",
+          "Prepared the launch (client UI feedback, SEO fixes, sitemap) and kept maintaining the site after go-live"
+        ]
       }
     ]
   },
@@ -143,21 +177,34 @@
       {
         "title": "LoadForge",
         "period": "SEP — OCT 2026",
-        "description": "AWS auto-scaling lab provisioned with Terraform. Load-tested with k6: throughput 26.7 → 39.2 req/s (+47%), health-check latency under load from ~20 s to 8 ms.",
-        "tags": "AWS · Terraform · NestJS · Next.js · k6",
+        "tags": "AWS · Terraform · NestJS · Next.js · k6 · GitHub Actions",
         "links": [
           {
             "label": "loadforge.quannh.xyz",
             "href": "https://loadforge.quannh.xyz"
           }
+        ],
+        "summary": "A self-built lab for learning AWS: load-test an auto-scaling Node.js fleet, then harden it step by step.",
+        "details": [
+          "Provisioned the whole stack with Terraform: VPC, HTTPS load balancer, EC2 Auto Scaling with CloudWatch alarms, keyless GitHub OIDC deploys",
+          "Three apps: the servers under test (NestJS), a watcher that streams the Auto Scaling group and CloudWatch over SSE, and a Next.js dashboard",
+          "Raised throughput by 47% (26.7 → 39.2 req/s), cut health-check latency under load from ~20 s to 8 ms and scale-out from ~3 min to 30–50 s",
+          "Every change measured with a k6 load generator, shipped through zero-downtime CI/CD"
         ]
       },
       {
         "title": "Coding Guide",
         "period": "IN DAILY USE",
-        "description": "Claude Code skills distilled from client work: a review checklist built from recurring bugs, ClickUp MCP bug-fix automation, Next.js + Strapi setup and EC2 deploy playbooks.",
         "tags": "Claude Code · MCP · Next.js · Strapi · AWS",
-        "links": []
+        "links": [],
+        "summary": "Claude Code skills distilled from lessons on client projects, used in daily work.",
+        "details": [
+          "A review checklist built from the bugs that came up most often across projects, checked against every change",
+          "Bug-fix workflow automated via ClickUp MCP: fix, self-review, open pull requests and report back, with human approval at each step",
+          "One-command setup for new Next.js + Strapi projects, wired to the client's technical criteria",
+          "EC2 deploy playbooks (Docker + GHCR, and PM2) that record every mistake made on the first production run",
+          "General UI/UX rules with a review checklist for building and reviewing screens"
+        ]
       }
     ]
   },

@@ -5,8 +5,12 @@ export type Stat = { value: string; label: string };
 export type Project = {
   title: string;
   period: string;
-  description: string;
+  /** One line shown while collapsed. */
+  summary: string;
   role: string;
+  tags: string;
+  /** What I did, shown when expanded. */
+  details: string[];
   /** Live sites; empty while a project is pre-launch. */
   links: Link[];
 };
@@ -14,8 +18,11 @@ export type Project = {
 export type PersonalProject = {
   title: string;
   period: string;
-  description: string;
+  /** One line shown while collapsed. */
+  summary: string;
   tags: string;
+  /** Shown when expanded. */
+  details: string[];
   /** Public links only; a private repo gets none. */
   links: Link[];
 };

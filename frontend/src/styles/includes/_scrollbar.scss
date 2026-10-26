@@ -57,7 +57,7 @@
     width: 7px;
     opacity: 1;
     background: rgba(var(--glow), 0.75);
-    box-shadow: 0 0 10px rgba(var(--glow), 0.45);
+    box-shadow: 0 0 6px rgba(var(--glow), 0.25);
   }
 
   .scrollbar.is-dragging & {

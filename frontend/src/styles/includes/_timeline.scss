@@ -12,8 +12,8 @@
   border-radius: 2px;
   background: linear-gradient(
     180deg,
-    rgba(var(--glow), 0.7),
-    rgba(var(--glow), 0.25) 70%,
+    rgba(var(--glow), 0.5),
+    rgba(var(--glow), 0.18) 70%,
     rgba(var(--glow), 0)
   );
 
@@ -45,12 +45,12 @@
   border-radius: 50%;
   background: var(--bg);
   border: 2px solid var(--accent);
-  box-shadow: 0 0 12px rgba(var(--glow), 0.6);
+  box-shadow: 0 0 8px rgba(var(--glow), 0.3);
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 // The entry being hovered lights its dot.
 li:hover > .timeline-dot {
   background: var(--accent);
-  box-shadow: 0 0 18px rgba(var(--glow), 0.9);
+  box-shadow: 0 0 10px rgba(var(--glow), 0.45);
 }
