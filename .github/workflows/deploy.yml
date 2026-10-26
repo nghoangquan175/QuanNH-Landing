@@ -83,7 +83,8 @@ jobs:
             set -e
             cd /opt/portfolio
             docker login ghcr.io -u '${{ github.actor }}' --password-stdin
-            export TAG='${{ github.sha }}'
+            # Persisted so a manual `docker compose up` on the server keeps the same images.
+            echo 'TAG=${{ github.sha }}' > .env
             docker compose pull
             docker compose up -d --remove-orphans
             docker logout ghcr.io

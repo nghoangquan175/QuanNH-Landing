@@ -1,5 +1,5 @@
 # Production stack on EC2 — copied to /opt/portfolio/docker-compose.yml by the deploy
-# workflow, which also sets TAG to the commit being deployed.
+# workflow, which also writes TAG (the commit being deployed) to /opt/portfolio/.env.
 #
 # Images are built by GitHub Actions and pulled from GHCR; the server never builds.
 # Secrets live next to this file in backend.env / frontend.env (mode 600), never in git.
