@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui/Container";
-import { Expandable } from "@/components/ui/Expandable";
+import { ExpandGroup, Expandable } from "@/components/ui/Expandable";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { Timeline } from "@/components/ui/Timeline";
@@ -45,13 +45,15 @@ export function Work({ work }: { work: Portfolio["work"] }) {
     <section id="work" className="border-t border-line pb-[48px] pt-[64px] 768:pb-[64px] 768:pt-[88px] 1024:pb-[72px] 1024:pt-[110px]">
       <Container>
         <SectionHeading eyebrow={work.eyebrow} title={work.title} />
-        <Timeline
-          items={work.projects.map((project) => ({
-            key: project.title,
-            period: project.period,
-            content: <ProjectCard project={project} />,
-          }))}
-        />
+        <ExpandGroup>
+          <Timeline
+            items={work.projects.map((project) => ({
+              key: project.title,
+              period: project.period,
+              content: <ProjectCard project={project} />,
+            }))}
+          />
+        </ExpandGroup>
       </Container>
     </section>
   );

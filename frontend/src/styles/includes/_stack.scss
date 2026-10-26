@@ -1,16 +1,29 @@
-// Stack section (sections/Skills.tsx): hovering a row dims the others, so the row you
-// are reading comes forward without anything being drawn.
+// Stack section (sections/Skills.tsx): the hovered row gets a short accent bar on its
+// left edge — only as tall as the row, so it stays small on any screen width.
 
 .stack-row {
-  transition: opacity 0.35s ease;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    width: 2px;
+    height: 22px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: translateY(-50%) scaleY(0);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &:hover::before {
+    transform: translateY(-50%) scaleY(1);
+  }
 }
 
-.stack-list:hover .stack-row:not(:hover) {
-  opacity: 0.4;
-}
-
-@media (hover: none) {
-  .stack-list:hover .stack-row:not(:hover) {
-    opacity: 1;
+@media (prefers-reduced-motion: reduce) {
+  .stack-row::before {
+    transition: none;
   }
 }

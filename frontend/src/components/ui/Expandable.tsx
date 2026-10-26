@@ -1,52 +1,66 @@
 "use client";
 
-import { useId, useState } from "react";
+import { createContext, useContext, useId, useState } from "react";
 import { cn } from "@/lib/cn";
 
+/** Wrap a list in this and only one of its Expandables can be open at a time. */
+const GroupContext = createContext<{ openId: string | null; setOpenId: (id: string | null) => void } | null>(null);
+
+export function ExpandGroup({ children }: { children: React.ReactNode }) {
+  const [openId, setOpenId] = useState<string | null>(null);
+  return <GroupContext.Provider value={{ openId, setOpenId }}>{children}</GroupContext.Provider>;
+}
+
 type Props = {
-  /** Always visible; the whole area toggles the panel. */
+  /** Always visible. */
   header: React.ReactNode;
   /** Revealed when open. */
   children: React.ReactNode;
-  /** Rendered after the panel, outside the toggle — for links, which can't nest in a button. */
+  /** Rendered after the panel; always visible. */
   footer?: React.ReactNode;
   className?: string;
   headerClassName?: string;
   panelClassName?: string;
-  defaultOpen?: boolean;
   label: string;
 };
 
 /**
- * Header + collapsible panel. Height animates via grid-template-rows 0fr → 1fr
- * (styles/includes/_expand.scss), so nothing is measured in JS. The "+" turns into "×".
+ * Header + collapsible panel. The WHOLE block toggles — header, open panel, padding —
+ * except links (they open in a new tab) and clicks that end a text selection. The
+ * header is still a real button so keyboards and screen readers get aria-expanded.
+ * Height animates via grid-template-rows 0fr → 1fr (styles/includes/_expand.scss).
  */
-export function Expandable({
-  header,
-  children,
-  footer,
-  className,
-  headerClassName,
-  panelClassName,
-  defaultOpen = false,
-  label,
-}: Props) {
-  const [open, setOpen] = useState(defaultOpen);
-  const panelId = useId();
+export function Expandable({ header, children, footer, className, headerClassName, panelClassName, label }: Props) {
+  const id = useId();
+  const group = useContext(GroupContext);
+  const [localOpen, setLocalOpen] = useState(false);
+  const open = group ? group.openId === id : localOpen;
+
+  const toggle = () => {
+    if (group) group.setOpenId(open ? null : id);
+    else setLocalOpen((v) => !v);
+  };
+
+  const onClick = (event: React.MouseEvent) => {
+    if ((event.target as Element).closest("a")) return;
+    if (window.getSelection()?.toString()) return;
+    toggle();
+  };
 
   return (
-    <div className={cn("expandable", open && "is-open", className)}>
+    // The button inside carries the keyboard/AT semantics; this handler only widens the
+    // pointer target to the whole block, so it is not a second control.
+    <div className={cn("expandable group cursor-pointer", open && "is-open", className)} onClick={onClick}>
       <button
         type="button"
         aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen((v) => !v)}
-        className={cn("group grid w-full grid-cols-[1fr_auto] items-start gap-x-[16px] text-left", headerClassName)}
+        aria-controls={`${id}-panel`}
+        className={cn("grid w-full grid-cols-[1fr_auto] items-start gap-x-[16px] text-left", headerClassName)}
       >
         <span className="min-w-0">{header}</span>
         <span className="expand-toggle relative mt-[6px] size-[18px] shrink-0 text-muted transition-colors group-hover:text-accent" aria-hidden="true" />
       </button>
-      <div id={panelId} role="region" aria-label={label} className="expand-panel grid">
+      <div id={`${id}-panel`} role="region" aria-label={label} className="expand-panel grid">
         <div className="min-h-0 overflow-hidden">
           <div className={panelClassName}>{children}</div>
         </div>
