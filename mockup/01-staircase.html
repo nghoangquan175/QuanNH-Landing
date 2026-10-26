@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 · Staircase — Nguyen Hoang Quan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#07080b;--panel:#0f1117;--line:#1f2330;--text:#e9ecf3;--muted:#8a91a3;--accent:#7cf5c4;--accent2:#5b8cff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(7,8,11,.7);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .logo{font-family:"JetBrains Mono";font-weight:600}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--muted)}
+  nav ul a:hover{color:var(--text)}
+  .btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px}
+  .btn.primary{background:var(--accent);color:#04120c}
+  .btn.ghost{border:1px solid var(--line)}
+
+  /* HERO: stepped blocks rising toward the centre */
+  .hero{position:relative;padding:120px 0 0;text-align:center;overflow:hidden}
+  .hero .tag{font-family:"JetBrains Mono";font-size:13px;color:var(--accent);letter-spacing:.1em}
+  .hero h1{font-size:clamp(44px,8vw,96px);line-height:1;font-weight:800;letter-spacing:-.04em;margin:18px 0}
+  .hero p{color:var(--muted);max-width:560px;margin:0 auto 32px}
+  .hero .cta{display:flex;gap:12px;justify-content:center}
+  .stairs{display:grid;grid-template-columns:repeat(9,1fr);align-items:end;gap:6px;margin-top:80px;height:260px}
+  .stairs div{background:linear-gradient(180deg,var(--panel),#0a0c11);border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0}
+  .stairs div:nth-child(1),.stairs div:nth-child(9){height:100%}
+  .stairs div:nth-child(2),.stairs div:nth-child(8){height:80%}
+  .stairs div:nth-child(3),.stairs div:nth-child(7){height:60%}
+  .stairs div:nth-child(4),.stairs div:nth-child(6){height:40%}
+  .stairs div:nth-child(5){height:22%;background:linear-gradient(180deg,var(--accent),transparent);opacity:.5}
+  .stairs .stat{display:flex;flex-direction:column;justify-content:flex-start;padding:16px;text-align:left}
+  .stat b{font-size:28px}
+  .stat small{color:var(--muted);font-size:12px}
+
+  section{padding:110px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:"JetBrains Mono";color:var(--accent);font-size:13px;margin-bottom:12px}
+  h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin-bottom:40px}
+
+  /* Projects as descending steps */
+  .steps{display:flex;flex-direction:column;gap:18px}
+  .step{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .step:nth-child(2){margin-left:6%}.step:nth-child(3){margin-left:12%}.step:nth-child(4){margin-left:18%}.step:nth-child(5){margin-left:24%}
+  .step .n{font-family:"JetBrains Mono";font-size:40px;color:var(--line);font-weight:600}
+  .step h3{font-size:20px}
+  .step p{color:var(--muted);font-size:14px}
+  .chip{font-family:"JetBrains Mono";font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted);white-space:nowrap}
+
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .skill{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .skill h4{font-size:13px;color:var(--accent);font-family:"JetBrains Mono";margin-bottom:10px}
+  .skill p{color:var(--muted);font-size:14px}
+
+  .timeline{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .job{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+  .job .when{font-family:"JetBrains Mono";font-size:12px;color:var(--muted)}
+  .job h3{margin:6px 0 10px}
+  .job li{color:var(--muted);font-size:14px;margin-left:18px}
+
+  .contact{text-align:center}
+  .contact h2{font-size:clamp(40px,7vw,80px)}
+  footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--line);text-align:center}
+  @media (max-width:800px){nav ul{display:none}.skills,.timeline{grid-template-columns:1fr 1fr}.step{grid-template-columns:1fr;margin-left:0!important}.stairs{height:180px}}
+  @media (max-width:520px){.skills,.timeline{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="#">quannh<span>.xyz</span></a>
+  <ul><li><a href="#work">Work</a></li><li><a href="#skills">Skills</a></li><li><a href="#exp">Experience</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a class="btn ghost" href="#contact">Hire me</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="tag">// FULL-STACK DEVELOPER · HANOI</div>
+  <h1>Built for real clients.<br>Shipped for real users.</h1>
+  <p>I build production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.</p>
+  <div class="cta"><a class="btn primary" href="#work">See my work</a><a class="btn ghost" href="#contact">Get in touch</a></div>
+  <div class="stairs">
+    <div class="stat"><b>5</b><small>production sites</small></div>
+    <div class="stat"><b>2</b><small>countries</small></div>
+    <div class="stat"><b>99</b><small>Lighthouse perf</small></div>
+    <div></div><div></div><div></div>
+    <div class="stat"><b>3</b><small>apps, 1 CMS</small></div>
+    <div class="stat"><b>47%</b><small>throughput gain</small></div>
+    <div class="stat"><b>1+</b><small>years shipping</small></div>
+  </div>
+</div></header>
+
+<section id="work"><div class="wrap">
+  <div class="eyebrow">01 / SELECTED WORK</div>
+  <h2>Each project, one step further.</h2>
+  <div class="steps">
+    <a class="step" href="#"><span class="n">01</span><div><h3>READY.QUIT.SOLID</h3><p>Quit-smoking platform for Aboriginal communities in Australia. Next.js + Strapi, HubSpot CRM.</p></div><span class="chip">Full-stack</span></a>
+    <a class="step" href="#"><span class="n">02</span><div><h3>House Nine &amp; Nine and Found</h3><p>Portfolio site and headless Shopify store running from one custom NestJS CMS.</p></div><span class="chip">Full-stack</span></a>
+    <a class="step" href="#"><span class="n">03</span><div><h3>John Holland Group</h3><p>Monthly maintenance of a major Australian corporate site with 50+ CMS content types.</p></div><span class="chip">Maintenance</span></a>
+    <a class="step" href="#"><span class="n">04</span><div><h3>Flip The Vape</h3><p>National campaign site plus 8 state subsites from one component library.</p></div><span class="chip">Front-end</span></a>
+    <a class="step" href="#"><span class="n">05</span><div><h3>LoadForge</h3><p>AWS auto-scaling lab built with Terraform: 26.7 → 39.2 req/s under load.</p></div><span class="chip">AWS lab</span></a>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="eyebrow">02 / STACK</div>
+  <h2>Tools I reach for.</h2>
+  <div class="skills">
+    <div class="skill"><h4>FRONT-END</h4><p>Next.js, React, Tailwind CSS, TypeScript</p></div>
+    <div class="skill"><h4>BACK-END &amp; CMS</h4><p>NestJS, Node.js, Strapi, Prisma</p></div>
+    <div class="skill"><h4>DATA</h4><p>PostgreSQL, Redis, MySQL, MongoDB</p></div>
+    <div class="skill"><h4>CLOUD</h4><p>AWS, Terraform, Docker, GitHub Actions</p></div>
+  </div>
+</div></section>
+
+<section id="exp"><div class="wrap">
+  <div class="eyebrow">03 / EXPERIENCE</div>
+  <h2>Where I've worked.</h2>
+  <div class="timeline">
+    <div class="job"><div class="when">MAR 2026 — PRESENT</div><h3>Full-stack Developer · MOHA Software</h3><ul><li>5 production websites for AU &amp; UK clients</li><li>Figma → Next.js, Strapi and NestJS back ends</li><li>Claude Code + MCP in the daily workflow</li></ul></div>
+    <div class="job"><div class="when">JUL 2025 — DEC 2025</div><h3>Intern Software Developer · ADD Group</h3><ul><li>Websites with HTML, CSS, JS and Blogger</li><li>Google Cloud integrations with Sheets &amp; Chat</li><li>Internal hardware, network and servers</li></ul></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <div class="eyebrow">04 / CONTACT</div>
+  <h2>Let's build the next step.</h2>
+  <div class="cta" style="display:flex;gap:12px;justify-content:center"><a class="btn primary" href="mailto:nghoangquan1705@gmail.com">Email me</a><a class="btn ghost" href="https://github.com/nghoangquan175">GitHub</a><a class="btn ghost" href="https://www.linkedin.com/in/nghoangquan175/">LinkedIn</a></div>
+</div></section>
+<footer>Mockup 01 · Staircase layout · <a href="index.html">all layouts</a></footer>
+</body>
+</html>
