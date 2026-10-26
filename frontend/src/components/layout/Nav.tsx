@@ -11,7 +11,7 @@ export function Nav({ site }: { site: Portfolio["site"] }) {
           {site.logo}
           <span className="text-accent">{site.logoAccent}</span>
         </a>
-        <ul className="hidden gap-[28px] text-[14px] text-muted 768:flex">
+        <ul className="hidden gap-[18px] text-[13px] text-muted 768:flex 1024:gap-[28px] 1024:text-[14px]">
           {site.nav.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="transition-colors hover:text-text">

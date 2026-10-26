@@ -12,12 +12,16 @@
         "href": "#personal"
       },
       {
-        "label": "Skills",
+        "label": "Stack",
         "href": "#skills"
       },
       {
         "label": "Experience",
         "href": "#experience"
+      },
+      {
+        "label": "Language",
+        "href": "#language"
       },
       {
         "label": "Contact",
