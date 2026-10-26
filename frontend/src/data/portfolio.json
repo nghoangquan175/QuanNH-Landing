@@ -1,7 +1,7 @@
 {
   "site": {
-    "logo": "quannh",
-    "logoAccent": ".xyz",
+    "logo": "Quan",
+    "logoAccent": "NH",
     "nav": [
       {
         "label": "Work",
@@ -163,8 +163,7 @@
   },
   "skills": {
     "eyebrow": "03 / STACK",
-    "title": "The stack, layer by layer.",
-    "caption": "How a request travels through what I build — from the screen down to the cloud.",
+    "title": "Tools I reach for.",
     "groups": [
       {
         "title": "AI WORKFLOW",

@@ -1,83 +1,85 @@
-// Stack section (sections/Skills.tsx): layered architecture with a request pulse
-// travelling down the middle.
+// Stack section (sections/Skills.tsx): the hovered row's bottom rule lights up from the
+// left. Kept deliberately quiet.
 
-.stack-flow {
-  // The line the request travels along, behind the layers.
-  &::before {
-    content: "";
-    position: absolute;
-    top: -24px;
-    bottom: -24px;
-    left: 50%;
-    width: 2px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, transparent, rgba(var(--glow), 0.35) 12%, rgba(var(--glow), 0.35) 88%, transparent);
+.stack-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.stack-row:hover::after {
+  transform: scaleX(1);
+}
+
+// Personal work accordion (sections/PersonalList.tsx) — same quiet language as the stack
+// rows: the open row's rule is lit, the panel slides open, "+" turns into "×".
+
+.personal-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.personal-row.is-open::after {
+  transform: scaleX(1);
+}
+
+.personal-panel {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.45s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+
+  .is-open > & {
+    grid-template-rows: 1fr;
+    opacity: 1;
   }
+}
 
-  // The pulse: a short glowing segment sliding from the top layer to the base. It runs
-  // behind the layers (they sit at z-index 1) and shows in the gaps between them, so it
-  // never crosses the text.
+// Two 1.5px bars: a "+" that rotates 45° into a "×" when open.
+.personal-toggle {
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+
+  &::before,
   &::after {
     content: "";
     position: absolute;
-    top: -24px;
     left: 50%;
-    z-index: 0;
-    width: 4px;
-    height: 56px;
-    border-radius: 4px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, transparent, var(--accent), transparent);
-    box-shadow: 0 0 18px rgba(var(--glow), 0.8);
-    animation: stack-pulse 3.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-    pointer-events: none;
+    top: 50%;
+    width: 14px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
   }
-}
 
-@keyframes stack-pulse {
-  0% {
-    top: -24px;
-    opacity: 0;
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
   }
-  10% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  100% {
-    top: calc(100% - 32px);
-    opacity: 0;
-  }
-}
 
-.stack-layer {
-  // A lit top edge, like the stairs in the hero.
-  border-top-color: rgba(var(--glow), 0.3);
-  box-shadow: 0 -8px 24px -16px rgba(var(--glow), 0.45);
-  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-
-  &:hover {
-    transform: translateY(-3px);
-    border-color: rgba(var(--glow), 0.5);
-    box-shadow: 0 0 36px -10px rgba(var(--glow), 0.45);
-  }
-}
-
-.stack-pill {
-  background: var(--bg);
-  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    border-color: rgba(var(--glow), 0.6);
+  .is-open & {
+    transform: rotate(45deg);
     color: var(--accent);
-    box-shadow: 0 0 12px -2px rgba(var(--glow), 0.5);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stack-flow::after {
-    animation: none;
-    opacity: 0;
+  .personal-panel,
+  .personal-toggle,
+  .personal-row::after,
+  .stack-row::after {
+    transition: none;
   }
 }

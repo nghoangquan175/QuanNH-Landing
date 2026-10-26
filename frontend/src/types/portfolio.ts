@@ -38,7 +38,7 @@ export type Portfolio = {
   };
   work: SectionHeading & { projects: Project[] };
   personal: SectionHeading & { projects: PersonalProject[] };
-  skills: SectionHeading & { caption: string; groups: SkillGroup[] };
+  skills: SectionHeading & { groups: SkillGroup[] };
   experience: SectionHeading & { jobs: Job[] };
   contact: SectionHeading & { links: (Link & { primary: boolean })[] };
   footer: string;

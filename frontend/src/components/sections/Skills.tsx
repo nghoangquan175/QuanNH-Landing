@@ -2,41 +2,32 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Portfolio } from "@/types/portfolio";
 
-// From 1024 up the layers widen as they go down — the narrow top is what users touch,
-// the wide base is what everything runs on. Full widths on smaller screens.
-const WIDTHS = ["1024:w-[64%]", "1024:w-[73%]", "1024:w-[82%]", "1024:w-[91%]", "1024:w-full"];
-
+/** A plain spec sheet: one row per group. The only motion is the row's underline. */
 export function Skills({ skills }: { skills: Portfolio["skills"] }) {
   return (
     <section id="skills" className="border-t border-line py-[64px] 768:py-[88px] 1024:py-[110px]">
       <Container>
         <SectionHeading eyebrow={skills.eyebrow} title={skills.title} />
-        <p className="-mt-[16px] mb-[36px] max-w-[520px] text-[15px] text-muted 768:-mt-[24px]">{skills.caption}</p>
-
-        {/* `stack-flow` draws the centre line and the pulse travelling down it. */}
-        <div className="stack-flow relative flex flex-col items-center gap-[16px] 768:gap-[18px]">
-          {skills.groups.map((group, i) => (
+        <dl className="border-t border-line">
+          {skills.groups.map((group) => (
             <div
               key={group.title}
-              className={`stack-layer relative z-[1] flex w-full flex-col gap-[12px] rounded-[14px] border border-line bg-panel px-[18px] py-[16px] 768:flex-row 768:items-center 768:gap-[24px] 768:px-[24px] ${WIDTHS[i] ?? "1024:w-full"}`}
+              className="stack-row group relative grid grid-cols-1 gap-[6px] border-b border-line py-[18px] 768:grid-cols-[220px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[22px]"
             >
-              <div className="flex shrink-0 items-baseline gap-[10px] 768:w-[190px]">
-                <span className="font-mono text-[11px] text-muted">L{i + 1}</span>
-                <h4 className="font-mono text-[13px] tracking-[0.04em] text-accent">{group.title}</h4>
-              </div>
-              <ul className="flex flex-wrap gap-[8px]">
+              <dt className="font-mono text-[12px] tracking-[0.08em] text-muted transition-colors duration-300 group-hover:text-accent">
+                {group.title}
+              </dt>
+              {/* Wrap between tools, never inside a name like "GitHub Actions". */}
+              <dd className="flex min-w-0 flex-wrap items-baseline gap-x-[22px] gap-y-[4px] text-[16px] 768:text-[18px]">
                 {group.items.split(",").map((tech) => (
-                  <li
-                    key={tech}
-                    className="stack-pill rounded-full border border-line px-[12px] py-[5px] text-[13px] text-text"
-                  >
+                  <span key={tech} className="whitespace-nowrap">
                     {tech.trim()}
-                  </li>
+                  </span>
                 ))}
-              </ul>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </Container>
     </section>
   );
