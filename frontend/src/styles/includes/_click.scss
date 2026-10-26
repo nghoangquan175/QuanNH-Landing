@@ -1,0 +1,122 @@
+// Click feedback spawned by ClickEffects.tsx. Dark: a mint ring with pixel sparks.
+// Light: a soft violet watercolour bloom with a thin trailing ring.
+
+@mixin when-light {
+  :root[data-theme="light"] & {
+    @content;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) & {
+      @content;
+    }
+  }
+}
+
+.click-fx {
+  position: fixed;
+  z-index: 90;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.click-fx__ring {
+  position: absolute;
+  left: -23px;
+  top: -23px;
+  width: 46px;
+  height: 46px;
+  border: 2px solid #7cf5c4;
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(124, 245, 196, 0.7), inset 0 0 10px rgba(124, 245, 196, 0.4);
+  animation: click-ring 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+
+  &--outer {
+    display: none;
+  }
+
+  @include when-light {
+    left: -40px;
+    top: -40px;
+    width: 80px;
+    height: 80px;
+    border: 0;
+    box-shadow: none;
+    background: radial-gradient(circle, rgba(124, 108, 255, 0.35), rgba(186, 150, 255, 0.18) 45%, transparent 70%);
+    filter: blur(2px);
+    animation: click-bloom 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+
+    &--outer {
+      display: block;
+      left: -30px;
+      top: -30px;
+      width: 60px;
+      height: 60px;
+      background: none;
+      border: 1px solid rgba(109, 93, 252, 0.55);
+      filter: none;
+      animation: click-ring-soft 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s forwards;
+      transform: scale(0.3);
+    }
+  }
+}
+
+.click-fx__particle {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 4px;
+  height: 4px;
+  background: #7cf5c4;
+  box-shadow: 0 0 6px #7cf5c4;
+  transform: rotate(var(--angle)) translateX(6px);
+  animation: click-spark 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+
+  @include when-light {
+    display: none;
+  }
+}
+
+@keyframes click-ring {
+  from {
+    opacity: 1;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes click-spark {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(34px) scale(0.5);
+  }
+}
+
+@keyframes click-bloom {
+  from {
+    opacity: 0.9;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes click-ring-soft {
+  from {
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { ClickEffects } from "@/components/layout/ClickEffects";
+import { Intro, introInitScript } from "@/components/layout/Intro";
 import { themeInitScript } from "@/components/layout/ThemeToggle";
 import "@/styles/globals.scss";
 
@@ -16,9 +18,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
+        {/* Theme first: the intro picks its variant from data-theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introInitScript }} />
       </head>
-      <body className="font-sans leading-[1.6] antialiased">{children}</body>
+      <body className="font-sans leading-[1.6] antialiased">
+        <Intro />
+        <ClickEffects />
+        {children}
+      </body>
     </html>
   );
 }

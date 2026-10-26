@@ -1,0 +1,245 @@
+// Opening overlay. Only visible while <html data-intro="play">, set by the inline script
+// in layout.tsx; "skip" and "done" (and no JS at all) leave it hidden.
+
+// Selectors under which the light variant applies — mirrors _theme.scss.
+@mixin when-light {
+  :root[data-theme="light"] & {
+    @content;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) & {
+      @content;
+    }
+  }
+}
+
+.intro {
+  display: none;
+}
+
+:root[data-intro="play"] {
+  overflow: hidden;
+
+  .intro {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    // Holds the visitor off the page until the overlay is gone.
+    pointer-events: all;
+  }
+}
+
+// Hero content arrives after the intro: delay = intro length, or none when it is skipped.
+:root {
+  --intro-delay: 0s;
+}
+
+:root[data-intro="play"] {
+  --intro-delay: 2.3s;
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--intro-delay) + var(--reveal-i, 0) * 0.09s);
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// ---- Dark: terminal boot, then the staircase lifts -------------------------------
+
+.intro-dark {
+  position: absolute;
+  inset: 0;
+
+  @include when-light {
+    display: none;
+  }
+}
+
+.intro-cols {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+
+  span {
+    // -1px overlap hides sub-pixel seams between the columns.
+    position: relative;
+    margin-right: -1px;
+    background: #07080b;
+    border-bottom: 1px solid rgba(124, 245, 196, 0.7);
+
+    // Glow strictly below the lifting edge — a box-shadow's blur bleeds onto the sides
+    // and draws seams between the columns.
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 36px;
+      background: linear-gradient(180deg, rgba(124, 245, 196, 0.28), transparent);
+    }
+    animation: intro-col-lift 0.7s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+    animation-delay: calc(1.45s + var(--step) * 0.06s);
+  }
+}
+
+@keyframes intro-col-lift {
+  to {
+    transform: translateY(-110%);
+  }
+}
+
+.intro-term {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #7cf5c4;
+  text-shadow: 0 0 12px rgba(124, 245, 196, 0.6);
+  animation: intro-fade-out 0.25s ease-in 1.3s forwards;
+
+  p {
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: intro-type 0.38s steps(20, end) forwards;
+    animation-delay: calc(0.1s + var(--i) * 0.36s);
+  }
+
+  // Blinking block cursor after the last line.
+  p:last-child span::after {
+    content: "";
+    display: inline-block;
+    width: 0.6em;
+    height: 1.05em;
+    margin-left: 0.3em;
+    vertical-align: -0.15em;
+    background: currentColor;
+    animation: intro-blink 0.5s steps(1) infinite;
+  }
+}
+
+@keyframes intro-type {
+  to {
+    width: var(--w);
+  }
+}
+
+@keyframes intro-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-fade-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+}
+
+// ---- Light: violet bloom, name into focus, iris closes --------------------------
+
+.intro-light {
+  display: none;
+
+  @include when-light {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    background: #fbfaff;
+    // 72% is just past the corners (they sit at ~70.7% of the reference radius).
+    clip-path: circle(72% at 50% 50%);
+    animation: intro-iris 0.85s cubic-bezier(0.55, 0, 0.25, 1) 1.5s forwards;
+  }
+}
+
+@keyframes intro-iris {
+  to {
+    clip-path: circle(0% at 50% 50%);
+  }
+}
+
+.intro-orb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 108, 255, 0.45), rgba(186, 150, 255, 0.2) 45%, transparent 70%);
+  filter: blur(20px);
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0;
+  animation: intro-bloom 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes intro-bloom {
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.intro-name {
+  position: relative;
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #16142b;
+
+  span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+    animation: intro-letter 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation-delay: calc(0.25s + var(--i) * 0.035s);
+  }
+}
+
+@keyframes intro-letter {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+.intro-role {
+  position: relative;
+  margin-top: 8px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6d5dfc;
+  opacity: 0;
+  animation: intro-role-in 0.5s ease-out 0.95s forwards;
+}
+
+@keyframes intro-role-in {
+  to {
+    opacity: 1;
+  }
+}

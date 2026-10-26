@@ -23,23 +23,23 @@ export function Hero({ hero }: { hero: Portfolio["hero"] }) {
   return (
     <header className="hero-glow relative overflow-hidden pt-[72px] text-center 768:pt-[100px] 1024:pt-[120px]">
       <Container className="relative z-[1]">
-        <p className="glow-text font-mono text-[11px] tracking-[0.1em] text-accent 768:text-[13px]">{hero.tag}</p>
-        <h1 className="my-[16px] text-[32px] font-extrabold leading-[1.1] tracking-[-0.04em] 768:my-[18px] 768:text-[64px] 768:leading-none 1024:text-[96px]">
+        <p style={{ "--reveal-i": 0 } as React.CSSProperties} className="reveal glow-text font-mono text-[11px] tracking-[0.1em] text-accent 768:text-[13px]">{hero.tag}</p>
+        <h1 style={{ "--reveal-i": 1 } as React.CSSProperties} className="reveal my-[16px] text-[32px] font-extrabold leading-[1.1] tracking-[-0.04em] 768:my-[18px] 768:text-[64px] 768:leading-none 1024:text-[96px]">
           {hero.titleLines[0]}
           <br />
           <span className="gradient-title">{hero.titleLines[1]}</span>
         </h1>
-        <p className="mx-auto mb-[28px] max-w-[560px] text-[15px] text-muted 768:mb-[32px] 768:text-[16px]">
+        <p style={{ "--reveal-i": 2 } as React.CSSProperties} className="reveal mx-auto mb-[28px] max-w-[560px] text-[15px] text-muted 768:mb-[32px] 768:text-[16px]">
           {hero.description}
         </p>
-        <div className="flex flex-wrap justify-center gap-[12px]">
+        <div style={{ "--reveal-i": 3 } as React.CSSProperties} className="reveal flex flex-wrap justify-center gap-[12px]">
           <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
           <Button href={hero.secondaryCta.href} variant="ghost">
             {hero.secondaryCta.label}
           </Button>
         </div>
 
-        <div className="mt-[56px] grid grid-cols-3 grid-rows-[150px_150px] items-end gap-[6px] 768:mt-[80px] 768:h-[260px] 768:grid-cols-9 768:grid-rows-1">
+        <div style={{ "--reveal-i": 4 } as React.CSSProperties} className="reveal mt-[56px] grid grid-cols-3 grid-rows-[150px_150px] items-end gap-[6px] 768:mt-[80px] 768:h-[260px] 768:grid-cols-9 768:grid-rows-1">
           {left.map((stat, i) => (
             <StatStep key={stat.label} stat={stat} height={OUTER_HEIGHTS[i]} />
           ))}
