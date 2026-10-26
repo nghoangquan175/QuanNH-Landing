@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import type { Portfolio } from "@/types/portfolio";
 
@@ -8,12 +7,9 @@ export function Nav({ site }: { site: Portfolio["site"] }) {
   return (
     <nav className="reveal sticky top-0 z-10 border-b border-line bg-[var(--nav)] backdrop-blur-[12px]">
       <Container className="flex h-[64px] items-center justify-between">
-        <a href="#" aria-label={`${site.logo}${site.logoAccent} — back to top`} className="flex items-center gap-[10px] font-mono font-semibold">
-          <Logo />
-          <span>
-            {site.logo}
-            <span className="text-accent">{site.logoAccent}</span>
-          </span>
+        <a href="#" aria-label={`${site.logo} — back to top`} className="text-[22px] font-bold tracking-[-0.03em]">
+          {site.logo}
+          <span className="text-accent">{site.logoAccent}</span>
         </a>
         <ul className="hidden gap-[28px] text-[14px] text-muted 768:flex">
           {site.nav.map((item) => (

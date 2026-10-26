@@ -1,5 +1,4 @@
 import { Container } from "@/components/ui/Container";
-import { Logo } from "@/components/ui/Logo";
 import type { Portfolio } from "@/types/portfolio";
 
 type Props = {
@@ -20,12 +19,9 @@ export function Footer({ footer, site, contact }: Props) {
       <Container>
         <div className="grid gap-[36px] 768:grid-cols-[2fr_1fr_1fr] 768:gap-[48px]">
           <div>
-            <a href="#" className="inline-flex items-center gap-[10px] font-mono font-semibold">
-              <Logo />
-              <span>
-                {site.logo}
-                <span className="text-accent">{site.logoAccent}</span>
-              </span>
+            <a href="#" className="text-[26px] font-bold tracking-[-0.03em]">
+              {site.logo}
+              <span className="text-accent">{site.logoAccent}</span>
             </a>
             <p className="mt-[16px] max-w-[340px] text-[14px] text-muted">{footer.tagline}</p>
             <p className="mt-[10px] font-mono text-[12px] text-muted">{footer.location}</p>
