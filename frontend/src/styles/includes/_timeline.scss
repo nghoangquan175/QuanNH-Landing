@@ -22,6 +22,20 @@
   }
 }
 
+// Alternate layout: rail centred from 1024 up, and each entry after the first rises into
+// the gap beside the previous card so the two sides interleave instead of stacking.
+@media (min-width: 1024px) {
+  .timeline--alternate {
+    &::before {
+      left: calc(50% - 1px);
+    }
+
+    > li + li {
+      margin-top: -16px;
+    }
+  }
+}
+
 .timeline-dot {
   position: relative;
   z-index: 1;

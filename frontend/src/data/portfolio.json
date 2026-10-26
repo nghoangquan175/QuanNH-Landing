@@ -163,23 +163,28 @@
   },
   "skills": {
     "eyebrow": "03 / STACK",
-    "title": "Tools I reach for.",
+    "title": "The stack, layer by layer.",
+    "caption": "How a request travels through what I build — from the screen down to the cloud.",
     "groups": [
       {
+        "title": "AI WORKFLOW",
+        "items": "Claude Code, MCP, Antigravity"
+      },
+      {
         "title": "FRONT-END",
-        "items": "Next.js, React, Tailwind CSS, TypeScript"
+        "items": "Next.js, React, TypeScript, Tailwind CSS, Redux"
       },
       {
         "title": "BACK-END & CMS",
-        "items": "NestJS, Node.js, Strapi, Prisma"
+        "items": "NestJS, Node.js, Strapi, Prisma, ExpressJS"
       },
       {
         "title": "DATA",
-        "items": "PostgreSQL, Redis, MySQL, MongoDB"
+        "items": "PostgreSQL, Redis, MySQL, MongoDB, SQLite"
       },
       {
-        "title": "CLOUD",
-        "items": "AWS, Terraform, Docker, GitHub Actions"
+        "title": "CLOUD & DELIVERY",
+        "items": "AWS, Terraform, Docker, GitHub Actions, Nginx, Cloudflare"
       }
     ]
   },

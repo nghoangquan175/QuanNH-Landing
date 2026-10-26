@@ -9,6 +9,7 @@ export function Experience({ experience }: { experience: Portfolio["experience"]
       <Container>
         <SectionHeading eyebrow={experience.eyebrow} title={experience.title} />
         <Timeline
+          alternate
           items={experience.jobs.map((job) => ({
             key: job.title,
             period: job.period,
