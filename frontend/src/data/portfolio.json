@@ -50,24 +50,32 @@
         "label": "production sites"
       },
       {
-        "value": "50+",
-        "label": "CMS content types"
-      },
-      {
-        "value": "99",
-        "label": "Lighthouse perf"
-      },
-      {
-        "value": "3",
-        "label": "apps, 1 CMS"
-      },
-      {
-        "value": "47%",
-        "label": "throughput gain"
-      },
-      {
         "value": "1+",
-        "label": "years shipping"
+        "label": "years of experience"
+      },
+      {
+        "value": "Node.js",
+        "label": "runtime behind my stack"
+      },
+      {
+        "value": "B2",
+        "label": "English (CEFR)"
+      },
+      {
+        "value": "Figma",
+        "label": "designs built to spec"
+      },
+      {
+        "value": "AWS",
+        "label": "where I deploy"
+      },
+      {
+        "value": "AI",
+        "label": "assisted workflow, daily"
+      },
+      {
+        "value": "GMT+7",
+        "label": "Hanoi time zone"
       }
     ]
   },

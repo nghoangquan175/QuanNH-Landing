@@ -2,23 +2,23 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { Portfolio, Stat } from "@/types/portfolio";
 
-// From 768 up: nine columns stepping down toward a glowing core — three stats on each
-// side, two empty "near" steps beside the core. Below 768 the six stats sit in two rows
-// of three (left side descending, right side ascending) and the core steps are hidden.
-const OUTER_HEIGHTS = ["h-[100%]", "h-[80%]", "h-[60%]"];
+// From 1024 up: nine columns — four stats stepping down on each side of a glowing core.
+// Below that the eight stats sit in two rows of four (each row a shallow V) and the core
+// is hidden, so text values like "Node.js" keep room to breathe.
+const HEIGHTS = ["h-[100%]", "h-[82%]", "h-[64%]", "h-[46%]"];
 
 function StatStep({ stat, height }: { stat: Stat; height: string }) {
   return (
-    <div className={`stair ${height} flex flex-col p-[12px] text-left 1024:p-[16px]`}>
-      <b className="text-[22px] leading-[1.3] 1024:text-[28px]">{stat.value}</b>
-      <small className="text-[11px] leading-[1.4] text-muted 1024:text-[12px]">{stat.label}</small>
+    <div className={`stair ${height} flex min-w-0 flex-col p-[10px] text-left 1024:p-[14px]`}>
+      <b className="text-[17px] leading-[1.25] tracking-[-0.01em] 768:text-[20px] 1024:text-[22px]">{stat.value}</b>
+      <small className="mt-[2px] text-[10.5px] leading-[1.35] text-muted 768:text-[11px] 1024:text-[12px]">{stat.label}</small>
     </div>
   );
 }
 
 export function Hero({ hero }: { hero: Portfolio["hero"] }) {
-  const left = hero.stats.slice(0, 3);
-  const right = hero.stats.slice(3, 6);
+  const left = hero.stats.slice(0, 4);
+  const right = hero.stats.slice(4, 8);
 
   return (
     <header className="hero-glow relative overflow-hidden pt-[72px] text-center 768:pt-[100px] 1024:pt-[120px]">
@@ -39,15 +39,13 @@ export function Hero({ hero }: { hero: Portfolio["hero"] }) {
           </Button>
         </div>
 
-        <div style={{ "--reveal-i": 4 } as React.CSSProperties} className="reveal mt-[56px] grid grid-cols-3 grid-rows-[150px_150px] items-end gap-[6px] 768:mt-[80px] 768:h-[260px] 768:grid-cols-9 768:grid-rows-1">
+        <div style={{ "--reveal-i": 4 } as React.CSSProperties} className="reveal mt-[56px] grid grid-cols-4 grid-rows-[140px_140px] items-end gap-[6px] 768:mt-[72px] 768:grid-rows-[160px_160px] 1024:mt-[80px] 1024:h-[260px] 1024:grid-cols-9 1024:grid-rows-1">
           {left.map((stat, i) => (
-            <StatStep key={stat.label} stat={stat} height={OUTER_HEIGHTS[i]} />
+            <StatStep key={stat.label} stat={stat} height={HEIGHTS[i]} />
           ))}
-          <div className="stair stair--near hidden h-[40%] 768:block" />
-          <div className="stair stair--core hidden h-[22%] 768:block" />
-          <div className="stair stair--near hidden h-[40%] 768:block" />
+          <div className="stair stair--core hidden h-[22%] 1024:block" />
           {right.map((stat, i) => (
-            <StatStep key={stat.label} stat={stat} height={OUTER_HEIGHTS[2 - i]} />
+            <StatStep key={stat.label} stat={stat} height={HEIGHTS[3 - i]} />
           ))}
         </div>
       </Container>
