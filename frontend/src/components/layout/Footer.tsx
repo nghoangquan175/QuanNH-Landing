@@ -65,7 +65,6 @@ export function Footer({ footer, site, contact }: Props) {
 
         <div className="mt-[48px] flex flex-col gap-[10px] border-t border-line py-[22px] font-mono text-[12px] text-muted 768:mt-[56px] 768:flex-row 768:items-center 768:justify-between">
           <p>© 2026 {footer.name}</p>
-          <p>{footer.credit}</p>
           <a href="#" className="transition-colors hover:text-accent">
             Back to top ↑
           </a>

@@ -29,7 +29,13 @@ export type PersonalProject = {
 
 export type SkillGroup = { title: string; items: string };
 
-export type Job = { period: string; title: string; points: string[] };
+export type Job = {
+  period: string;
+  title: string;
+  /** Optional label on the card, e.g. EDUCATION. */
+  tag?: string;
+  points: string[];
+};
 
 export type SectionHeading = { eyebrow: string; title: string };
 
@@ -55,5 +61,5 @@ export type Portfolio = {
     /** IANA zone for the live local-time readout. */
     timeZone: string;
   };
-  footer: { name: string; tagline: string; location: string; credit: string };
+  footer: { name: string; tagline: string; location: string };
 };

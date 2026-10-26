@@ -15,6 +15,11 @@ export function Experience({ experience }: { experience: Portfolio["experience"]
             period: job.period,
             content: (
               <div className="step-card rounded-[16px] border border-line bg-panel p-[20px] 768:p-[24px]">
+                {job.tag && (
+                  <span className="mb-[8px] inline-block rounded-full border border-line px-[10px] py-[3px] font-mono text-[11px] text-muted">
+                    {job.tag}
+                  </span>
+                )}
                 <h3 className="mb-[10px] text-[18px] font-bold">{job.title}</h3>
                 <ul className="ml-[18px] list-disc text-[14px] text-muted">
                   {job.points.map((point) => (

@@ -12,7 +12,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "600"], variab
 
 export const metadata: Metadata = {
   title: "Nguyen Hoang Quan — Full-stack Developer",
-  description: "Portfolio of Nguyen Hoang Quan, full-stack developer building production websites with Next.js, Strapi, NestJS and AWS.",
+  description: "Portfolio of Nguyen Hoang Quan, a full-stack developer in Hanoi building and looking after production websites for international clients.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

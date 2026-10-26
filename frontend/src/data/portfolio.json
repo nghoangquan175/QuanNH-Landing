@@ -30,12 +30,12 @@
     }
   },
   "hero": {
-    "tag": "// BASED IN HANOI, VIETNAM",
+    "tag": "// NGUYEN HOANG QUAN · FULL-STACK DEVELOPER · HANOI",
     "titleLines": [
-      "Nguyen Hoang Quan",
-      "Full-stack developer."
+      "Built for real clients.",
+      "Shipped for real users."
     ],
-    "description": "Built for real clients, shipped for real users — production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.",
+    "description": "I build and look after production websites for international clients — from the first design to launch and the years after it.",
     "primaryCta": {
       "label": "See my work",
       "href": "#work"
@@ -50,8 +50,8 @@
         "label": "production sites"
       },
       {
-        "value": "2",
-        "label": "countries"
+        "value": "50+",
+        "label": "CMS content types"
       },
       {
         "value": "99",
@@ -85,7 +85,7 @@
           }
         ],
         "period": "SEP 2026",
-        "summary": "Corporate site of a major Australian infrastructure and construction company.",
+        "summary": "Corporate site of a major infrastructure and construction company.",
         "tags": "Next.js · React · TypeScript · Strapi 4",
         "details": [
           "Monthly maintenance cycle on the live site: bug fixes, small improvements and client change requests",
@@ -105,7 +105,7 @@
           "Integrated HubSpot CRM so contact and newsletter sign-ups flow straight into the client's marketing tools",
           "Reached Lighthouse 86–99 performance and 96–100 accessibility on every page, mobile and desktop",
           "Deployed staging with Docker on the company's self-hosted server and shipped client change requests",
-          "Worked directly with the Australian client over Slack and ClickUp: requirements, UAT feedback, fixes in short cycles"
+          "Worked directly with the client over Slack and ClickUp: requirements, UAT feedback, fixes in short cycles"
         ]
       },
       {
@@ -122,7 +122,7 @@
           }
         ],
         "period": "JUL — SEP 2026",
-        "summary": "Rebuild for a UK interior design studio: portfolio site and headless Shopify store on one CMS.",
+        "summary": "Rebuild for an interior design studio: portfolio site and headless Shopify store on one CMS.",
         "tags": "Next.js 16 · NestJS · Prisma · PostgreSQL · Redis · Shopify",
         "details": [
           "Built features across 3 apps: 2 public Next.js sites (studio and Shopify store) and the NestJS + React CMS shared by both",
@@ -160,7 +160,7 @@
           }
         ],
         "period": "MAY — JUN 2026",
-        "summary": "Corporate site for a venture-acceleration firm working between Australia and the Middle East.",
+        "summary": "Corporate site for a venture-acceleration firm.",
         "tags": "Next.js 16 · TypeScript · Tailwind CSS · Strapi 5",
         "details": [
           "Built 6 responsive pages plus the header, footer and mobile navigation from the design",
@@ -236,13 +236,13 @@
   },
   "experience": {
     "eyebrow": "04 / EXPERIENCE",
-    "title": "Where I've worked.",
+    "title": "Where I've worked and studied.",
     "jobs": [
       {
         "period": "MAR 2026 — PRESENT",
         "title": "Full-stack Developer · MOHA Software",
         "points": [
-          "5 production websites for AU & UK clients",
+          "5 production websites for international clients",
           "Figma → Next.js, Strapi and NestJS back ends",
           "Claude Code + MCP in the daily workflow"
         ]
@@ -254,6 +254,14 @@
           "Websites with HTML, CSS, JS and Blogger",
           "Google Cloud integrations with Sheets & Chat",
           "Internal hardware, network and servers"
+        ]
+      },
+      {
+        "period": "DEC 2022 — JUN 2026",
+        "title": "B.S. in Information Technology · Hanoi Open University",
+        "tag": "EDUCATION",
+        "points": [
+          "Major: Software Engineering"
         ]
       }
     ]
@@ -280,8 +288,7 @@
   },
   "footer": {
     "name": "Nguyen Hoang Quan",
-    "tagline": "Full-stack developer building production websites with Next.js, Strapi, NestJS and AWS.",
-    "location": "Hanoi, Vietnam",
-    "credit": "Built with Next.js & Strapi · Deployed on AWS"
+    "tagline": "Full-stack developer building and looking after production websites for international clients.",
+    "location": "Hanoi, Vietnam"
   }
 }
