@@ -6,7 +6,8 @@ export type Project = {
   title: string;
   description: string;
   role: string;
-  href: string | null;
+  /** Live sites; empty while a project is pre-launch. */
+  links: Link[];
 };
 
 export type SkillGroup = { title: string; items: string };

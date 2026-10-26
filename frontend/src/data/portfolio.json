@@ -3,26 +3,68 @@
     "logo": "quannh",
     "logoAccent": ".xyz",
     "nav": [
-      { "label": "Work", "href": "#work" },
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Experience", "href": "#experience" },
-      { "label": "Contact", "href": "#contact" }
+      {
+        "label": "Work",
+        "href": "#work"
+      },
+      {
+        "label": "Skills",
+        "href": "#skills"
+      },
+      {
+        "label": "Experience",
+        "href": "#experience"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
     ],
-    "navCta": { "label": "Hire me", "href": "#contact" }
+    "navCta": {
+      "label": "Hire me",
+      "href": "#contact"
+    }
   },
   "hero": {
     "tag": "// FULL-STACK DEVELOPER · HANOI",
-    "titleLines": ["Built for real clients.", "Shipped for real users."],
+    "titleLines": [
+      "Built for real clients.",
+      "Shipped for real users."
+    ],
     "description": "I build production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.",
-    "primaryCta": { "label": "See my work", "href": "#work" },
-    "secondaryCta": { "label": "Get in touch", "href": "#contact" },
+    "primaryCta": {
+      "label": "See my work",
+      "href": "#work"
+    },
+    "secondaryCta": {
+      "label": "Get in touch",
+      "href": "#contact"
+    },
     "stats": [
-      { "value": "5", "label": "production sites" },
-      { "value": "2", "label": "countries" },
-      { "value": "99", "label": "Lighthouse perf" },
-      { "value": "3", "label": "apps, 1 CMS" },
-      { "value": "47%", "label": "throughput gain" },
-      { "value": "1+", "label": "years shipping" }
+      {
+        "value": "5",
+        "label": "production sites"
+      },
+      {
+        "value": "2",
+        "label": "countries"
+      },
+      {
+        "value": "99",
+        "label": "Lighthouse perf"
+      },
+      {
+        "value": "3",
+        "label": "apps, 1 CMS"
+      },
+      {
+        "value": "47%",
+        "label": "throughput gain"
+      },
+      {
+        "value": "1+",
+        "label": "years shipping"
+      }
     ]
   },
   "work": {
@@ -33,31 +75,66 @@
         "title": "READY.QUIT.SOLID",
         "description": "Quit-smoking platform for Aboriginal communities in Australia. Next.js + Strapi, HubSpot CRM.",
         "role": "Full-stack",
-        "href": null
+        "links": []
       },
       {
         "title": "House Nine & Nine and Found",
         "description": "Portfolio site and headless Shopify store running from one custom NestJS CMS.",
         "role": "Full-stack",
-        "href": "https://housenine.co.uk"
+        "links": [
+          {
+            "label": "housenine.co.uk",
+            "href": "https://housenine.co.uk"
+          },
+          {
+            "label": "nineandfound.com",
+            "href": "https://www.nineandfound.com"
+          }
+        ]
       },
       {
         "title": "John Holland Group",
         "description": "Monthly maintenance of a major Australian corporate site with 50+ CMS content types.",
         "role": "Maintenance",
-        "href": "https://johnholland.com.au"
+        "links": [
+          {
+            "label": "johnholland.com.au",
+            "href": "https://johnholland.com.au"
+          }
+        ]
       },
       {
         "title": "Flip The Vape",
         "description": "National campaign site plus 8 state subsites from one component library.",
         "role": "Front-end",
-        "href": "https://flipthevape.com"
+        "links": [
+          {
+            "label": "flipthevape.com",
+            "href": "https://flipthevape.com"
+          }
+        ]
+      },
+      {
+        "title": "Hatch Quarter",
+        "description": "Venture-acceleration firm site: 6 pages on Strapi CMS, maintained after launch.",
+        "role": "Front-end",
+        "links": [
+          {
+            "label": "hatchquarter.com.au",
+            "href": "https://hatchquarter.com.au"
+          }
+        ]
       },
       {
         "title": "LoadForge",
         "description": "AWS auto-scaling lab built with Terraform: 26.7 → 39.2 req/s under load.",
         "role": "AWS lab",
-        "href": "https://loadforge.quannh.xyz"
+        "links": [
+          {
+            "label": "loadforge.quannh.xyz",
+            "href": "https://loadforge.quannh.xyz"
+          }
+        ]
       }
     ]
   },
@@ -65,10 +142,22 @@
     "eyebrow": "02 / STACK",
     "title": "Tools I reach for.",
     "groups": [
-      { "title": "FRONT-END", "items": "Next.js, React, Tailwind CSS, TypeScript" },
-      { "title": "BACK-END & CMS", "items": "NestJS, Node.js, Strapi, Prisma" },
-      { "title": "DATA", "items": "PostgreSQL, Redis, MySQL, MongoDB" },
-      { "title": "CLOUD", "items": "AWS, Terraform, Docker, GitHub Actions" }
+      {
+        "title": "FRONT-END",
+        "items": "Next.js, React, Tailwind CSS, TypeScript"
+      },
+      {
+        "title": "BACK-END & CMS",
+        "items": "NestJS, Node.js, Strapi, Prisma"
+      },
+      {
+        "title": "DATA",
+        "items": "PostgreSQL, Redis, MySQL, MongoDB"
+      },
+      {
+        "title": "CLOUD",
+        "items": "AWS, Terraform, Docker, GitHub Actions"
+      }
     ]
   },
   "experience": {
@@ -99,9 +188,21 @@
     "eyebrow": "04 / CONTACT",
     "title": "Let's build the next step.",
     "links": [
-      { "label": "Email me", "href": "mailto:nghoangquan1705@gmail.com", "primary": true },
-      { "label": "GitHub", "href": "https://github.com/nghoangquan175", "primary": false },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/nghoangquan175/", "primary": false }
+      {
+        "label": "Email me",
+        "href": "mailto:nghoangquan1705@gmail.com",
+        "primary": true
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/nghoangquan175",
+        "primary": false
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/nghoangquan175/",
+        "primary": false
+      }
     ]
   },
   "footer": "© 2026 Nguyen Hoang Quan"
