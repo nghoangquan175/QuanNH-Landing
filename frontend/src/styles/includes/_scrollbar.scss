@@ -1,0 +1,66 @@
+// Overlay scrollbar (CustomScrollbar.tsx). Mouse users get the custom thumb and no
+// native scrollbar, so the layout width never changes. Touch devices already have native
+// overlay scrollbars; they keep those and the custom one stays hidden.
+
+@media (pointer: fine) {
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.scrollbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  width: 12px;
+
+  @media (pointer: coarse) {
+    display: none;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  // Not while the intro holds the page.
+  :root[data-intro="play"] & {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.scrollbar__thumb {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 4px;
+  border-radius: 999px;
+  background: rgba(var(--glow), 0.4);
+  opacity: 0.6;
+  cursor: grab;
+  will-change: transform;
+  transition: width 0.2s, right 0.2s, opacity 0.3s, background-color 0.2s, box-shadow 0.2s;
+
+  .scrollbar.is-active & {
+    opacity: 1;
+  }
+
+  .scrollbar:hover &,
+  .scrollbar.is-dragging & {
+    right: 2px;
+    width: 7px;
+    opacity: 1;
+    background: rgba(var(--glow), 0.75);
+    box-shadow: 0 0 10px rgba(var(--glow), 0.45);
+  }
+
+  .scrollbar.is-dragging & {
+    cursor: grabbing;
+  }
+}

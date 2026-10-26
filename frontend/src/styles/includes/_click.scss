@@ -23,11 +23,11 @@
 
 .click-fx__ring {
   position: absolute;
-  left: -23px;
-  top: -23px;
-  width: 46px;
-  height: 46px;
-  border: 2px solid #7cf5c4;
+  left: -15px;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #7cf5c4;
   border-radius: 50%;
   box-shadow: 0 0 14px rgba(124, 245, 196, 0.7), inset 0 0 10px rgba(124, 245, 196, 0.4);
   animation: click-ring 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
@@ -37,10 +37,10 @@
   }
 
   @include when-light {
-    left: -40px;
-    top: -40px;
-    width: 80px;
-    height: 80px;
+    left: -26px;
+    top: -26px;
+    width: 52px;
+    height: 52px;
     border: 0;
     box-shadow: none;
     background: radial-gradient(circle, rgba(124, 108, 255, 0.35), rgba(186, 150, 255, 0.18) 45%, transparent 70%);
@@ -49,10 +49,10 @@
 
     &--outer {
       display: block;
-      left: -30px;
-      top: -30px;
-      width: 60px;
-      height: 60px;
+      left: -19px;
+      top: -19px;
+      width: 38px;
+      height: 38px;
       background: none;
       border: 1px solid rgba(109, 93, 252, 0.55);
       filter: none;
@@ -64,13 +64,13 @@
 
 .click-fx__particle {
   position: absolute;
-  left: -2px;
-  top: -2px;
-  width: 4px;
-  height: 4px;
+  left: -1.5px;
+  top: -1.5px;
+  width: 3px;
+  height: 3px;
   background: #7cf5c4;
   box-shadow: 0 0 6px #7cf5c4;
-  transform: rotate(var(--angle)) translateX(6px);
+  transform: rotate(var(--angle)) translateX(4px);
   animation: click-spark 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 
   @include when-light {
@@ -95,7 +95,7 @@
   }
   to {
     opacity: 0;
-    transform: rotate(var(--angle)) translateX(34px) scale(0.5);
+    transform: rotate(var(--angle)) translateX(22px) scale(0.5);
   }
 }
 

@@ -1,5 +1,7 @@
 const SEEN_KEY = "intro-seen";
+// Both variants show the same words; only the motion and mood differ.
 const NAME = "Nguyen Hoang Quan";
+const ROLE = "full-stack developer";
 
 /**
  * Runs before first paint (see layout.tsx). Decides whether the intro plays: once per
@@ -11,13 +13,11 @@ export const introInitScript = `(function(){var d=document.documentElement,seen=
 // Columns lift from the centre outwards: delay grows with distance from column 5.
 const COLUMN_DELAYS = [4, 3, 2, 1, 0, 1, 2, 3, 4];
 
-const BOOT_LINES = ["booting quannh.xyz", "loading 5 projects", "ready"];
-
 /** Opening overlay. Both variants are in the markup; CSS shows the one for the theme. */
 export function Intro() {
   return (
     <div className="intro" aria-hidden="true">
-      {/* Dark: a terminal boot sequence, then the staircase columns lift away. */}
+      {/* Dark: the name typed out terminal-style, then the staircase columns lift away. */}
       <div className="intro-dark">
         <div className="intro-cols">
           {COLUMN_DELAYS.map((step, i) => (
@@ -25,11 +25,12 @@ export function Intro() {
           ))}
         </div>
         <div className="intro-term">
-          {BOOT_LINES.map((line, i) => (
-            <p key={line} style={{ "--i": i, "--w": `${line.length + 2}ch` } as React.CSSProperties}>
-              <span>&gt; {line}</span>
-            </p>
-          ))}
+          <p className="intro-term__name" style={{ "--chars": NAME.length } as React.CSSProperties}>
+            <span>{NAME}</span>
+          </p>
+          <p className="intro-term__role" style={{ "--chars": ROLE.length } as React.CSSProperties}>
+            <span>{ROLE}</span>
+          </p>
         </div>
       </div>
 
@@ -43,7 +44,7 @@ export function Intro() {
             </span>
           ))}
         </div>
-        <p className="intro-role">full-stack developer</p>
+        <p className="intro-role">{ROLE}</p>
       </div>
     </div>
   );

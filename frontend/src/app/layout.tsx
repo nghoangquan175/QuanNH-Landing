@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ClickEffects } from "@/components/layout/ClickEffects";
+import { CustomScrollbar } from "@/components/layout/CustomScrollbar";
 import { Intro, introInitScript } from "@/components/layout/Intro";
 import { themeInitScript } from "@/components/layout/ThemeToggle";
 import "@/styles/globals.scss";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="font-sans leading-[1.6] antialiased">
         <Intro />
         <ClickEffects />
+        <CustomScrollbar />
         {children}
       </body>
     </html>
