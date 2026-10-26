@@ -1,0 +1,72 @@
+// Colour tokens. Dark is the default; light follows the OS unless the visitor picked a
+// theme with the toggle (stored as data-theme on <html>).
+@mixin light-tokens {
+  --bg: #fbfaff;
+  --panel: #ffffff;
+  --panel2: #f3f1ff;
+  --line: #e4e0f7;
+  --text: #16142b;
+  --muted: #6b6884;
+  --accent: #6d5dfc;
+  --on-accent: #ffffff;
+  --glow: 124, 108, 255;
+  --glow2: 186, 150, 255;
+  --nav: rgba(251, 250, 255, 0.75);
+  --h1a: #16142b;
+  --h1b: #6d5dfc;
+  color-scheme: light;
+}
+
+:root {
+  --bg: #07080b;
+  --panel: #0f1117;
+  --panel2: #0a0c11;
+  --line: #1f2330;
+  --text: #e9ecf3;
+  --muted: #8a91a3;
+  --accent: #7cf5c4;
+  --on-accent: #04120c;
+  --glow: 124, 245, 196;
+  --glow2: 91, 140, 255;
+  --nav: rgba(7, 8, 11, 0.7);
+  --h1a: #ffffff;
+  --h1b: #b9f7de;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    @include light-tokens;
+  }
+}
+
+:root[data-theme="light"] {
+  @include light-tokens;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// Theme toggle shows the icon of the theme you are currently in.
+.theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme="light"] {
+  .theme-icon-sun { display: block; }
+  .theme-icon-moon { display: none; }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    .theme-icon-sun { display: block; }
+    .theme-icon-moon { display: none; }
+  }
+}

@@ -1,0 +1,119 @@
+// Glow effects that Tailwind utilities can't express cleanly (pseudo-elements,
+// keyframes, rgba from a CSS variable). Layout stays in Tailwind classes.
+
+.glow-shadow {
+  box-shadow: 0 0 24px rgba(var(--glow), 0.45);
+
+  &:hover {
+    box-shadow: 0 0 36px rgba(var(--glow), 0.7);
+  }
+}
+
+.glow-ring:hover {
+  box-shadow: 0 0 18px rgba(var(--glow), 0.45);
+}
+
+.glow-text {
+  text-shadow: 0 0 12px rgba(var(--glow), 0.6);
+}
+
+.gradient-title {
+  background: linear-gradient(180deg, var(--h1a) 30%, var(--h1b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Hero: halo behind the headline and a faint arc rising from the stairs.
+.hero-glow {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    width: 900px;
+    height: 520px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(var(--glow2), 0.22), rgba(var(--glow), 0.08) 45%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1180px;
+    width: 1700px;
+    height: 1700px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border-top: 1px solid rgba(var(--glow), 0.35);
+    box-shadow: 0 -30px 90px rgba(var(--glow), 0.12);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+}
+
+@keyframes breathe {
+  50% {
+    box-shadow: 0 -40px 120px rgba(var(--glow), 0.2);
+  }
+}
+
+.stair {
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border: 1px solid var(--line);
+  border-top-color: rgba(var(--glow), 0.28);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -8px 24px -12px rgba(var(--glow), 0.35);
+  transition: background-color 0.3s, border-color 0.3s;
+
+  &--near {
+    border-top-color: rgba(var(--glow), 0.5);
+    box-shadow: 0 -10px 30px -10px rgba(var(--glow), 0.5);
+  }
+
+  &--core {
+    background: linear-gradient(180deg, var(--accent), transparent);
+    opacity: 0.6;
+    box-shadow: 0 -20px 60px rgba(var(--glow), 0.55);
+  }
+}
+
+.step-card {
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    border-color: rgba(var(--glow), 0.45);
+    box-shadow: 0 0 40px -10px rgba(var(--glow), 0.35);
+  }
+
+  &:hover .step-number {
+    color: var(--accent);
+    text-shadow: 0 0 14px rgba(var(--glow), 0.6);
+  }
+}
+
+.contact-glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 800px;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(var(--glow), 0.14), transparent 65%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow::after {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

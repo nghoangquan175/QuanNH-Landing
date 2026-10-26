@@ -1,5 +1,7 @@
 @use "includes/family-fonts";
 @use "includes/typos-fonts";
+@use "includes/theme";
+@use "includes/glow";
 
 @tailwind base;
 @tailwind components;

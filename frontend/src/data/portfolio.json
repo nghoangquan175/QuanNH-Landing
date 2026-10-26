@@ -1,0 +1,108 @@
+{
+  "site": {
+    "logo": "quannh",
+    "logoAccent": ".xyz",
+    "nav": [
+      { "label": "Work", "href": "#work" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "navCta": { "label": "Hire me", "href": "#contact" }
+  },
+  "hero": {
+    "tag": "// FULL-STACK DEVELOPER · HANOI",
+    "titleLines": ["Built for real clients.", "Shipped for real users."],
+    "description": "I build production websites for clients in Australia and the UK with Next.js, Strapi, NestJS and AWS.",
+    "primaryCta": { "label": "See my work", "href": "#work" },
+    "secondaryCta": { "label": "Get in touch", "href": "#contact" },
+    "stats": [
+      { "value": "5", "label": "production sites" },
+      { "value": "2", "label": "countries" },
+      { "value": "99", "label": "Lighthouse perf" },
+      { "value": "3", "label": "apps, 1 CMS" },
+      { "value": "47%", "label": "throughput gain" },
+      { "value": "1+", "label": "years shipping" }
+    ]
+  },
+  "work": {
+    "eyebrow": "01 / SELECTED WORK",
+    "title": "Each project, one step further.",
+    "projects": [
+      {
+        "title": "READY.QUIT.SOLID",
+        "description": "Quit-smoking platform for Aboriginal communities in Australia. Next.js + Strapi, HubSpot CRM.",
+        "role": "Full-stack",
+        "href": null
+      },
+      {
+        "title": "House Nine & Nine and Found",
+        "description": "Portfolio site and headless Shopify store running from one custom NestJS CMS.",
+        "role": "Full-stack",
+        "href": "https://housenine.co.uk"
+      },
+      {
+        "title": "John Holland Group",
+        "description": "Monthly maintenance of a major Australian corporate site with 50+ CMS content types.",
+        "role": "Maintenance",
+        "href": "https://johnholland.com.au"
+      },
+      {
+        "title": "Flip The Vape",
+        "description": "National campaign site plus 8 state subsites from one component library.",
+        "role": "Front-end",
+        "href": "https://flipthevape.com"
+      },
+      {
+        "title": "LoadForge",
+        "description": "AWS auto-scaling lab built with Terraform: 26.7 → 39.2 req/s under load.",
+        "role": "AWS lab",
+        "href": "https://loadforge.quannh.xyz"
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "02 / STACK",
+    "title": "Tools I reach for.",
+    "groups": [
+      { "title": "FRONT-END", "items": "Next.js, React, Tailwind CSS, TypeScript" },
+      { "title": "BACK-END & CMS", "items": "NestJS, Node.js, Strapi, Prisma" },
+      { "title": "DATA", "items": "PostgreSQL, Redis, MySQL, MongoDB" },
+      { "title": "CLOUD", "items": "AWS, Terraform, Docker, GitHub Actions" }
+    ]
+  },
+  "experience": {
+    "eyebrow": "03 / EXPERIENCE",
+    "title": "Where I've worked.",
+    "jobs": [
+      {
+        "period": "MAR 2026 — PRESENT",
+        "title": "Full-stack Developer · MOHA Software",
+        "points": [
+          "5 production websites for AU & UK clients",
+          "Figma → Next.js, Strapi and NestJS back ends",
+          "Claude Code + MCP in the daily workflow"
+        ]
+      },
+      {
+        "period": "JUL 2025 — DEC 2025",
+        "title": "Intern Software Developer · ADD Group",
+        "points": [
+          "Websites with HTML, CSS, JS and Blogger",
+          "Google Cloud integrations with Sheets & Chat",
+          "Internal hardware, network and servers"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "04 / CONTACT",
+    "title": "Let's build the next step.",
+    "links": [
+      { "label": "Email me", "href": "mailto:nghoangquan1705@gmail.com", "primary": true },
+      { "label": "GitHub", "href": "https://github.com/nghoangquan175", "primary": false },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/nghoangquan175/", "primary": false }
+    ]
+  },
+  "footer": "© 2026 Nguyen Hoang Quan"
+}
