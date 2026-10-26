@@ -1,28 +1,47 @@
-// Stack section (sections/Skills.tsx): the hovered row gets a short accent bar on its
-// left edge — only as tall as the row, so it stays small on any screen width.
+// Stack section (sections/Skills.tsx): on hover a hairline grows beside the group name
+// and the name eases a few pixels right, as if the line nudged it. Kept to a whisper.
 
 .stack-row {
   position: relative;
 
+  dt {
+    transition: color 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   &::before {
     content: "";
     position: absolute;
-    left: -14px;
+    left: 0;
     top: 50%;
-    width: 2px;
-    height: 22px;
-    border-radius: 2px;
+    width: 1px;
+    height: 14px;
     background: var(--accent);
+    opacity: 0;
     transform: translateY(-50%) scaleY(0);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
   }
 
-  &:hover::before {
-    transform: translateY(-50%) scaleY(1);
+  &:hover {
+    dt {
+      transform: translateX(8px);
+    }
+
+    &::before {
+      opacity: 0.8;
+      transform: translateY(-50%) scaleY(1);
+    }
+  }
+}
+
+// On phones the label sits above the tools, so centre the hairline on the label line.
+@media (max-width: 767px) {
+  .stack-row::before {
+    top: 26px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .stack-row dt,
   .stack-row::before {
     transition: none;
   }

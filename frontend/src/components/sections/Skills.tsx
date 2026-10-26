@@ -17,7 +17,7 @@ export function Skills({ skills }: { skills: Portfolio["skills"] }) {
               key={group.title}
               className="stack-row group grid grid-cols-1 gap-[6px] border-b border-line py-[18px] 768:grid-cols-[220px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[22px]"
             >
-              <dt className="font-mono text-[12px] tracking-[0.08em] text-muted transition-colors duration-300 group-hover:text-accent">
+              <dt className="font-mono text-[12px] tracking-[0.08em] text-muted group-hover:text-accent">
                 {group.title}
               </dt>
               {/* Wrap between tools, never inside a name like "GitHub Actions". */}
