@@ -1,5 +1,8 @@
 export type Link = { label: string; href: string };
 
+/** Optional per-page overrides from the CMS; anything empty falls back to the page's content. */
+export type Seo = { metaTitle?: string; metaDescription?: string; noIndex?: boolean };
+
 export type Stat = {
   value: string;
   label: string;
@@ -24,6 +27,8 @@ export type Project = {
   links: Link[];
   /** Long-form write-up, served at /work/[slug]. */
   caseStudy?: CaseStudy;
+  /** For the case study page. */
+  seo?: Seo;
 };
 
 export type CaseStudy = {
@@ -53,6 +58,7 @@ export type PersonalProject = {
   /** "owner/name" of a public repo; shows when it was last committed to. */
   repo?: string;
   caseStudy?: CaseStudy;
+  seo?: Seo;
 };
 
 export type SkillGroup = { title: string; items: string };
@@ -68,6 +74,8 @@ export type Job = {
 export type SectionHeading = { eyebrow: string; title: string };
 
 export type Portfolio = {
+  /** The home page's. */
+  seo?: Seo;
   site: { logo: string; logoAccent: string; nav: Link[]; navCta: Link };
   hero: {
     tag: string;

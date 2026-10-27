@@ -53,6 +53,11 @@
       "component": "home.contact",
       "repeatable": false,
       "required": true
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
     }
   }
 }

@@ -2,7 +2,7 @@ import "server-only";
 
 import { cacheLife, cacheTag } from "next/cache";
 import fallback from "@/data/portfolio.json";
-import type { CaseStudy, Link, PersonalProject, Portfolio, Project } from "@/types/portfolio";
+import type { CaseStudy, Link, PersonalProject, Portfolio, Project, Seo } from "@/types/portfolio";
 
 /** Every cached CMS read carries this tag; /api/revalidate drops them all at once. */
 export const PORTFOLIO_TAG = "portfolio";
@@ -12,6 +12,7 @@ const FALLBACK = fallback as Portfolio;
 // ---- Strapi's shapes, as far as the mapping below reads them -------------------------
 
 type Point = { text: string };
+type StrapiSeo = { metaTitle: string | null; metaDescription: string | null; noIndex: boolean | null } | null;
 type StrapiLink = { label: string; href: string };
 type StrapiCaseStudy = {
   context: string;
@@ -30,6 +31,7 @@ type StrapiProject = {
   details: Point[];
   links: StrapiLink[];
   caseStudy: StrapiCaseStudy | null;
+  seo: StrapiSeo;
 };
 
 // ---- Reads ---------------------------------------------------------------------------
@@ -73,12 +75,24 @@ async function read<T>(path: string, params: Record<string, unknown>): Promise<T
 }
 
 const PROJECT_POPULATE: Populate = {
+  seo: true,
   details: true,
   links: true,
   caseStudy: { populate: { approach: true, results: true, open: true, chapters: { populate: { fix: true } } } },
 };
 
 // ---- Mapping, field by field so a half-filled entry degrades one field at a time ------
+
+/** Only the fields an editor actually filled, so the page's own content fills the rest. */
+function seo(value: StrapiSeo): Seo | undefined {
+  if (!value) return undefined;
+  const result: Seo = {
+    ...(value.metaTitle?.trim() ? { metaTitle: value.metaTitle.trim() } : {}),
+    ...(value.metaDescription?.trim() ? { metaDescription: value.metaDescription.trim() } : {}),
+    ...(value.noIndex ? { noIndex: true } : {}),
+  };
+  return Object.keys(result).length ? result : undefined;
+}
 
 const texts = (points: Point[] | null | undefined) => (points ?? []).map((point) => point.text);
 const link = (value: StrapiLink | null | undefined, fb: Link): Link => ({ label: value?.label ?? fb.label, href: value?.href ?? fb.href });
@@ -105,6 +119,7 @@ function caseStudy(study: StrapiCaseStudy | null): CaseStudy | undefined {
 
 function project(entry: StrapiProject) {
   const study = caseStudy(entry.caseStudy);
+  const meta = seo(entry.seo);
   return {
     title: entry.title,
     slug: entry.slug,
@@ -114,6 +129,7 @@ function project(entry: StrapiProject) {
     details: texts(entry.details),
     links: (entry.links ?? []).map((value) => ({ label: value.label, href: value.href })),
     ...(study ? { caseStudy: study } : {}),
+    ...(meta ? { seo: meta } : {}),
   };
 }
 
@@ -142,6 +158,7 @@ async function getSite(): Promise<Pick<Portfolio, "site" | "footer">> {
 
 type Heading = { eyebrow: string; title: string };
 type Home = {
+  seo: StrapiSeo;
   hero: {
     tag: string;
     titleLine1: string;
@@ -178,6 +195,7 @@ const heading = (value: Heading): Heading => ({ eyebrow: value.eyebrow, title: v
 async function getHome() {
   const home = await read<Home>("/home", {
     populate: {
+      seo: true,
       hero: { populate: { primaryCta: true, secondaryCta: true, stats: true } },
       work: true,
       personal: true,
@@ -188,8 +206,10 @@ async function getHome() {
     } satisfies Populate,
   });
   const { hero, skills, experience, language, contact } = home ?? {};
+  const meta = home ? seo(home.seo) : undefined;
 
   return {
+    ...(meta ? { seo: meta } : {}),
     hero: hero
       ? {
           tag: hero.tag,

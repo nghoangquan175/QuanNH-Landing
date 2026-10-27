@@ -480,6 +480,7 @@ export interface ApiClientProjectClientProject
     period: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     role: Schema.Attribute.String & Schema.Attribute.Required;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     summary: Schema.Attribute.String & Schema.Attribute.Required;
     tags: Schema.Attribute.String & Schema.Attribute.Required;
@@ -519,6 +520,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
     personal: Schema.Attribute.Component<'home.section-heading', false> &
       Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     skills: Schema.Attribute.Component<'home.skills', false> &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -565,6 +567,7 @@ export interface ApiPersonalProjectPersonalProject
     period: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     repo: Schema.Attribute.String;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     status: Schema.Attribute.String;
     summary: Schema.Attribute.String & Schema.Attribute.Required;

@@ -36,6 +36,8 @@ const cspHeader = `
 const nextConfig: NextConfig = {
   output: "standalone", // the Dockerfile copies .next/standalone
   cacheComponents: true,
+  // Share images (src/lib/og.tsx) read these at runtime when they revalidate.
+  outputFileTracingIncludes: { "/**/opengraph-image": ["./src/assets/fonts/*.ttf"] },
   partialPrefetching: true,
 
   images: {

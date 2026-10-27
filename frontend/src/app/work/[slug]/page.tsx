@@ -10,35 +10,21 @@ import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { Tag } from "@/components/ui/Tag";
 import { getPortfolio } from "@/lib/api/portfolio";
+import { caseStudies, findCase } from "@/lib/cases";
+import { jsonLd, pageMetadata } from "@/lib/seo";
 import { hasShots } from "@/lib/shots";
-import type { CaseStudy, Portfolio, PersonalProject, Project } from "@/types/portfolio";
-
-type Entry = (Project | PersonalProject) & { caseStudy: CaseStudy };
-
-/** Client then personal projects that have a write-up, in the order the home page lists them. */
-function caseStudies(data: Portfolio): Entry[] {
-  return [...data.work.projects, ...data.personal.projects].filter((project): project is Entry => !!project.caseStudy);
-}
-
-async function findCase(slug: string) {
-  const data = await getPortfolio();
-  const all = caseStudies(data);
-  const index = all.findIndex((project) => project.slug === slug);
-  if (index === -1) return null;
-  return { data, project: all[index], next: all[(index + 1) % all.length] };
-}
+import { SITE_URL } from "@/lib/site";
+import type { CaseStudy } from "@/types/portfolio";
 
 export async function generateStaticParams() {
   return caseStudies(await getPortfolio()).map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
-  const found = await findCase((await params).slug);
+  const { slug } = await params;
+  const found = findCase(await getPortfolio(), slug);
   if (!found) return {};
-  return {
-    title: `${found.project.title} — Case study · Nguyen Hoang Quan`,
-    description: found.project.summary,
-  };
+  return pageMetadata(`/work/${slug}`, { title: `${found.project.title} case study`, description: found.project.summary }, found.project.seo);
 }
 
 function Part({ index, label, children }: { index: number; label: string; children: React.ReactNode }) {
@@ -86,9 +72,10 @@ function Points({ items }: { items: string[] }) {
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
-  const found = await findCase((await params).slug);
+  const data = await getPortfolio();
+  const found = findCase(data, (await params).slug);
   if (!found) notFound();
-  const { data, project, next } = found;
+  const { project, next } = found;
   const study = project.caseStudy;
   const role = "role" in project ? project.role : "Personal project";
   // Numbered in order, so optional parts don't leave gaps.
@@ -114,8 +101,23 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
     ...(study.open ? [{ label: "STILL OPEN", body: <Points items={study.open} /> }] : []),
   ];
 
+  const url = `${SITE_URL}/work/${project.slug}`;
+  // The write-up as a piece of work by the site's Person (declared on the home page).
+  const structured = {
+    "@type": "CreativeWork",
+    "@id": `${url}#work`,
+    name: project.title,
+    headline: `${project.title} case study`,
+    description: project.summary,
+    url,
+    keywords: project.tags,
+    author: { "@id": `${SITE_URL}/#person` },
+    ...(project.links[0] ? { sameAs: project.links.map((link) => link.href) } : {}),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structured)} />
       <Nav site={data.site} contact={data.contact} base="/" />
       <main>
         <Container className="pb-[72px] pt-[40px] 768:pb-[96px] 768:pt-[56px]">

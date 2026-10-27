@@ -210,6 +210,26 @@ export interface SharedPoint extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    description: "Leave empty to use the page's own title and summary.";
+    displayName: 'SEO';
+    icon: 'search';
+  };
+  attributes: {
+    metaDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 70;
+      }>;
+    noIndex: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface SharedStat extends Struct.ComponentSchema {
   collectionName: 'components_shared_stats';
   info: {
@@ -241,6 +261,7 @@ declare module '@strapi/strapi' {
       'shared.contact-link': SharedContactLink;
       'shared.link': SharedLink;
       'shared.point': SharedPoint;
+      'shared.seo': SharedSeo;
       'shared.stat': SharedStat;
     }
   }
