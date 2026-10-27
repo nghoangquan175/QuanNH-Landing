@@ -69,10 +69,20 @@ export function Footer({ footer, site, contact }: Props) {
             <DeployInfo />
             <QuickMenuHint />
           </div>
-          <a href="#" className="inline-flex items-center gap-[4px] transition-colors hover:text-accent">
+          <a href="#" className="inline-flex shrink-0 items-center gap-[4px] transition-colors hover:text-accent">
             Back to top
             <ArrowUp className="size-[13px]" aria-hidden="true" />
           </a>
+        </div>
+
+        {/* The name, set to the full width and sitting on the bottom edge of the page. */}
+        <div className="wordmark" aria-hidden="true">
+          <p>
+            <span className="wordmark__ink">
+              {site.logo}
+              {site.logoAccent}
+            </span>
+          </p>
         </div>
       </Container>
     </footer>

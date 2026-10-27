@@ -1,0 +1,65 @@
+// Footer wordmark (components/layout/Footer.tsx): the logo set to the container's exact
+// width, cut off at its baseline by the bottom of the page, rising into place over the
+// last stretch of scroll.
+//
+// Measured on Inter 800 at -0.05em tracking: "QuanNH." inks 4.107em wide, starting
+// 0.031em in from its origin; caps stand 0.751em tall, their tops 0.113em below the top
+// of a 1em line box. Change the font, weight or tracking and these need measuring again.
+
+.wordmark {
+  container-type: inline-size;
+  user-select: none;
+  pointer-events: none;
+
+  p {
+    font-size: 24.35cqi;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    white-space: nowrap;
+    height: 0.751em;
+    margin-left: -0.031em;
+    overflow: hidden;
+  }
+}
+
+.wordmark__ink {
+  display: block;
+  margin-top: -0.113em;
+  // Faint, and fading towards the page edge, so it reads as a texture before a word.
+  background: linear-gradient(180deg, var(--wordmark-top), var(--wordmark-bottom));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+:root {
+  --wordmark-top: color-mix(in srgb, var(--text) 9%, transparent);
+  --wordmark-bottom: color-mix(in srgb, var(--text) 2%, transparent);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .wordmark {
+      view-timeline-name: --wordmark;
+    }
+
+    // From the moment its top edge shows to the moment the page bottoms out.
+    .wordmark__ink {
+      animation: wordmark-rise linear both;
+      animation-timeline: --wordmark;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes wordmark-rise {
+  from {
+    transform: translateY(45%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}

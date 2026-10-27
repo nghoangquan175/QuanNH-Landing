@@ -380,11 +380,7 @@
       }
     ],
     "location": "Hanoi, Vietnam",
-    "timeZone": "Asia/Ho_Chi_Minh",
-    "now": {
-      "text": "Client sites at MOHA Software, PushMeUp on my own time",
-      "updated": "Oct 2026"
-    }
+    "timeZone": "Asia/Ho_Chi_Minh"
   },
   "footer": {
     "name": "Nguyen Hoang Quan",
