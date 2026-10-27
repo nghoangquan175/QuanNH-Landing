@@ -140,7 +140,11 @@ export function CommandPalette({ nav, contact }: Props) {
   };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+    // A search field's first Escape would only clear the text; one press closes.
+    if (event.key === "Escape") {
+      event.preventDefault();
+      close();
+    } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       const step = event.key === "ArrowDown" ? 1 : -1;
       setIndex((current + step + visible.length) % visible.length);
@@ -190,9 +194,11 @@ export function CommandPalette({ nav, contact }: Props) {
             }}
             onKeyDown={onKeyDown}
             placeholder="Type a command or section…"
-            // Not a form field: keep the browser's autofill and password managers out
-            // (Bitwarden, 1Password, LastPass each have their own opt-out attribute).
-            type="text"
+            // Not a form field: keep the browser's autofill and password managers out.
+            // type="search" is what Bitwarden skips unconditionally (it honours
+            // data-bwignore only when the user opts in); 1Password and LastPass read
+            // their own attributes.
+            type="search"
             name="quick-menu"
             autoComplete="off"
             autoCorrect="off"
@@ -205,7 +211,7 @@ export function CommandPalette({ nav, contact }: Props) {
             aria-label="Search commands"
             aria-controls="palette-list"
             aria-activedescendant={visible[current] ? `palette-${visible[current].id}` : undefined}
-            className="w-full border-0 border-b border-line bg-transparent px-[18px] py-[16px] text-[15px] text-text placeholder:text-muted focus:border-line focus:outline-none focus:ring-0"
+            className="w-full appearance-none border-0 border-b border-line bg-transparent [&::-webkit-search-cancel-button]:hidden px-[18px] py-[16px] text-[15px] text-text placeholder:text-muted focus:border-line focus:outline-none focus:ring-0"
           />
 
           <ul id="palette-list" role="listbox" aria-label="Commands" className="max-h-[min(440px,60vh)] overflow-y-auto p-[6px]">
