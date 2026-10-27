@@ -59,7 +59,7 @@ export function Expandable({ header, children, footer, className, headerClassNam
         className={cn("grid w-full grid-cols-[1fr_auto] items-start gap-x-[16px] text-left", headerClassName)}
       >
         <span className="min-w-0">{header}</span>
-        <Plus className="expand-toggle mt-[3px] size-[20px] shrink-0 text-muted transition-colors group-hover:text-accent" strokeWidth={1.75} aria-hidden="true" />
+        <Plus className="expand-toggle mt-[3px] size-[20px] shrink-0 text-muted group-hover:text-accent" strokeWidth={1.75} aria-hidden="true" />
       </button>
       <div id={`${id}-panel`} role="region" aria-label={label} className="expand-panel grid">
         <div className="min-h-0 overflow-hidden">

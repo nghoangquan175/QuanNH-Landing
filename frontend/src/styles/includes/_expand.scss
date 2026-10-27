@@ -17,9 +17,13 @@
   }
 }
 
-// The "+" icon rotates 45° into a "×" when open.
+// The "+" turns 45° clockwise into a "×" when open and back when closed. The transition
+// lives here, not as a Tailwind class on the icon: a `transition-colors` utility would
+// override it and the turn would snap instead of animate.
 .expand-toggle {
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.15s;
 
   .is-open > button > & {
     transform: rotate(45deg);
