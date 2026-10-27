@@ -375,7 +375,26 @@
           "EC2 deploy playbooks (Docker + GHCR, and PM2) that record every mistake made on the first production run",
           "General UI/UX rules with a review checklist for building and reviewing screens"
         ],
-        "repo": "nghoangquan175/Coding-Guide"
+        "repo": "nghoangquan175/Coding-Guide",
+        "caseStudy": {
+          "context": "My own set of Claude Code skills: the rules, checklists and workflows I kept re-explaining on client projects, written down once so an AI agent and I apply them the same way every time. Public on GitHub, and used in my daily work.",
+          "problem": "The same bugs kept coming back on new projects, and each project learnt them again. A lesson that lives in a commit message or in one repo's notes doesn't survive the next project, and an AI agent without that context repeats the mistake with full confidence.",
+          "approach": [
+            "Went through the history of two client projects, 578 commits and 84 tickets, and turned what had to be fixed into a review checklist: 199 checks in 12 sections, each linked to the commit that fixed it",
+            "Wrote each check to say how to see the problem, because most of them fail silently: a CMS field the API ignores, a CSS class that emits nothing, a fallback that looks exactly like real content",
+            "Made reviews load only the sections a change can affect, so a typical branch is checked against 3 or 4 of the 12 sections instead of the whole list",
+            "Automated the bug-fix workflow through ClickUp MCP: read the queue, sort it, fix, review against the checklist, ship to staging and report on each ticket, pausing for approval where asked",
+            "Turned new-project setup into one skill wired to the client's 33 technical criteria, and wrote deploy and SEO playbooks from building this site"
+          ],
+          "results": [
+            "7 skills, public on GitHub and in daily use",
+            "Every check can be traced back to the bug and the commit behind it",
+            "This site was deployed and given its SEO with these skills, and its first production run added its own mistakes to the deploy playbook"
+          ],
+          "open": [
+            "The PM2 deploy playbook has not been run end to end yet"
+          ]
+        }
       }
     ]
   },
