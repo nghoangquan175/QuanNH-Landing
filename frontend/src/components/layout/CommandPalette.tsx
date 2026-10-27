@@ -214,7 +214,7 @@ export function CommandPalette({ nav, contact }: Props) {
             }}
             onKeyDown={onKeyDown}
             // The shortcut is only worth teaching where there is a keyboard to press it on.
-            placeholder={finePointer ? `Type a command or section… (${shortcut} anytime)` : "Type a command or section…"}
+            placeholder={finePointer ? `Type a command or section… (${shortcut})` : "Type a command or section…"}
             // Not a form field: keep the browser's autofill and password managers out.
             // type="search" is what Bitwarden skips unconditionally (it honours
             // data-bwignore only when the user opts in); 1Password and LastPass read
