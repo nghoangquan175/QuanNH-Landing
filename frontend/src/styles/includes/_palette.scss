@@ -38,3 +38,14 @@
     animation: none;
   }
 }
+
+// While it is open the page behind stays put: the dialog covers the viewport but has
+// nothing to scroll, so a wheel over it would otherwise scroll the page, and the list
+// would hand its leftover scroll on at either end.
+html:has(.palette[open]) {
+  overflow: hidden;
+}
+
+.palette ul {
+  overscroll-behavior: contain;
+}
