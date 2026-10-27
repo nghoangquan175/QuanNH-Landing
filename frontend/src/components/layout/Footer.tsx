@@ -17,8 +17,8 @@ export function Footer({ footer, site, contact }: Props) {
   return (
     <footer className="border-t border-line pt-[48px] 768:pt-[64px]">
       <Container>
-        <div className="grid gap-[36px] 768:grid-cols-[2fr_1fr_1fr] 768:gap-[48px]">
-          <div>
+        <div className="grid grid-cols-2 gap-[36px] 768:grid-cols-[2fr_1fr_1fr] 768:gap-[48px]">
+          <div className="col-span-2 768:col-span-1">
             <a href="#" className="text-[26px] font-bold tracking-[-0.03em]">
               {site.logo}
               <span className="text-accent">{site.logoAccent}</span>
@@ -59,7 +59,7 @@ export function Footer({ footer, site, contact }: Props) {
           </div>
         </div>
 
-        <div className="mt-[48px] flex flex-col gap-[10px] border-t border-line py-[22px] font-mono text-[12px] text-muted 768:mt-[56px] 768:flex-row 768:items-center 768:justify-between">
+        <div className="mt-[48px] flex items-center justify-between gap-[16px] border-t border-line py-[22px] font-mono text-[12px] text-muted 768:mt-[56px]">
           <p>© 2026 {footer.name}</p>
           <a href="#" className="transition-colors hover:text-accent">
             Back to top ↑
