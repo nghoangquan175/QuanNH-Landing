@@ -36,6 +36,14 @@ Strapi 5 on **SQLite** (`.tmp/data.db`) by deliberate choice; don't switch to Po
 
 Pushing to `main` (changes under `frontend/`, `backend/`, `deploy/` or the workflow) triggers `.github/workflows/deploy.yml`. It builds both images to GHCR with production build args, then SSHes to the EC2 host and copies `deploy/docker-compose.prod.yml` to `/opt/portfolio/docker-compose.yml`. There it writes `TAG=<sha>`, pulls the images, restarts the stack and smoke-tests through Nginx. The server never builds. Both containers bind to `127.0.0.1` behind host Nginx and Cloudflare.
 
+## Commit messages
+
+Conventional-commit style: `type(scope): summary`. Write the summary in lowercase imperative/descriptive English with no trailing period, and list several changes comma-separated in one line.
+
+- Types in use: `feat` (new or changed UI or behaviour), `style` (visual tweaks only), `content` (copy and data in `portfolio.json`), `fix`, `revert`, `ci` (workflow or deploy), `chore` (tooling, deps, scaffolding).
+- Scope is the app touched, `frontend` or `backend`. Leave it out when the change spans both or neither (`ci: …`, `chore: …`).
+- Examples: `feat(frontend): language section with IELTS summary and zoomable certificate viewer`, `style(frontend): stack rows only recolour the group name on hover`.
+
 ## Other folders
 
 - `mockup/`: static HTML design explorations (the site implements `01-staircase`). The root `index.html` redirects there.
