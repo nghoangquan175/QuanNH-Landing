@@ -4,6 +4,7 @@ import { ExpandGroup, Expandable } from "@/components/ui/Expandable";
 import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
+import { Tag } from "@/components/ui/Tag";
 import { TimeAgo } from "@/components/ui/TimeAgo";
 import { getLastCommit } from "@/lib/api/github";
 import type { Portfolio } from "@/types/portfolio";
@@ -33,11 +34,14 @@ export async function Personal({ personal }: { personal: Portfolio["personal"] }
                     <span className="grid gap-y-[4px] 768:grid-cols-[150px_1fr] 768:gap-x-[24px]">
                       <span className="font-mono text-[12px] tracking-[0.06em] text-muted 768:mt-[10px]">{project.period}</span>
                       <span className="min-w-0">
-                        <ProjectTitle project={project}>
-                          <span className="block w-fit text-[22px] font-bold leading-[1.2] transition-colors duration-300 group-hover:text-accent 768:text-[28px]">
-                            {project.title}
-                          </span>
-                        </ProjectTitle>
+                        <span className="flex flex-wrap items-center gap-x-[12px] gap-y-[6px]">
+                          <ProjectTitle project={project}>
+                            <span className="block w-fit text-[22px] font-bold leading-[1.2] transition-colors duration-300 group-hover:text-accent 768:text-[28px]">
+                              {project.title}
+                            </span>
+                          </ProjectTitle>
+                          {project.status && <Tag>{project.status}</Tag>}
+                        </span>
                         <span className="mt-[6px] block text-[15px] text-muted">{project.summary}</span>
                         <span className="mt-[6px] block font-mono text-[12px] text-muted opacity-80">{project.tags}</span>
                       </span>
@@ -47,7 +51,6 @@ export async function Personal({ personal }: { personal: Portfolio["personal"] }
                   footer={
                     <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px] pb-[20px] 768:ml-[174px] 768:pb-[26px]">
                       <SiteLinks links={project.links} empty="private repo" />
-                      {project.status && <span className="font-mono text-[12px] text-muted">{project.status}</span>}
                       <CaseStudyLink study={project.caseStudy} />
                       {project.repo && lastCommits[i] && (
                         <a

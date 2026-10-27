@@ -290,7 +290,7 @@
             "href": "https://github.com/nghoangquan175/LoadForge"
           }
         ],
-        "status": "demo offline, torn down after testing",
+        "status": "Offline",
         "summary": "A self-built lab for learning AWS: load-test an auto-scaling Node.js fleet, then harden it step by step.",
         "details": [
           "Provisioned the whole stack with Terraform: VPC, HTTPS load balancer, EC2 Auto Scaling with CloudWatch alarms, keyless GitHub OIDC deploys",

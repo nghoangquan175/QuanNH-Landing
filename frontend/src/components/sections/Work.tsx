@@ -5,6 +5,7 @@ import { ProjectShots } from "@/components/ui/ProjectShots";
 import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
+import { Tag } from "@/components/ui/Tag";
 import { Timeline } from "@/components/ui/Timeline";
 import type { Portfolio, Project } from "@/types/portfolio";
 
@@ -21,9 +22,7 @@ function ProjectCard({ project }: { project: Project }) {
                 {project.title}
               </span>
             </ProjectTitle>
-            <span className="whitespace-nowrap rounded-full border border-line px-[10px] py-[3px] font-mono text-[11px] text-muted">
-              {project.role}
-            </span>
+            <Tag>{project.role}</Tag>
           </span>
           <span className="mt-[6px] block text-[14px] text-muted">{project.summary}</span>
           <span className="mt-[8px] block font-mono text-[12px] text-muted opacity-80">{project.tags}</span>

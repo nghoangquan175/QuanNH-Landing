@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { ProjectShots } from "@/components/ui/ProjectShots";
 import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SiteLinks } from "@/components/ui/SiteLinks";
+import { Tag } from "@/components/ui/Tag";
 import { getPortfolio } from "@/lib/api/portfolio";
 import type { CaseStudy, Portfolio, PersonalProject, Project } from "@/types/portfolio";
 
@@ -129,11 +130,14 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <p className="mt-[36px] font-mono text-[12px] tracking-[0.1em] text-accent 768:mt-[48px]">
               CASE STUDY · {project.period}
             </p>
-            <ProjectTitle project={project}>
-              <h1 className="mt-[12px] w-fit text-[36px] font-bold leading-[1.05] tracking-[-0.03em] 768:text-[56px]">
-                {project.title}
-              </h1>
-            </ProjectTitle>
+            <div className="mt-[12px] flex flex-wrap items-center gap-x-[16px] gap-y-[8px]">
+              <ProjectTitle project={project}>
+                <h1 className="w-fit text-[36px] font-bold leading-[1.05] tracking-[-0.03em] 768:text-[56px]">
+                  {project.title}
+                </h1>
+              </ProjectTitle>
+              {"status" in project && project.status && <Tag>{project.status}</Tag>}
+            </div>
             <p className="mt-[18px] max-w-[640px] text-[16px] text-muted 768:text-[18px]">{project.summary}</p>
 
             <dl className="mt-[28px] grid gap-[10px] font-mono text-[12px] 768:grid-cols-[180px_1fr] 768:gap-x-[24px]">
@@ -144,7 +148,6 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               <dt className="tracking-[0.08em] text-muted">{"role" in project ? "LIVE" : "LINKS"}</dt>
               <dd className="flex flex-wrap gap-x-[16px] gap-y-[4px]">
                 <SiteLinks links={project.links} empty={"role" in project ? "pre-launch" : "private repo"} />
-                {"status" in project && project.status && <span className="text-muted">{project.status}</span>}
               </dd>
             </dl>
 
