@@ -47,6 +47,7 @@ export async function Personal({ personal }: { personal: Portfolio["personal"] }
                   footer={
                     <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px] pb-[20px] 768:ml-[174px] 768:pb-[26px]">
                       <SiteLinks links={project.links} empty="private repo" />
+                      {project.status && <span className="font-mono text-[12px] text-muted">{project.status}</span>}
                       <CaseStudyLink study={project.caseStudy} />
                       {project.repo && lastCommits[i] && (
                         <a

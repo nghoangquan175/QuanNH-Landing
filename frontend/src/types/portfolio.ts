@@ -46,6 +46,8 @@ export type PersonalProject = {
   details: string[];
   /** Public links only; a private repo gets none. */
   links: Link[];
+  /** A short note beside the links, e.g. why there is no live demo. */
+  status?: string;
   /** "owner/name" of a public repo; shows when it was last committed to. */
   repo?: string;
   caseStudy?: CaseStudy;

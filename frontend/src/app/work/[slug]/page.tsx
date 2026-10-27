@@ -141,9 +141,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               <dd>{role}</dd>
               <dt className="tracking-[0.08em] text-muted">STACK</dt>
               <dd>{project.tags}</dd>
-              <dt className="tracking-[0.08em] text-muted">LIVE</dt>
+              <dt className="tracking-[0.08em] text-muted">{"role" in project ? "LIVE" : "LINKS"}</dt>
               <dd className="flex flex-wrap gap-x-[16px] gap-y-[4px]">
                 <SiteLinks links={project.links} empty={"role" in project ? "pre-launch" : "private repo"} />
+                {"status" in project && project.status && <span className="text-muted">{project.status}</span>}
               </dd>
             </dl>
 
