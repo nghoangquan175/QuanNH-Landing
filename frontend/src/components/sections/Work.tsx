@@ -1,5 +1,4 @@
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { CaseStudyLink } from "@/components/ui/CaseStudyLink";
 import { Container } from "@/components/ui/Container";
 import { ExpandGroup, Expandable } from "@/components/ui/Expandable";
 import { ProjectShots } from "@/components/ui/ProjectShots";
@@ -34,15 +33,7 @@ function ProjectCard({ project }: { project: Project }) {
       footer={
         <div className="mt-[12px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
           <SiteLinks links={project.links} empty="pre-launch" />
-          {project.caseStudy && (
-            <Link
-              href={`/work/${project.caseStudy.slug}`}
-              className="inline-flex items-center gap-[3px] font-mono text-[12px] text-text underline-offset-[3px] hover:text-accent hover:underline"
-            >
-              Read case study
-              <ArrowRight className="size-[13px]" aria-hidden="true" />
-            </Link>
-          )}
+          <CaseStudyLink study={project.caseStudy} />
         </div>
       }
     >

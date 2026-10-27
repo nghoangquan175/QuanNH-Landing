@@ -29,7 +29,11 @@ export type CaseStudy = {
   context: string;
   problem: string;
   approach: string[];
+  /** Things that broke along the way, each with its cause, fix and measured result. */
+  chapters?: { title: string; problem: string; why?: string; fix: string[]; result: string }[];
   results: string[];
+  /** Ideas not built yet. */
+  open?: string[];
 };
 
 export type PersonalProject = {
@@ -44,6 +48,7 @@ export type PersonalProject = {
   links: Link[];
   /** "owner/name" of a public repo; shows when it was last committed to. */
   repo?: string;
+  caseStudy?: CaseStudy;
 };
 
 export type SkillGroup = { title: string; items: string };

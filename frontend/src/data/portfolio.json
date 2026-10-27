@@ -297,7 +297,83 @@
           "Raised throughput by 47% (26.7 → 39.2 req/s), cut health-check latency under load from ~20 s to 8 ms and scale-out from ~3 min to 30–50 s",
           "Every change measured with a k6 load generator, shipped through zero-downtime CI/CD"
         ],
-        "repo": "nghoangquan175/LoadForge"
+        "repo": "nghoangquan175/LoadForge",
+        "caseStudy": {
+          "slug": "loadforge",
+          "context": "A lab I built on my own time to learn AWS by putting it under load: a fleet of Node.js servers (the Defenders) in an EC2 Auto Scaling group behind an HTTPS load balancer, a Watcher that streams the group's state, and a dashboard that shows it and runs load tests. All provisioned with Terraform and shipped through GitHub Actions.",
+          "problem": "Auto scaling looks simple on paper: add a server when average CPU passes 60%. The point was to load-test the real thing, find each place it failed to hold up, fix it, and measure every change.",
+          "approach": [
+            "Provisioned the stack with Terraform: a VPC across 2 public subnets, an HTTPS load balancer with a wildcard certificate, a launch template, the Auto Scaling group, CloudWatch, and config in SSM Parameter Store",
+            "Scaling rule: target tracking on average CPU at 60%",
+            "A CPU-heavy route on the Defenders (counting primes) to take traffic from k6 or the dashboard's own load test",
+            "Zero-downtime deploys: GitHub Actions builds the images to GHCR, and instance refresh starts new servers before stopping old ones"
+          ],
+          "chapters": [
+            {
+              "title": "Half the CPU went unused",
+              "problem": "Under load, the group never scaled out.",
+              "why": "A t3.micro has 2 vCPUs, but Node.js runs JavaScript on one core. One core sat at 100% and the other near 0%, so average CPU topped out around 50% and never reached the 60% target.",
+              "fix": [
+                "Node cluster: one worker per vCPU sharing the port, with the primary process restarting any that die"
+              ],
+              "result": "CPU use 101% → 200% and throughput 26.7 → 39.2 req/s (+47%). The scaling rule can fire."
+            },
+            {
+              "title": "Busy servers were replaced as dead",
+              "problem": "Under heavy load, servers were terminated and replaced instead of the group growing.",
+              "why": "The load balancer's health check waited in line behind the CPU-heavy requests on the same workers. It took ~20 s, timed out, and a server that was only busy was marked unhealthy.",
+              "fix": [
+                "The primary process answers health checks on its own port, while the load stays on the workers",
+                "Keep-alive raised to 125 s, past the load balancer's 120 s, which ended random 502s from reused closed connections"
+              ],
+              "result": "At 200% CPU the health check answers in 8 ms, and busy servers stay in the group."
+            },
+            {
+              "title": "The dashboard went blind during tests",
+              "problem": "During a load test the dashboard froze, and when it did show data, the data was minutes old.",
+              "why": "Its live stream was served by the same workers that ran the load, and CloudWatch data arrives 1–2 minutes late.",
+              "fix": [
+                "A separate Watcher service streams to the dashboard, polling only while one is open, since CloudWatch reads are billed",
+                "Each Defender keeps its own last 5 minutes at one point per second and its last hour in 15 s steps; the Watcher reads them directly",
+                "CloudWatch only fills the gaps, such as servers that are already gone"
+              ],
+              "result": "Dashboard delay 2–3 minutes → a few seconds, every point measured and none filled in."
+            },
+            {
+              "title": "Three minutes to react to a spike",
+              "problem": "A burst pushes the first server past 90% CPU at once, but the 60% rule waits for 3 one-minute data points before adding a server, and that server still has to boot.",
+              "fix": [
+                "A second, danger level: each server publishes its CPU every 10 s, and an average over 90% for 30 s adds 2 servers at once",
+                "New servers boot from an image with Docker already installed, so boot skips installing it"
+              ],
+              "result": "Scaling out starts in 30–50 s instead of about 3 minutes, for around $0.60 a month."
+            },
+            {
+              "title": "Traffic wasn't shared evenly",
+              "problem": "Once new servers were ready, the load balancer still sent the overloaded one the same share of new requests.",
+              "why": "Round robin takes turns; it doesn't look at how busy each server is.",
+              "fix": [
+                "Switched the target group to least outstanding requests: each new request goes to the server with the fewest still in flight"
+              ],
+              "result": "New servers take most new requests until they are as busy as the rest, while the overloaded one drains."
+            }
+          ],
+          "results": [
+            "Throughput per server 26.7 → 39.2 req/s (+47%)",
+            "Health check under load ~20 s → 8 ms",
+            "Scale-out reaction ~3 minutes → 30–50 s",
+            "Dashboard delay 2–3 minutes → a few seconds",
+            "Deploys with no downtime, even on a single server"
+          ],
+          "open": [
+            "Per-IP rate limiting with AWS WAF: against a real attacker, scaling means paying to serve the attack",
+            "A warm pool of pre-booted servers that start in 20–30 s",
+            "The app image baked into the server image, so boot skips the pull too",
+            "At least 2 servers at all times, so one isn't a single point of failure",
+            "Load shedding: answer 503 fast once a server's queue is too long",
+            "Measure boot time before and after the image change"
+          ]
+        }
       },
       {
         "title": "Coding Guide",

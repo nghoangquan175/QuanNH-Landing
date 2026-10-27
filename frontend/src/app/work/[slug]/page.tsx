@@ -9,23 +9,25 @@ import { ProjectShots } from "@/components/ui/ProjectShots";
 import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { getPortfolio } from "@/lib/api/portfolio";
-import type { Portfolio } from "@/types/portfolio";
+import type { CaseStudy, Portfolio, PersonalProject, Project } from "@/types/portfolio";
 
-/** Selected Work projects that have a write-up, in the order the home page lists them. */
-function caseStudies(data: Portfolio) {
-  return data.work.projects.filter((project) => project.caseStudy);
+type Entry = (Project | PersonalProject) & { caseStudy: CaseStudy };
+
+/** Client then personal projects that have a write-up, in the order the home page lists them. */
+function caseStudies(data: Portfolio): Entry[] {
+  return [...data.work.projects, ...data.personal.projects].filter((project): project is Entry => !!project.caseStudy);
 }
 
 async function findCase(slug: string) {
   const data = await getPortfolio();
   const all = caseStudies(data);
-  const index = all.findIndex((project) => project.caseStudy?.slug === slug);
+  const index = all.findIndex((project) => project.caseStudy.slug === slug);
   if (index === -1) return null;
   return { data, project: all[index], next: all[(index + 1) % all.length] };
 }
 
 export async function generateStaticParams() {
-  return caseStudies(await getPortfolio()).map((project) => ({ slug: project.caseStudy!.slug }));
+  return caseStudies(await getPortfolio()).map((project) => ({ slug: project.caseStudy.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
@@ -48,6 +50,29 @@ function Part({ index, label, children }: { index: number; label: string; childr
   );
 }
 
+/** One thing that broke: what was seen, why, what changed, and what it gave. */
+function Chapter({ chapter }: { chapter: NonNullable<CaseStudy["chapters"]>[number] }) {
+  const rows: [string, React.ReactNode][] = [
+    ["PROBLEM", chapter.problem],
+    ...(chapter.why ? [["WHY", chapter.why] as [string, React.ReactNode]] : []),
+    ["FIX", chapter.fix.length === 1 ? chapter.fix[0] : <Points items={chapter.fix} />],
+    ["RESULT", chapter.result],
+  ];
+  return (
+    <div className="scroll-reveal">
+      <h3 className="text-[19px] font-bold tracking-[-0.01em] 768:text-[21px]">{chapter.title}</h3>
+      <dl className="mt-[12px] grid gap-x-[16px] gap-y-[10px] 768:grid-cols-[72px_1fr]">
+        {rows.map(([label, body]) => (
+          <div key={label} className="contents">
+            <dt className="pt-[5px] font-mono text-[11px] tracking-[0.08em] text-muted">{label}</dt>
+            <dd className={label === "RESULT" ? "text-accent" : undefined}>{body}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
 function Points({ items }: { items: string[] }) {
   return (
     <ul className="ml-[18px] list-disc space-y-[8px] marker:text-muted">
@@ -62,7 +87,30 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const found = await findCase((await params).slug);
   if (!found) notFound();
   const { data, project, next } = found;
-  const study = project.caseStudy!;
+  const study = project.caseStudy;
+  const role = "role" in project ? project.role : "Personal project";
+  // Numbered in order, so optional parts don't leave gaps.
+  const parts: { label: string; body: React.ReactNode }[] = [
+    { label: "CONTEXT", body: <p>{study.context}</p> },
+    { label: "THE PROBLEM", body: <p>{study.problem}</p> },
+    { label: "WHAT I DID", body: <Points items={study.approach} /> },
+    ...(study.chapters
+      ? [
+          {
+            label: "WHAT BROKE UNDER LOAD",
+            body: (
+              <div className="space-y-[32px]">
+                {study.chapters.map((chapter) => (
+                  <Chapter key={chapter.title} chapter={chapter} />
+                ))}
+              </div>
+            ),
+          },
+        ]
+      : []),
+    { label: "OUTCOME", body: <Points items={study.results} /> },
+    ...(study.open ? [{ label: "STILL OPEN", body: <Points items={study.open} /> }] : []),
+  ];
 
   return (
     <>
@@ -90,39 +138,32 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
             <dl className="mt-[28px] grid gap-[10px] font-mono text-[12px] 768:grid-cols-[180px_1fr] 768:gap-x-[24px]">
               <dt className="tracking-[0.08em] text-muted">ROLE</dt>
-              <dd>{project.role}</dd>
+              <dd>{role}</dd>
               <dt className="tracking-[0.08em] text-muted">STACK</dt>
               <dd>{project.tags}</dd>
               <dt className="tracking-[0.08em] text-muted">LIVE</dt>
               <dd className="flex flex-wrap gap-x-[16px] gap-y-[4px]">
-                <SiteLinks links={project.links} empty="pre-launch" />
+                <SiteLinks links={project.links} empty={"role" in project ? "pre-launch" : "private repo"} />
               </dd>
             </dl>
 
-            {project.screenshots && (
+            {"screenshots" in project && project.screenshots && (
               <div className="mt-[40px]">
                 <ProjectShots shots={project.screenshots} eager />
               </div>
             )}
 
             <div className="mt-[24px]">
-              <Part index={1} label="CONTEXT">
-                <p>{study.context}</p>
-              </Part>
-              <Part index={2} label="THE PROBLEM">
-                <p>{study.problem}</p>
-              </Part>
-              <Part index={3} label="WHAT I DID">
-                <Points items={study.approach} />
-              </Part>
-              <Part index={4} label="OUTCOME">
-                <Points items={study.results} />
-              </Part>
+              {parts.map((part, i) => (
+                <Part key={part.label} index={i + 1} label={part.label}>
+                  {part.body}
+                </Part>
+              ))}
             </div>
 
             {next !== project && (
               <Link
-                href={`/work/${next.caseStudy!.slug}`}
+                href={`/work/${next.caseStudy.slug}`}
                 className="group mt-[16px] flex items-center justify-between gap-[16px] border-t border-line pt-[28px]"
               >
                 <span>
