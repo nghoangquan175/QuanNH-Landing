@@ -84,11 +84,17 @@ body {
   mix-blend-mode: normal;
 }
 
+// A mask taller than the page — opaque top, a soft feathered band, transparent below —
+// slides down, so the wipe's leading edge is a gradient rather than a hard line.
 ::view-transition-new(root) {
-  animation: theme-wipe 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  -webkit-mask: linear-gradient(to bottom, #000 45%, transparent 55%) 0 100% / 100% 250% no-repeat;
+  mask: linear-gradient(to bottom, #000 45%, transparent 55%) 0 100% / 100% 250% no-repeat;
+  animation: theme-wipe 0.7s cubic-bezier(0.45, 0, 0.25, 1) forwards;
 }
 
 @keyframes theme-wipe {
-  from { clip-path: inset(0 0 100% 0); }
-  to { clip-path: inset(0); }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
 }
