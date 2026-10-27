@@ -187,6 +187,24 @@
     "title": "Built on my own time.",
     "projects": [
       {
+        "title": "PushMeUp",
+        "period": "OCT 2026",
+        "tags": "React · TypeScript · MediaPipe · WebRTC · Cloudflare TURN · WebSockets · AWS · Terraform",
+        "links": [
+          {
+            "label": "pushmeup.quannh.xyz",
+            "href": "https://pushmeup.quannh.xyz"
+          }
+        ],
+        "summary": "A home-workout web app that counts your reps through the camera, with motion games you can play against a friend.",
+        "details": [
+          "Pose tracking in the browser with MediaPipe: counts reps for push-ups, squats, planks and more, with guided workouts and a spoken coach",
+          "Motion games (Shapeshift, Hurdles, Hole in the wall, Dodge ball) played solo, two on one device, or head to head over Duo",
+          "Duo matches peer to peer over WebRTC, paired through a small WebSocket server, with Cloudflare TURN relaying video when players can't connect directly; kept smooth on phones by moving the pose model to a Web Worker",
+          "Runs on EC2 provisioned with Terraform, shipped through GitHub Actions; English and Vietnamese"
+        ]
+      },
+      {
         "title": "LoadForge",
         "period": "SEP — OCT 2026",
         "tags": "AWS · Terraform · NestJS · Next.js · k6 · GitHub Actions",
