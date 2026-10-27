@@ -70,3 +70,25 @@ body {
     .theme-icon-moon { display: none; }
   }
 }
+
+// Theme swap (ThemeToggle): the new theme wipes in from the top over the old one.
+:root.theme-switching *,
+:root.theme-switching *::before,
+:root.theme-switching *::after {
+  transition: none !important;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: theme-wipe 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes theme-wipe {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}
