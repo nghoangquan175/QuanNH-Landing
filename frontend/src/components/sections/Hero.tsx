@@ -32,14 +32,14 @@ export function Hero({ hero }: { hero: Portfolio["hero"] }) {
         <p style={{ "--reveal-i": 2 } as React.CSSProperties} className="reveal mx-auto mb-[28px] max-w-[560px] text-[15px] text-muted 768:mb-[32px] 768:text-[16px]">
           {hero.description}
         </p>
-        <div style={{ "--reveal-i": 3 } as React.CSSProperties} className="reveal flex flex-wrap justify-center gap-[12px]">
+        <div style={{ "--reveal-i": 3 } as React.CSSProperties} className="reveal flex flex-wrap justify-center gap-[12px] print:hidden">
           <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
           <Button href={hero.secondaryCta.href} variant="ghost">
             {hero.secondaryCta.label}
           </Button>
         </div>
 
-        <div style={{ "--reveal-i": 4 } as React.CSSProperties} className="reveal mt-[56px] grid grid-cols-4 grid-rows-[140px_140px] items-end gap-[6px] 768:mt-[72px] 768:grid-rows-[160px_160px] 1024:mt-[80px] 1024:h-[260px] 1024:grid-cols-9 1024:grid-rows-1">
+        <div style={{ "--reveal-i": 4 } as React.CSSProperties} className="reveal mt-[56px] grid print:hidden grid-cols-4 grid-rows-[140px_140px] items-end gap-[6px] 768:mt-[72px] 768:grid-rows-[160px_160px] 1024:mt-[80px] 1024:h-[260px] 1024:grid-cols-9 1024:grid-rows-1">
           {left.map((stat, i) => (
             <StatStep key={stat.label} stat={stat} height={HEIGHTS[i]} />
           ))}

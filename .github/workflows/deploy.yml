@@ -39,6 +39,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build time
+        id: meta
+        run: echo "time=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+
       - uses: docker/build-push-action@v6
         with:
           context: ./${{ matrix.app }}
@@ -53,6 +57,9 @@ jobs:
             NEXT_PUBLIC_SITE_ENV=production
             NEXT_PUBLIC_STRAPI_API_URL=https://cms.quannh.xyz
             STRAPI_API_URL=https://cms.quannh.xyz
+            NEXT_PUBLIC_BUILD_SHA=${{ github.sha }}
+            NEXT_PUBLIC_BUILD_TIME=${{ steps.meta.outputs.time }}
+            NEXT_PUBLIC_SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha,scope=${{ matrix.app }}
           cache-to: type=gha,mode=max,scope=${{ matrix.app }}
 

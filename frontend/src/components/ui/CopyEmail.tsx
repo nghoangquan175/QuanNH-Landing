@@ -28,7 +28,7 @@ export function CopyEmail({ email }: { email: string }) {
         onClick={copy}
         aria-label={copied ? "Email copied" : "Copy email"}
         title={copied ? "Copied" : "Copy email"}
-        className={cn("grid size-[28px] place-items-center rounded-full transition-colors hover:text-accent", copied ? "text-accent" : "text-muted")}
+        className={cn("grid size-[28px] print:hidden place-items-center rounded-full transition-colors hover:text-accent", copied ? "text-accent" : "text-muted")}
       >
         {copied ? <Check className="size-[15px]" aria-hidden="true" /> : <Copy className="size-[15px]" aria-hidden="true" />}
       </button>

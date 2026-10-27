@@ -14,7 +14,7 @@ export function Language({ language }: { language: Portfolio["language"] }) {
 
         <div className="grid gap-[32px] 1024:grid-cols-[360px_1fr] 1024:gap-[64px]">
           {/* The certificate, summarised; the scan itself opens in the viewer. */}
-          <div className="scroll-reveal self-start rounded-[16px] border border-line bg-panel p-[22px] 768:p-[26px]">
+          <div className="scroll-reveal self-start rounded-[16px] print:break-inside-avoid border border-line bg-panel p-[22px] 768:p-[26px]">
             <p className="font-mono text-[12px] tracking-[0.08em] text-muted">
               {cert.name.toUpperCase()} · {cert.date}
             </p>
@@ -26,7 +26,7 @@ export function Language({ language }: { language: Portfolio["language"] }) {
               </span>
             </div>
 
-            <div className="mt-[20px] border-t border-line pt-[18px]">
+            <div className="mt-[20px] border-t border-line pt-[18px] print:hidden">
               <CertificateViewer image={ieltsCertificate} alt={cert.imageAlt} label="View certificate" />
             </div>
           </div>

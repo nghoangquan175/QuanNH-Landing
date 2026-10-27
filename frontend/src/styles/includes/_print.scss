@@ -1,0 +1,94 @@
+// Printing (Ctrl+P, or "Print as CV" in the footer) gives a plain CV: dark ink on white
+// in either theme, every panel open, nothing moving. Page chrome — nav, footer, buttons,
+// the hero stairs — is dropped with Tailwind's `print:hidden` on the components.
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 12mm 14mm;
+  }
+
+  // !important so the ink wins over whichever theme the visitor is in.
+  :root {
+    --bg: #ffffff !important;
+    --panel: #ffffff !important;
+    --panel2: #ffffff !important;
+    --line: #dcdce4 !important;
+    --text: #15141c !important;
+    --muted: #55536a !important;
+    --accent: #4a3dd4 !important;
+    --h1a: #15141c !important;
+    --h1b: #15141c !important;
+    color-scheme: light;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  // Both start hidden and rely on an animation to appear.
+  .reveal,
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .intro,
+  .click-fx,
+  .scrollbar,
+  .hero-glow::before,
+  .hero-glow::after,
+  .contact-glow::before {
+    display: none !important;
+  }
+
+  .gradient-title {
+    background: none;
+    color: var(--text);
+  }
+
+  .expand-panel {
+    grid-template-rows: 1fr !important;
+    opacity: 1 !important;
+  }
+
+  // Tighter rhythm than on screen: the sections are what matter, not the air around them.
+  main > header,
+  main > section {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+    border-top: 0 !important;
+  }
+
+  main > header {
+    padding-top: 0 !important;
+  }
+
+  // Paper is smaller than the screen layout it inherits: scale the whole page down.
+  body {
+    zoom: 0.78;
+  }
+
+  h1 {
+    font-size: 52px !important;
+  }
+
+  // A section's eyebrow and title stay with what follows them.
+  p:has(+ h2),
+  h2 {
+    break-after: avoid;
+  }
+
+  // Cards may split across pages (keeping them whole leaves half-empty pages); single
+  // lines and rows may not.
+  .expand-panel li,
+  .stack-row,
+  main > section dl > div {
+    break-inside: avoid;
+  }
+}

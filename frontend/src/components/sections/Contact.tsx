@@ -27,7 +27,7 @@ export function Contact({ contact }: { contact: Portfolio["contact"] }) {
             {contact.title}
           </h2>
           <p className="mt-[18px] max-w-[440px] text-[16px] text-muted">{contact.text}</p>
-          <div className="mt-[28px]">
+          <div className="mt-[28px] print:hidden">
             <Button href={`mailto:${contact.email}`}>Email me</Button>
           </div>
         </div>
