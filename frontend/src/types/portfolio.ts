@@ -13,6 +13,8 @@ export type Project = {
   details: string[];
   /** Live sites; empty while a project is pre-launch. */
   links: Link[];
+  /** Home-page captures shown when expanded; `image` is a key in ProjectShots. */
+  screenshots?: { image: string; alt: string }[];
 };
 
 export type PersonalProject = {
@@ -25,6 +27,8 @@ export type PersonalProject = {
   details: string[];
   /** Public links only; a private repo gets none. */
   links: Link[];
+  /** "owner/name" of a public repo; shows when it was last committed to. */
+  repo?: string;
 };
 
 export type SkillGroup = { title: string; items: string };

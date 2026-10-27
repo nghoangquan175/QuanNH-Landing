@@ -11,6 +11,13 @@ const GroupContext = createContext<{
   setOpenId: React.Dispatch<React.SetStateAction<string | null>>;
 } | null>(null);
 
+/** Whether the nearest Expandable is open, for content that should wait until it is. */
+const OpenContext = createContext(false);
+
+export function useExpandableOpen() {
+  return useContext(OpenContext);
+}
+
 export function ExpandGroup({ children }: { children: React.ReactNode }) {
   const [openId, setOpenId] = useState<string | null>(null);
   return <GroupContext.Provider value={{ openId, setOpenId }}>{children}</GroupContext.Provider>;
@@ -86,7 +93,9 @@ export function Expandable({ header, children, footer, className, headerClassNam
       </button>
       <div id={`${id}-panel`} role="region" aria-label={label} className="expand-panel grid">
         <div className="min-h-0 overflow-hidden">
-          <div className={panelClassName}>{children}</div>
+          <div className={panelClassName}>
+            <OpenContext.Provider value={open}>{children}</OpenContext.Provider>
+          </div>
         </div>
       </div>
       {footer}

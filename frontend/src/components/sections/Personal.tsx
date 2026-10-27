@@ -2,20 +2,27 @@ import { Container } from "@/components/ui/Container";
 import { ExpandGroup, Expandable } from "@/components/ui/Expandable";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
+import { TimeAgo } from "@/components/ui/TimeAgo";
+import { getLastCommit } from "@/lib/api/github";
 import type { Portfolio } from "@/types/portfolio";
 
 /**
  * Accordion rows in the same spec-sheet style as the Stack section; all start closed.
- * Links sit under the header, always visible, as on the Selected Work cards.
+ * Links sit under the header, always visible, as on the Selected Work cards; a public
+ * repo adds when it was last committed to, linking to its history.
  */
-export function Personal({ personal }: { personal: Portfolio["personal"] }) {
+export async function Personal({ personal }: { personal: Portfolio["personal"] }) {
+  const lastCommits = await Promise.all(
+    personal.projects.map((project) => (project.repo ? getLastCommit(project.repo) : null)),
+  );
+
   return (
     <section id="personal" className="py-[48px] 768:py-[64px] 1024:py-[72px]">
       <Container>
         <SectionHeading eyebrow={personal.eyebrow} title={personal.title} />
         <ExpandGroup>
           <ul className="border-t border-line">
-            {personal.projects.map((project) => (
+            {personal.projects.map((project, i) => (
               <li key={project.title} className="scroll-reveal border-b border-line">
                 <Expandable
                   label={project.title}
@@ -36,6 +43,16 @@ export function Personal({ personal }: { personal: Portfolio["personal"] }) {
                   footer={
                     <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px] pb-[20px] 768:ml-[174px] 768:pb-[26px]">
                       <SiteLinks links={project.links} empty="private repo" />
+                      {project.repo && lastCommits[i] && (
+                        <a
+                          href={`https://github.com/${project.repo}/commits`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[12px] text-muted transition-colors hover:text-text"
+                        >
+                          last commit <TimeAgo iso={lastCommits[i]} />
+                        </a>
+                      )}
                     </div>
                   }
                 >

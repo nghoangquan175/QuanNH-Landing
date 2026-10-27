@@ -103,6 +103,12 @@
           "Monthly maintenance cycle on the live site: bug fixes, small improvements and client change requests",
           "Worked across the Next.js front end and a Strapi CMS with 50+ content types",
           "Kept the editor setup the client's content team relies on working as the CMS changed"
+        ],
+        "screenshots": [
+          {
+            "image": "john-holland",
+            "alt": "Home page of johnholland.com.au"
+          }
         ]
       },
       {
@@ -142,6 +148,16 @@
           "Integrated the Shopify Storefront API for product listings, filters and search",
           "Made the sites faster and sturdier: lighter images, lazy loading, fewer API calls, pages that stay up when Shopify is down",
           "Delivered in 3 milestones agreed with the client (UI, CMS, then docs and user guides), reviewed over Slack and Google Meet"
+        ],
+        "screenshots": [
+          {
+            "image": "house-nine",
+            "alt": "Home page of housenine.co.uk"
+          },
+          {
+            "image": "nine-and-found",
+            "alt": "Home page of nineandfound.com"
+          }
         ]
       },
       {
@@ -160,6 +176,12 @@
           "Turned Figma designs into a responsive front end that works across desktop, tablet and mobile",
           "Built reusable UI components shared across the national site and 8 state and territory subsites",
           "Built animated, interactive sections for the campaign content and delivered client change requests"
+        ],
+        "screenshots": [
+          {
+            "image": "flip-the-vape",
+            "alt": "Home page of flipthevape.com"
+          }
         ]
       },
       {
@@ -178,6 +200,12 @@
           "Built 6 responsive pages plus the header, footer and mobile navigation from the design",
           "Connected the pages to the Strapi CMS and built interactive sections such as animated sliders",
           "Prepared the launch (client UI feedback, SEO fixes, sitemap) and kept maintaining the site after go-live"
+        ],
+        "screenshots": [
+          {
+            "image": "hatch-quarter",
+            "alt": "Home page of hatchquarter.com.au"
+          }
         ]
       }
     ]
@@ -220,7 +248,8 @@
           "Three apps: the servers under test (NestJS), a watcher that streams the Auto Scaling group and CloudWatch over SSE, and a Next.js dashboard",
           "Raised throughput by 47% (26.7 → 39.2 req/s), cut health-check latency under load from ~20 s to 8 ms and scale-out from ~3 min to 30–50 s",
           "Every change measured with a k6 load generator, shipped through zero-downtime CI/CD"
-        ]
+        ],
+        "repo": "nghoangquan175/LoadForge"
       },
       {
         "title": "Coding Guide",
@@ -239,7 +268,8 @@
           "One-command setup for new Next.js + Strapi projects, wired to the client's technical criteria",
           "EC2 deploy playbooks (Docker + GHCR, and PM2) that record every mistake made on the first production run",
           "General UI/UX rules with a review checklist for building and reviewing screens"
-        ]
+        ],
+        "repo": "nghoangquan175/Coding-Guide"
       }
     ]
   },
