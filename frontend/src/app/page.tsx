@@ -14,7 +14,7 @@ export default async function Home() {
 
   return (
     <>
-      <Nav site={data.site} />
+      <Nav site={data.site} contact={data.contact} />
       <main>
         <Hero hero={data.hero} />
         <Work work={data.work} />

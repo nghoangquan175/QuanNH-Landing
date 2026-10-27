@@ -14,19 +14,23 @@ function applyTheme(next: string) {
   }
 }
 
-function toggleTheme(event: React.MouseEvent<HTMLButtonElement>) {
+/**
+ * Swaps the theme. With a starting element the new theme spreads out from its centre;
+ * without one (or with reduced motion, or no View Transitions) it just switches.
+ */
+export function switchTheme(from?: Element | null) {
   const root = document.documentElement;
   const next = root.dataset.theme === "light" ? "dark" : "light";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (!document.startViewTransition || reduceMotion) {
+  if (!from || !document.startViewTransition || reduceMotion) {
     applyTheme(next);
     return;
   }
 
-  // The new theme spreads out as a soft-edged circle from the centre of this button
+  // The new theme spreads out as a soft-edged circle from the centre of `from`
   // (see _theme.scss), wide enough at the end to cover the farthest corner.
-  const rect = event.currentTarget.getBoundingClientRect();
+  const rect = from.getBoundingClientRect();
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
   const reach = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
@@ -51,7 +55,8 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={(event) => switchTheme(event.currentTarget)}
+      data-theme-toggle
       aria-label="Toggle light and dark mode"
       className="glow-ring grid size-[40px] place-items-center rounded-full border border-line text-text transition-shadow"
     >

@@ -1,0 +1,40 @@
+// Command menu (components/layout/CommandPalette.tsx): a dimmed backdrop and a panel that
+// drops in from a hair above.
+
+.palette::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+// Light: a faint ink wash instead of grey murk.
+:root[data-theme="light"] .palette::backdrop {
+  background: rgba(22, 20, 43, 0.18);
+}
+
+.palette[open] > div {
+  animation: palette-in 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.palette[open]::backdrop {
+  animation: palette-fade 0.18s ease-out;
+}
+
+@keyframes palette-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+
+@keyframes palette-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .palette[open] > div,
+  .palette[open]::backdrop {
+    animation: none;
+  }
+}
