@@ -17,25 +17,9 @@
   }
 }
 
-// Two 1.5px bars: a "+" that rotates 45° into a "×" when open.
+// The "+" icon rotates 45° into a "×" when open.
 .expand-toggle {
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 14px;
-    height: 1.5px;
-    background: currentColor;
-    transform: translate(-50%, -50%);
-  }
-
-  &::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
 
   .is-open > button > & {
     transform: rotate(45deg);

@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowUpRight, Minus, Plus, RotateCcw, X } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -107,7 +108,7 @@ export function CertificateViewer({ image, alt, label }: { image: StaticImageDat
   };
 
   const toolButton =
-    "grid size-[36px] place-items-center rounded-full text-[18px] text-white/80 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30";
+    "grid size-[36px] place-items-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30";
 
   return (
     <>
@@ -118,7 +119,7 @@ export function CertificateViewer({ image, alt, label }: { image: StaticImageDat
         className="inline-flex items-center gap-[8px] rounded-full border border-line px-[18px] py-[10px] text-[14px] font-semibold transition-colors hover:border-accent hover:text-accent"
       >
         {label}
-        <span aria-hidden="true">↗</span>
+        <ArrowUpRight className="size-[16px]" aria-hidden="true" />
       </button>
 
       {open &&
@@ -148,21 +149,21 @@ export function CertificateViewer({ image, alt, label }: { image: StaticImageDat
             </div>
 
             <button ref={closeRef} type="button" onClick={close} aria-label="Close" className={`${toolButton} absolute right-[16px] top-[16px] bg-white/10`}>
-              ×
+              <X className="size-[18px]" aria-hidden="true" />
             </button>
 
             <div className="absolute bottom-[20px] left-1/2 flex -translate-x-1/2 items-center gap-[4px] rounded-full bg-neutral-900/90 px-[8px] py-[6px] font-mono text-[12px] text-white/80 ring-1 ring-white/10">
               <button type="button" onClick={() => zoomTo(zoom - STEP)} disabled={zoom <= MIN_ZOOM} aria-label="Zoom out" className={toolButton}>
-                −
+                <Minus className="size-[16px]" aria-hidden="true" />
               </button>
               <span className="w-[48px] text-center tabular-nums" aria-live="polite">
                 {Math.round(zoom * 100)}%
               </span>
               <button type="button" onClick={() => zoomTo(zoom + STEP)} disabled={zoom >= MAX_ZOOM} aria-label="Zoom in" className={toolButton}>
-                +
+                <Plus className="size-[16px]" aria-hidden="true" />
               </button>
-              <button type="button" onClick={() => zoomTo(1)} disabled={zoom === MIN_ZOOM} aria-label="Reset zoom" className={`${toolButton} text-[15px]`}>
-                ⟲
+              <button type="button" onClick={() => zoomTo(1)} disabled={zoom === MIN_ZOOM} aria-label="Reset zoom" className={toolButton}>
+                <RotateCcw className="size-[15px]" aria-hidden="true" />
               </button>
             </div>
           </div>,

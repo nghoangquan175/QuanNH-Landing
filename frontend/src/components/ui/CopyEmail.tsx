@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 
 /** The address as a mailto link, plus a quiet copy button that confirms for a moment. */
@@ -25,8 +26,9 @@ export function CopyEmail({ email }: { email: string }) {
         type="button"
         onClick={copy}
         aria-live="polite"
-        className="rounded-full border border-line px-[10px] py-[2px] font-mono text-[11px] text-muted transition-colors hover:border-accent hover:text-accent"
+        className="inline-flex items-center gap-[5px] rounded-full border border-line px-[10px] py-[2px] font-mono text-[11px] text-muted transition-colors hover:border-accent hover:text-accent"
       >
+        {copied ? <Check className="size-[12px]" aria-hidden="true" /> : <Copy className="size-[12px]" aria-hidden="true" />}
         {copied ? "Copied" : "Copy"}
       </button>
     </span>

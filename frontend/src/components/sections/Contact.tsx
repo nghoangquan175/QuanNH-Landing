@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { CopyEmail } from "@/components/ui/CopyEmail";
@@ -41,9 +42,10 @@ export function Contact({ contact }: { contact: Portfolio["contact"] }) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline-offset-[4px] hover:text-accent hover:underline"
+                className="inline-flex items-center gap-[4px] underline-offset-[4px] hover:text-accent hover:underline"
               >
-                {link.value} ↗
+                {link.value}
+                <ArrowUpRight className="size-[15px]" aria-hidden="true" />
               </a>
             </Row>
           ))}
