@@ -25,6 +25,12 @@
       animation-range: entry-crossing 25vh entry-crossing calc(100% + 25vh);
     }
 
+    // Experience cards slide in sideways; start that later, once the card is properly in
+    // view, or the movement is over before the eye gets to it.
+    .timeline--alternate .scroll-reveal {
+      animation-range: entry-crossing 10vh entry-crossing 40vh;
+    }
+
     // Each dot lights as the rail's tip passes it.
     .timeline-dot {
       animation: timeline-dot-on linear both;

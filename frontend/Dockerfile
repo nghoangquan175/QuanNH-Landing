@@ -20,10 +20,8 @@ COPY . .
 ARG NEXT_PUBLIC_SITE_URL
 ARG NEXT_PUBLIC_SITE_ENV
 ARG NEXT_PUBLIC_STRAPI_API_URL
-# Shown in the footer ("Deployed 3 hours ago · be0e773"); CI passes the commit and time.
-ARG NEXT_PUBLIC_BUILD_SHA
+# Shown in the footer ("Updated 2 minutes ago"); CI passes the build time.
 ARG NEXT_PUBLIC_BUILD_TIME
-ARG NEXT_PUBLIC_SOURCE_URL
 # Also needed at build time: pages prerender against it and the CSP img-src uses it.
 ARG STRAPI_API_URL
 # STRAPI_API_TOKEN is deliberately NOT an ARG — build args are recorded in image
@@ -32,9 +30,7 @@ ARG STRAPI_API_URL
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
     NEXT_PUBLIC_SITE_ENV=$NEXT_PUBLIC_SITE_ENV \
     NEXT_PUBLIC_STRAPI_API_URL=$NEXT_PUBLIC_STRAPI_API_URL \
-    NEXT_PUBLIC_BUILD_SHA=$NEXT_PUBLIC_BUILD_SHA \
     NEXT_PUBLIC_BUILD_TIME=$NEXT_PUBLIC_BUILD_TIME \
-    NEXT_PUBLIC_SOURCE_URL=$NEXT_PUBLIC_SOURCE_URL \
     STRAPI_API_URL=$STRAPI_API_URL \
     NEXT_TELEMETRY_DISABLED=1
 RUN pnpm build

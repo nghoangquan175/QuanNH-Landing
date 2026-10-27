@@ -1,7 +1,6 @@
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { DeployInfo } from "@/components/ui/DeployInfo";
-import { PrintButton } from "@/components/ui/PrintButton";
 import type { Portfolio } from "@/types/portfolio";
 
 type Props = {
@@ -18,7 +17,7 @@ const linkClass = "inline-flex items-center gap-[4px] text-[14px] text-text opac
 
 export function Footer({ footer, site, contact }: Props) {
   return (
-    <footer className="border-t border-line print:hidden pt-[48px] 768:pt-[64px]">
+    <footer className="border-t border-line pt-[48px] 768:pt-[64px]">
       <Container>
         <div className="grid grid-cols-2 gap-[36px] 768:grid-cols-[2fr_1fr_1fr] 768:gap-[48px]">
           <div className="col-span-2 768:col-span-1">
@@ -59,9 +58,6 @@ export function Footer({ footer, site, contact }: Props) {
                   </a>
                 </li>
               ))}
-              <li>
-                <PrintButton className={linkClass} />
-              </li>
             </ul>
           </div>
         </div>

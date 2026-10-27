@@ -57,9 +57,7 @@ jobs:
             NEXT_PUBLIC_SITE_ENV=production
             NEXT_PUBLIC_STRAPI_API_URL=https://cms.quannh.xyz
             STRAPI_API_URL=https://cms.quannh.xyz
-            NEXT_PUBLIC_BUILD_SHA=${{ github.sha }}
             NEXT_PUBLIC_BUILD_TIME=${{ steps.meta.outputs.time }}
-            NEXT_PUBLIC_SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha,scope=${{ matrix.app }}
           cache-to: type=gha,mode=max,scope=${{ matrix.app }}
 

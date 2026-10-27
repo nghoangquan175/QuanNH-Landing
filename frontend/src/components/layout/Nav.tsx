@@ -5,7 +5,7 @@ import type { Portfolio } from "@/types/portfolio";
 
 export function Nav({ site }: { site: Portfolio["site"] }) {
   return (
-    <nav className="reveal sticky print:hidden top-0 z-10 border-b border-line bg-[var(--nav)] backdrop-blur-[12px]">
+    <nav className="reveal sticky top-0 z-10 border-b border-line bg-[var(--nav)] backdrop-blur-[12px]">
       <Container className="flex h-[64px] items-center justify-between">
         <a href="#" aria-label={`${site.logo} — back to top`} className="text-[22px] font-bold tracking-[-0.03em]">
           {site.logo}
