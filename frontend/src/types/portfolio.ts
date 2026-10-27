@@ -13,6 +13,8 @@ export type Project = {
   /** One line shown while collapsed. */
   summary: string;
   role: string;
+  /** Where I built it, shown as a tag beside the role. */
+  company?: string;
   tags: string;
   /** What I did, shown when expanded. */
   details: string[];

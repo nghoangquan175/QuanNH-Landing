@@ -91,6 +91,7 @@
       {
         "title": "John Holland Group",
         "role": "Maintenance",
+        "company": "MOHA Software",
         "links": [
           {
             "label": "johnholland.com.au",
@@ -115,6 +116,7 @@
       {
         "title": "READY.QUIT.SOLID",
         "role": "Full-stack",
+        "company": "MOHA Software",
         "links": [],
         "period": "AUG — SEP 2026",
         "summary": "Quit-smoking and vaping platform for Aboriginal and Torres Strait Islander communities.",
@@ -146,6 +148,7 @@
       {
         "title": "House Nine & Nine and Found",
         "role": "Full-stack",
+        "company": "MOHA Software",
         "links": [
           {
             "label": "housenine.co.uk",
@@ -196,6 +199,7 @@
       {
         "title": "Flip The Vape",
         "role": "Front-end",
+        "company": "MOHA Software",
         "links": [
           {
             "label": "flipthevape.com",
@@ -235,6 +239,7 @@
       {
         "title": "Hatch Quarter",
         "role": "Front-end",
+        "company": "MOHA Software",
         "links": [
           {
             "label": "hatchquarter.com.au",

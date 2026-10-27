@@ -23,6 +23,7 @@ function ProjectCard({ project }: { project: Project }) {
               </span>
             </ProjectTitle>
             <Tag>{project.role}</Tag>
+            {project.company && <Tag>{project.company}</Tag>}
           </span>
           <span className="mt-[6px] block text-[14px] text-muted">{project.summary}</span>
           <span className="mt-[8px] block font-mono text-[12px] text-muted opacity-80">{project.tags}</span>

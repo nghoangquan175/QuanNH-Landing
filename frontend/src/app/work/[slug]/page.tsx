@@ -128,7 +128,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </Link>
 
             <p className="mt-[36px] font-mono text-[12px] tracking-[0.1em] text-accent 768:mt-[48px]">
-              CASE STUDY · {project.period}
+              CASE STUDY · {"company" in project && project.company && `${project.company.toUpperCase()} · `}
+              <span className="whitespace-nowrap">{project.period}</span>
             </p>
             <div className="mt-[12px] flex flex-wrap items-center gap-x-[16px] gap-y-[8px]">
               <ProjectTitle project={project}>
