@@ -226,7 +226,12 @@
         "title": "Coding Guide",
         "period": "IN DAILY USE",
         "tags": "Claude Code · MCP · Next.js · Strapi · AWS",
-        "links": [],
+        "links": [
+          {
+            "label": "github.com/nghoangquan175/Coding-Guide",
+            "href": "https://github.com/nghoangquan175/Coding-Guide"
+          }
+        ],
         "summary": "Claude Code skills distilled from lessons on client projects, used in daily work.",
         "details": [
           "A review checklist built from the bugs that came up most often across projects, checked against every change",
