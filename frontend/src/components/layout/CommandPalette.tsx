@@ -21,17 +21,23 @@ const iconClass = "size-[16px] shrink-0";
 
 const noSubscribe = () => () => {};
 
-/** Dispatch on window to open the menu from elsewhere on the page. */
-export const OPEN_EVENT = "palette:open";
-
 /** "⌘K" on Apple devices, "Ctrl K" elsewhere. Server and first paint assume a Mac. */
-export function useShortcutLabel() {
+function useShortcutLabel() {
   const isMac = useSyncExternalStore(
     noSubscribe,
     () => /Mac|iPhone|iPad/.test(navigator.platform),
     () => true,
   );
   return isMac ? "⌘K" : "Ctrl K";
+}
+
+/** Whether the visitor has a mouse (and so, most likely, a keyboard). Assumed on the server. */
+function useFinePointer() {
+  return useSyncExternalStore(
+    noSubscribe,
+    () => window.matchMedia("(hover: hover) and (pointer: fine)").matches,
+    () => true,
+  );
 }
 
 /**
@@ -46,6 +52,7 @@ export function CommandPalette({ nav, contact }: Props) {
   const [index, setIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const shortcut = useShortcutLabel();
+  const finePointer = useFinePointer();
 
   const close = () => dialogRef.current?.close();
 
@@ -71,11 +78,7 @@ export function CommandPalette({ nav, contact }: Props) {
       else open();
     };
     document.addEventListener("keydown", onKeyDown, { capture: true });
-    window.addEventListener(OPEN_EVENT, open);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown, { capture: true });
-      window.removeEventListener(OPEN_EVENT, open);
-    };
+    return () => document.removeEventListener("keydown", onKeyDown, { capture: true });
   }, []);
 
   const items = useMemo<Item[]>(
@@ -204,7 +207,8 @@ export function CommandPalette({ nav, contact }: Props) {
               setIndex(0);
             }}
             onKeyDown={onKeyDown}
-            placeholder="Type a command or section…"
+            // The shortcut is only worth teaching where there is a keyboard to press it on.
+            placeholder={finePointer ? `Type a command or section… (${shortcut} anytime)` : "Type a command or section…"}
             // Not a form field: keep the browser's autofill and password managers out.
             // type="search" is what Bitwarden skips unconditionally (it honours
             // data-bwignore only when the user opts in); 1Password and LastPass read
