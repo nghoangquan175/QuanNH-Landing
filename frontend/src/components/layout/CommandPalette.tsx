@@ -21,6 +21,19 @@ const iconClass = "size-[16px] shrink-0";
 
 const noSubscribe = () => () => {};
 
+/** Dispatch on window to open the menu from elsewhere on the page. */
+export const OPEN_EVENT = "palette:open";
+
+/** "⌘K" on Apple devices, "Ctrl K" elsewhere. Server and first paint assume a Mac. */
+export function useShortcutLabel() {
+  const isMac = useSyncExternalStore(
+    noSubscribe,
+    () => /Mac|iPhone|iPad/.test(navigator.platform),
+    () => true,
+  );
+  return isMac ? "⌘K" : "Ctrl K";
+}
+
 /**
  * ⌘K / Ctrl+K command menu: jump to a section, copy the email, switch theme, open a
  * profile. Built on a modal <dialog>, so focus, Escape and the backdrop come from the
@@ -32,12 +45,7 @@ export function CommandPalette({ nav, contact }: Props) {
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
   const [copied, setCopied] = useState(false);
-  // Server and first paint assume a Mac; the real platform takes over after hydration.
-  const isMac = useSyncExternalStore(
-    noSubscribe,
-    () => /Mac|iPhone|iPad/.test(navigator.platform),
-    () => true,
-  );
+  const shortcut = useShortcutLabel();
 
   const close = () => dialogRef.current?.close();
 
@@ -63,7 +71,11 @@ export function CommandPalette({ nav, contact }: Props) {
       else open();
     };
     document.addEventListener("keydown", onKeyDown, { capture: true });
-    return () => document.removeEventListener("keydown", onKeyDown, { capture: true });
+    window.addEventListener(OPEN_EVENT, open);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown, { capture: true });
+      window.removeEventListener(OPEN_EVENT, open);
+    };
   }, []);
 
   const items = useMemo<Item[]>(
@@ -159,8 +171,6 @@ export function CommandPalette({ nav, contact }: Props) {
   useEffect(() => {
     dialogRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
   }, [current]);
-
-  const shortcut = isMac ? "⌘K" : "Ctrl K";
 
   return (
     <>

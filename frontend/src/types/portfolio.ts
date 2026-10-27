@@ -1,6 +1,11 @@
 export type Link = { label: string; href: string };
 
-export type Stat = { value: string; label: string };
+export type Stat = {
+  value: string;
+  label: string;
+  /** IANA zone: the value becomes the live time there, with `value` as the no-JS fallback. */
+  timeZone?: string;
+};
 
 export type Project = {
   title: string;
@@ -75,6 +80,8 @@ export type Portfolio = {
     location: string;
     /** IANA zone for the live local-time readout. */
     timeZone: string;
+    /** What I'm on right now, and the month it was last true. */
+    now?: { text: string; updated: string };
   };
   footer: { name: string; tagline: string; location: string };
 };

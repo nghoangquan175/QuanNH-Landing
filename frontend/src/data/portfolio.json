@@ -79,7 +79,8 @@
       },
       {
         "value": "GMT+7",
-        "label": "Hanoi time zone"
+        "label": "in Hanoi, GMT+7",
+        "timeZone": "Asia/Ho_Chi_Minh"
       }
     ]
   },
@@ -379,7 +380,11 @@
       }
     ],
     "location": "Hanoi, Vietnam",
-    "timeZone": "Asia/Ho_Chi_Minh"
+    "timeZone": "Asia/Ho_Chi_Minh",
+    "now": {
+      "text": "Client sites at MOHA Software, PushMeUp on my own time",
+      "updated": "Oct 2026"
+    }
   },
   "footer": {
     "name": "Nguyen Hoang Quan",

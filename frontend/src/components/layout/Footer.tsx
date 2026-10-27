@@ -1,4 +1,5 @@
 import { ArrowUp, ArrowUpRight } from "lucide-react";
+import { QuickMenuHint } from "@/components/layout/QuickMenuHint";
 import { Container } from "@/components/ui/Container";
 import { DeployInfo } from "@/components/ui/DeployInfo";
 import type { Portfolio } from "@/types/portfolio";
@@ -66,6 +67,7 @@ export function Footer({ footer, site, contact }: Props) {
           <div className="flex flex-wrap gap-x-[16px] gap-y-[4px]">
             <p>© 2026 {footer.name}</p>
             <DeployInfo />
+            <QuickMenuHint />
           </div>
           <a href="#" className="inline-flex items-center gap-[4px] transition-colors hover:text-accent">
             Back to top

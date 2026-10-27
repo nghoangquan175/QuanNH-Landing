@@ -2,11 +2,19 @@
 
 import { useEffect, useState } from "react";
 
+type Props = {
+  timeZone: string;
+  /** Append the UTC offset, e.g. "GMT+7". */
+  showOffset?: boolean;
+  /** Shown until mounted (and without JS). */
+  fallback?: string;
+};
+
 /**
  * Current time in `timeZone`, refreshed every 20 s. Renders a placeholder until mounted so
  * the server-rendered HTML never disagrees with the visitor's clock.
  */
-export function LocalTime({ timeZone }: { timeZone: string }) {
+export function LocalTime({ timeZone, showOffset = true, fallback = "--:--" }: Props) {
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -16,10 +24,12 @@ export function LocalTime({ timeZone }: { timeZone: string }) {
     return () => window.clearInterval(timer);
   }, []);
 
-  if (!now) return <span className="tabular-nums">--:--</span>;
+  if (!now) return <span className="tabular-nums">{fallback}</span>;
 
   const time = new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit" }).format(now);
-  const offset = new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "shortOffset" })
+  const offset =
+    showOffset &&
+    new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "shortOffset" })
     .formatToParts(now)
     .find((part) => part.type === "timeZoneName")?.value;
 

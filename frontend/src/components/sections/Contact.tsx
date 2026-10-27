@@ -52,6 +52,11 @@ export function Contact({ contact }: { contact: Portfolio["contact"] }) {
           <Row label="LOCATION">
             {contact.location} · <LocalTime timeZone={contact.timeZone} />
           </Row>
+          {contact.now && (
+            <Row label="NOW">
+              {contact.now.text} <span className="text-muted">· {contact.now.updated}</span>
+            </Row>
+          )}
         </dl>
       </Container>
     </section>

@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { LocalTime } from "@/components/ui/LocalTime";
+import { Scramble } from "@/components/ui/Scramble";
 import type { Portfolio, Stat } from "@/types/portfolio";
 
 // From 1024 up: nine columns — four stats stepping down on each side of a glowing core.
@@ -10,7 +12,9 @@ const HEIGHTS = ["h-[100%]", "h-[82%]", "h-[64%]", "h-[46%]"];
 function StatStep({ stat, height }: { stat: Stat; height: string }) {
   return (
     <div className={`stair ${height} flex min-w-0 flex-col p-[10px] text-left 1024:p-[14px]`}>
-      <b className="text-[17px] leading-[1.25] tracking-[-0.01em] 768:text-[20px] 1024:text-[22px]">{stat.value}</b>
+      <b className="text-[17px] leading-[1.25] tracking-[-0.01em] 768:text-[20px] 1024:text-[22px]">
+        {stat.timeZone ? <LocalTime timeZone={stat.timeZone} showOffset={false} fallback={stat.value} /> : stat.value}
+      </b>
       <small className="mt-[2px] text-[10.5px] leading-[1.35] text-muted 768:text-[11px] 1024:text-[12px]">{stat.label}</small>
     </div>
   );
@@ -23,7 +27,9 @@ export function Hero({ hero }: { hero: Portfolio["hero"] }) {
   return (
     <header className="hero-glow relative overflow-hidden pt-[72px] text-center 768:pt-[100px] 1024:pt-[120px]">
       <Container className="relative z-[1]">
-        <p style={{ "--reveal-i": 0 } as React.CSSProperties} className="reveal glow-text font-mono text-[11px] tracking-[0.1em] text-accent 768:text-[13px]">{hero.tag}</p>
+        <p style={{ "--reveal-i": 0 } as React.CSSProperties} className="reveal glow-text font-mono text-[11px] tracking-[0.1em] text-accent 768:text-[13px]">
+          <Scramble text={hero.tag} />
+        </p>
         <h1 style={{ "--reveal-i": 1 } as React.CSSProperties} className="reveal my-[16px] text-[32px] font-extrabold leading-[1.1] tracking-[-0.04em] 768:my-[18px] 768:text-[64px] 768:leading-none 1024:text-[96px]">
           {hero.titleLines[0]}
           <br />
