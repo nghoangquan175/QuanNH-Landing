@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "personal_projects",
+  "info": {
+    "singularName": "personal-project",
+    "pluralName": "personal-projects",
+    "displayName": "Personal project",
+    "description": "Personal Work. Lowest order shows first; repo is owner/name of a public GitHub repo."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "period": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "string",
+      "required": true
+    },
+    "details": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    },
+    "links": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "repo": {
+      "type": "string"
+    },
+    "caseStudy": {
+      "type": "component",
+      "component": "case.case-study",
+      "repeatable": false
+    }
+  }
+}

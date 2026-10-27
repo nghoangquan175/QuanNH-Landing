@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_contact_links",
+  "info": {
+    "displayName": "Contact link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

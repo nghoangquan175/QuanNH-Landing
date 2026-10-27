@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_home_skill_groups",
+  "info": {
+    "displayName": "Skill group",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

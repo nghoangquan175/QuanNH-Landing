@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_home_skillss",
+  "info": {
+    "displayName": "Skills",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "groups": {
+      "type": "component",
+      "component": "home.skill-group",
+      "repeatable": true
+    }
+  }
+}

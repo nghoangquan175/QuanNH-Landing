@@ -1,0 +1,58 @@
+{
+  "kind": "singleType",
+  "collectionName": "homes",
+  "info": {
+    "singularName": "home",
+    "pluralName": "homes",
+    "displayName": "Home",
+    "description": "Every section of the home page. The projects themselves are in Client projects and Personal projects."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "component": "home.hero",
+      "repeatable": false,
+      "required": true
+    },
+    "work": {
+      "type": "component",
+      "component": "home.section-heading",
+      "repeatable": false,
+      "required": true
+    },
+    "personal": {
+      "type": "component",
+      "component": "home.section-heading",
+      "repeatable": false,
+      "required": true
+    },
+    "skills": {
+      "type": "component",
+      "component": "home.skills",
+      "repeatable": false,
+      "required": true
+    },
+    "experience": {
+      "type": "component",
+      "component": "home.experience",
+      "repeatable": false,
+      "required": true
+    },
+    "language": {
+      "type": "component",
+      "component": "home.language",
+      "repeatable": false,
+      "required": true
+    },
+    "contact": {
+      "type": "component",
+      "component": "home.contact",
+      "repeatable": false,
+      "required": true
+    }
+  }
+}

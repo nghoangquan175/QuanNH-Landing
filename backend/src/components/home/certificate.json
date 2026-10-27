@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_home_certificates",
+  "info": {
+    "displayName": "Certificate",
+    "icon": "medal"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "string",
+      "required": true
+    },
+    "overall": {
+      "type": "string",
+      "required": true
+    },
+    "cefr": {
+      "type": "string",
+      "required": true
+    },
+    "imageAlt": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

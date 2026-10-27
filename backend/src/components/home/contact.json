@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_home_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "component": "shared.contact-link",
+      "repeatable": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "timeZone": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

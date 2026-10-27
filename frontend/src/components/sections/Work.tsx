@@ -33,11 +33,11 @@ function ProjectCard({ project }: { project: Project }) {
       footer={
         <div className="mt-[12px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
           <SiteLinks links={project.links} empty="pre-launch" />
-          <CaseStudyLink study={project.caseStudy} />
+          <CaseStudyLink slug={project.slug} study={project.caseStudy} />
         </div>
       }
     >
-      {project.screenshots && <ProjectShots shots={project.screenshots} />}
+      <ProjectShots slug={project.slug} />
       <ul className="ml-[18px] list-disc space-y-[6px] text-[14px] text-text marker:text-muted">
         {project.details.map((detail) => (
           <li key={detail}>{detail}</li>
@@ -55,7 +55,7 @@ export function Work({ work }: { work: Portfolio["work"] }) {
         <ExpandGroup>
           <Timeline
             items={work.projects.map((project) => ({
-              key: project.title,
+              key: project.slug,
               period: project.period,
               content: <ProjectCard project={project} />,
             }))}

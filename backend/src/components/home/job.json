@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_home_jobs",
+  "info": {
+    "displayName": "Job",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "period": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "tag": {
+      "type": "string"
+    },
+    "points": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    }
+  }
+}

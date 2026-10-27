@@ -9,6 +9,8 @@ export type Stat = {
 
 export type Project = {
   title: string;
+  /** URL segment of the case study, and the key for the project's screenshots. */
+  slug: string;
   period: string;
   /** One line shown while collapsed. */
   summary: string;
@@ -20,14 +22,11 @@ export type Project = {
   details: string[];
   /** Live sites; empty while a project is pre-launch. */
   links: Link[];
-  /** Home-page captures shown when expanded; `image` is a key in ProjectShots. */
-  screenshots?: { image: string; alt: string }[];
   /** Long-form write-up, served at /work/[slug]. */
   caseStudy?: CaseStudy;
 };
 
 export type CaseStudy = {
-  slug: string;
   context: string;
   problem: string;
   approach: string[];
@@ -40,6 +39,7 @@ export type CaseStudy = {
 
 export type PersonalProject = {
   title: string;
+  slug: string;
   period: string;
   /** One line shown while collapsed. */
   summary: string;

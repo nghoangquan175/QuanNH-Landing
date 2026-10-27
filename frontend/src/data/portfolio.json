@@ -90,6 +90,7 @@
     "projects": [
       {
         "title": "John Holland Group",
+        "slug": "john-holland",
         "role": "Maintenance",
         "company": "MOHA Software",
         "links": [
@@ -105,16 +106,11 @@
           "Monthly maintenance cycle on the live site: bug fixes, small improvements and client change requests",
           "Worked across the Next.js front end and a Strapi CMS with 50+ content types",
           "Kept the editor setup the client's content team relies on working as the CMS changed"
-        ],
-        "screenshots": [
-          {
-            "image": "john-holland",
-            "alt": "Home page of johnholland.com.au"
-          }
         ]
       },
       {
         "title": "READY.QUIT.SOLID",
+        "slug": "ready-quit-solid",
         "role": "Full-stack",
         "company": "MOHA Software",
         "links": [],
@@ -129,7 +125,6 @@
           "Worked directly with the client over Slack and ClickUp: requirements, UAT feedback, fixes in short cycles"
         ],
         "caseStudy": {
-          "slug": "ready-quit-solid",
           "context": "A quit-smoking and vaping platform for Aboriginal and Torres Strait Islander communities, built for an international client. I was the main contributor on the front end and the CMS.",
           "problem": "The site had to work well on every device for the people it serves, stay easy for the client's team to update, and send contact and newsletter sign-ups straight into the marketing tools they already use.",
           "approach": [
@@ -147,6 +142,7 @@
       },
       {
         "title": "House Nine & Nine and Found",
+        "slug": "house-nine",
         "role": "Full-stack",
         "company": "MOHA Software",
         "links": [
@@ -169,18 +165,7 @@
           "Made the sites faster and sturdier: lighter images, lazy loading, fewer API calls, pages that stay up when Shopify is down",
           "Delivered in 3 milestones agreed with the client (UI, CMS, then docs and user guides), reviewed over Slack and Google Meet"
         ],
-        "screenshots": [
-          {
-            "image": "house-nine",
-            "alt": "Home page of housenine.co.uk"
-          },
-          {
-            "image": "nine-and-found",
-            "alt": "Home page of nineandfound.com"
-          }
-        ],
         "caseStudy": {
-          "slug": "house-nine",
           "context": "An interior design studio with two sites: House Nine, its studio portfolio, and Nine and Found, its Shopify store. Both were rebuilt to run from one CMS.",
           "problem": "Two public sites and a store meant content in several places, and the store pages depended on Shopify being up. The studio needed one place to manage everything and sites that hold up on their own.",
           "approach": [
@@ -198,6 +183,7 @@
       },
       {
         "title": "Flip The Vape",
+        "slug": "flip-the-vape",
         "role": "Front-end",
         "company": "MOHA Software",
         "links": [
@@ -214,14 +200,7 @@
           "Built reusable UI components shared across the national site and 8 state and territory subsites",
           "Built animated, interactive sections for the campaign content and delivered client change requests"
         ],
-        "screenshots": [
-          {
-            "image": "flip-the-vape",
-            "alt": "Home page of flipthevape.com"
-          }
-        ],
         "caseStudy": {
-          "slug": "flip-the-vape",
           "context": "A public-health campaign site for Aboriginal communities: a national site plus 8 state and territory subsites.",
           "problem": "Nine sites had to look and behave like one campaign on desktop, tablet and mobile, without building each one from scratch.",
           "approach": [
@@ -238,6 +217,7 @@
       },
       {
         "title": "Hatch Quarter",
+        "slug": "hatch-quarter",
         "role": "Front-end",
         "company": "MOHA Software",
         "links": [
@@ -253,12 +233,6 @@
           "Built 6 responsive pages plus the header, footer and mobile navigation from the design",
           "Connected the pages to the Strapi CMS and built interactive sections such as animated sliders",
           "Prepared the launch (client UI feedback, SEO fixes, sitemap) and kept maintaining the site after go-live"
-        ],
-        "screenshots": [
-          {
-            "image": "hatch-quarter",
-            "alt": "Home page of hatchquarter.com.au"
-          }
         ]
       }
     ]
@@ -269,6 +243,7 @@
     "projects": [
       {
         "title": "PushMeUp",
+        "slug": "pushmeup",
         "period": "OCT 2026",
         "tags": "React · TypeScript · MediaPipe · WebRTC · Cloudflare TURN · WebSockets · AWS · Terraform",
         "links": [
@@ -287,6 +262,7 @@
       },
       {
         "title": "LoadForge",
+        "slug": "loadforge",
         "period": "SEP — OCT 2026",
         "tags": "AWS · Terraform · NestJS · Next.js · k6 · GitHub Actions",
         "links": [
@@ -305,7 +281,6 @@
         ],
         "repo": "nghoangquan175/LoadForge",
         "caseStudy": {
-          "slug": "loadforge",
           "context": "A lab I built on my own time to learn AWS by putting it under load: a fleet of Node.js servers (the Defenders) in an EC2 Auto Scaling group behind an HTTPS load balancer, a Watcher that streams the group's state, and a dashboard that shows it and runs load tests. All provisioned with Terraform and shipped through GitHub Actions.",
           "problem": "Auto scaling looks simple on paper: add a server when average CPU passes 60%. The point was to load-test the real thing, find each place it failed to hold up, fix it, and measure every change.",
           "approach": [
@@ -383,6 +358,7 @@
       },
       {
         "title": "Coding Guide",
+        "slug": "coding-guide",
         "period": "IN DAILY USE",
         "tags": "Claude Code · MCP · Next.js · Strapi · AWS",
         "links": [

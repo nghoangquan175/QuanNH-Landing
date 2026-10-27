@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_case_case_studys",
+  "info": {
+    "displayName": "Case study",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "context": {
+      "type": "text",
+      "required": true
+    },
+    "problem": {
+      "type": "text",
+      "required": true
+    },
+    "approach": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    },
+    "chapters": {
+      "type": "component",
+      "component": "case.chapter",
+      "repeatable": true
+    },
+    "results": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    },
+    "open": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    }
+  }
+}

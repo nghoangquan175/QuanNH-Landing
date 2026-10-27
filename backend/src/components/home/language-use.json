@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_home_language_uses",
+  "info": {
+    "displayName": "Language use",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "client_projects",
+  "info": {
+    "singularName": "client-project",
+    "pluralName": "client-projects",
+    "displayName": "Client project",
+    "description": "Selected Work. Lowest order shows first; a filled case study gets its own page at /work/<slug>."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "period": {
+      "type": "string",
+      "required": true
+    },
+    "summary": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "type": "string"
+    },
+    "details": {
+      "type": "component",
+      "component": "shared.point",
+      "repeatable": true
+    },
+    "links": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "caseStudy": {
+      "type": "component",
+      "component": "case.case-study",
+      "repeatable": false
+    }
+  }
+}

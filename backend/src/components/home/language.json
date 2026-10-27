@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_home_languages",
+  "info": {
+    "displayName": "Language",
+    "icon": "globe"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "certificate": {
+      "type": "component",
+      "component": "home.certificate",
+      "repeatable": false,
+      "required": true
+    },
+    "uses": {
+      "type": "component",
+      "component": "home.language-use",
+      "repeatable": true
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { Tag } from "@/components/ui/Tag";
 import { getPortfolio } from "@/lib/api/portfolio";
+import { hasShots } from "@/lib/shots";
 import type { CaseStudy, Portfolio, PersonalProject, Project } from "@/types/portfolio";
 
 type Entry = (Project | PersonalProject) & { caseStudy: CaseStudy };
@@ -22,13 +23,13 @@ function caseStudies(data: Portfolio): Entry[] {
 async function findCase(slug: string) {
   const data = await getPortfolio();
   const all = caseStudies(data);
-  const index = all.findIndex((project) => project.caseStudy.slug === slug);
+  const index = all.findIndex((project) => project.slug === slug);
   if (index === -1) return null;
   return { data, project: all[index], next: all[(index + 1) % all.length] };
 }
 
 export async function generateStaticParams() {
-  return caseStudies(await getPortfolio()).map((project) => ({ slug: project.caseStudy.slug }));
+  return caseStudies(await getPortfolio()).map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
@@ -152,9 +153,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               </dd>
             </dl>
 
-            {"screenshots" in project && project.screenshots && (
+            {hasShots(project.slug) && (
               <div className="mt-[40px]">
-                <ProjectShots shots={project.screenshots} eager />
+                <ProjectShots slug={project.slug} eager />
               </div>
             )}
 
@@ -168,7 +169,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
             {next !== project && (
               <Link
-                href={`/work/${next.caseStudy.slug}`}
+                href={`/work/${next.slug}`}
                 className="group mt-[16px] flex items-center justify-between gap-[16px] border-t border-line pt-[28px]"
               >
                 <span>

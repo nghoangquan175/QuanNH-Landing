@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_home_experiences",
+  "info": {
+    "displayName": "Experience",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "jobs": {
+      "type": "component",
+      "component": "home.job",
+      "repeatable": true
+    }
+  }
+}

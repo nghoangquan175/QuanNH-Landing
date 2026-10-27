@@ -112,3 +112,14 @@ jobs:
               echo "$host$path never became healthy (last status $code)"; exit 1
             done
           '
+
+      - name: Refresh content from the CMS
+        # CI builds without CMS access, so the new pages were prerendered from the bundled
+        # JSON. Mark them stale, then visit once so they rebuild from Strapi in the background.
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}" '
+            set -e
+            secret=$(grep "^REVALIDATE_SECRET=" /opt/portfolio/frontend.env | cut -d= -f2-)
+            curl -fsS -X POST -H "x-revalidate-secret: $secret" http://127.0.0.1:3000/api/revalidate
+            curl -fsS -o /dev/null http://127.0.0.1:3000/
+          '

@@ -1,0 +1,47 @@
+{
+  "kind": "singleType",
+  "collectionName": "sites",
+  "info": {
+    "singularName": "site",
+    "pluralName": "sites",
+    "displayName": "Site",
+    "description": "Logo, navigation and footer, shared by every page."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "string",
+      "required": true
+    },
+    "logoAccent": {
+      "type": "string",
+      "required": true
+    },
+    "nav": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "navCta": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false,
+      "required": true
+    },
+    "footerName": {
+      "type": "string",
+      "required": true
+    },
+    "footerTagline": {
+      "type": "text",
+      "required": true
+    },
+    "footerLocation": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

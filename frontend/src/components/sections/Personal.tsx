@@ -26,7 +26,7 @@ export async function Personal({ personal }: { personal: Portfolio["personal"] }
         <ExpandGroup>
           <ul className="border-t border-line">
             {personal.projects.map((project, i) => (
-              <li key={project.title} className="scroll-reveal border-b border-line">
+              <li key={project.slug} className="scroll-reveal border-b border-line">
                 <Expandable
                   label={project.title}
                   headerClassName="pt-[20px] 768:pt-[26px]"
@@ -51,7 +51,7 @@ export async function Personal({ personal }: { personal: Portfolio["personal"] }
                   footer={
                     <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px] pb-[20px] 768:ml-[174px] 768:pb-[26px]">
                       <SiteLinks links={project.links} empty="private repo" />
-                      <CaseStudyLink study={project.caseStudy} />
+                      <CaseStudyLink slug={project.slug} study={project.caseStudy} />
                       {project.repo && lastCommits[i] && (
                         <a
                           href={`https://github.com/${project.repo}/commits`}
