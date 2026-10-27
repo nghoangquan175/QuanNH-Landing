@@ -14,7 +14,7 @@ export function Language({ language }: { language: Portfolio["language"] }) {
 
         <div className="grid gap-[32px] 1024:grid-cols-[360px_1fr] 1024:gap-[64px]">
           {/* The certificate, summarised; the scan itself opens in the viewer. */}
-          <div className="self-start rounded-[16px] border border-line bg-panel p-[22px] 768:p-[26px]">
+          <div className="scroll-reveal self-start rounded-[16px] border border-line bg-panel p-[22px] 768:p-[26px]">
             <p className="font-mono text-[12px] tracking-[0.08em] text-muted">
               {cert.name.toUpperCase()} · {cert.date}
             </p>
@@ -32,12 +32,12 @@ export function Language({ language }: { language: Portfolio["language"] }) {
           </div>
 
           <div>
-            <p className="max-w-[560px] text-[16px] text-muted 768:text-[17px]">{language.text}</p>
+            <p className="scroll-reveal max-w-[560px] text-[16px] text-muted 768:text-[17px]">{language.text}</p>
             <dl className="mt-[24px] border-t border-line">
               {language.uses.map((use) => (
                 <div
                   key={use.label}
-                  className="stack-row group grid grid-cols-1 gap-[6px] border-b border-line py-[16px] 768:grid-cols-[140px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[18px]"
+                  className="scroll-reveal stack-row group grid grid-cols-1 gap-[6px] border-b border-line py-[16px] 768:grid-cols-[140px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[18px]"
                 >
                   <dt className="font-mono text-[12px] tracking-[0.08em] text-muted group-hover:text-accent">{use.label}</dt>
                   <dd className="text-[15px] 768:text-[16px]">{use.text}</dd>

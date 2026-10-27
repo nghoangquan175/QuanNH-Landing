@@ -16,7 +16,7 @@ export function Personal({ personal }: { personal: Portfolio["personal"] }) {
         <ExpandGroup>
           <ul className="border-t border-line">
             {personal.projects.map((project) => (
-              <li key={project.title} className="border-b border-line">
+              <li key={project.title} className="scroll-reveal border-b border-line">
                 <Expandable
                   label={project.title}
                   headerClassName="pt-[20px] 768:pt-[26px]"

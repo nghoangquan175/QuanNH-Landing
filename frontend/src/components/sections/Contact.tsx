@@ -7,7 +7,7 @@ import type { Portfolio } from "@/types/portfolio";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-1 gap-[4px] border-b border-line py-[16px] 768:grid-cols-[120px_1fr] 768:items-baseline 768:gap-[20px]">
+    <div className="scroll-reveal grid grid-cols-1 gap-[4px] border-b border-line py-[16px] 768:grid-cols-[120px_1fr] 768:items-baseline 768:gap-[20px]">
       <dt className="font-mono text-[12px] tracking-[0.08em] text-muted">{label}</dt>
       <dd className="min-w-0 text-[16px] 768:text-[17px]">{children}</dd>
     </div>
@@ -21,7 +21,7 @@ export function Contact({ contact }: { contact: Portfolio["contact"] }) {
       className="contact-glow relative overflow-hidden pb-[88px] pt-[48px] 768:pb-[110px] 768:pt-[64px] 1024:pb-[120px] 1024:pt-[72px]"
     >
       <Container className="relative grid gap-[40px] 1024:grid-cols-[1.1fr_1fr] 1024:gap-[72px]">
-        <div>
+        <div className="scroll-reveal">
           <p className="mb-[12px] font-mono text-[13px] text-accent">{contact.eyebrow}</p>
           <h2 className="text-[40px] font-bold leading-[1.05] tracking-[-0.03em] 768:text-[56px] 1024:text-[64px]">
             {contact.title}

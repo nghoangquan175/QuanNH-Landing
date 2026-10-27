@@ -9,12 +9,12 @@ const SIDES = {
   left: {
     dot: "1024:col-start-2",
     period: "1024:col-start-3 1024:text-left",
-    card: "1024:col-start-1",
+    card: "1024:col-start-1 1024:[--reveal-x:-16px]",
   },
   right: {
     dot: "1024:col-start-2",
     period: "1024:col-start-1 1024:text-right",
-    card: "1024:col-start-3",
+    card: "1024:col-start-3 1024:[--reveal-x:16px]",
   },
 };
 
@@ -23,7 +23,8 @@ const SIDES = {
  * in a left column beside the rail; below that it sits above the card. With `alternate`,
  * from 1024 up the rail moves to the centre and entries alternate sides. The rail itself
  * is drawn by `.timeline::before` in styles/includes/_timeline.scss so it can follow the
- * dot column at each breakpoint.
+ * dot column at each breakpoint; styles/includes/_scroll.scss draws it down as the page
+ * scrolls, and with `alternate` the cards slide in from their own side.
  */
 export function Timeline({ items, alternate = false }: { items: Item[]; alternate?: boolean }) {
   return (
@@ -49,13 +50,13 @@ export function Timeline({ items, alternate = false }: { items: Item[]; alternat
             />
             <p
               className={cn(
-                "col-start-2 row-start-1 font-mono text-[12px] tracking-[0.06em] text-muted 768:col-start-1 768:mt-[24px] 768:text-right",
+                "scroll-reveal col-start-2 row-start-1 font-mono text-[12px] tracking-[0.06em] text-muted 768:col-start-1 768:mt-[24px] 768:text-right",
                 side?.period,
               )}
             >
               {item.period}
             </p>
-            <div className={cn("col-start-2 768:col-start-3 768:row-start-1", side?.card)}>{item.content}</div>
+            <div className={cn("scroll-reveal col-start-2 768:col-start-3 768:row-start-1", side?.card)}>{item.content}</div>
           </li>
         );
       })}

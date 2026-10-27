@@ -3,8 +3,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Portfolio } from "@/types/portfolio";
 
 /**
- * A plain spec sheet, one row per group. Hovering a row brings it forward by quietly
- * dimming the others (styles/includes/_stack.scss) — no lines, no glow.
+ * A plain spec sheet, one row per group. Hovering a row only recolours its group name
+ * (styles/includes/_stack.scss) — no lines, no glow.
  */
 export function Skills({ skills }: { skills: Portfolio["skills"] }) {
   return (
@@ -15,7 +15,7 @@ export function Skills({ skills }: { skills: Portfolio["skills"] }) {
           {skills.groups.map((group) => (
             <div
               key={group.title}
-              className="stack-row group grid grid-cols-1 gap-[6px] border-b border-line py-[18px] 768:grid-cols-[220px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[22px]"
+              className="scroll-reveal stack-row group grid grid-cols-1 gap-[6px] border-b border-line py-[18px] 768:grid-cols-[220px_1fr] 768:items-baseline 768:gap-[24px] 768:py-[22px]"
             >
               <dt className="font-mono text-[12px] tracking-[0.08em] text-muted group-hover:text-accent">
                 {group.title}

@@ -1,0 +1,66 @@
+// Scroll-linked motion for everything below the hero, in CSS only (scroll-driven
+// animations). Both effects key off the same line, a quarter of the way up from the
+// bottom of the viewport: content finishes rising as it reaches that line, and timeline
+// rails are drawn down to it. Browsers without animation-timeline, and visitors who
+// prefer reduced motion, get the page fully drawn and still.
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    // Rises (and, with --reveal-x, slides in) between entering the viewport and the line.
+    .scroll-reveal {
+      animation: scroll-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry-crossing 0px entry-crossing 25vh;
+    }
+
+    // entry-crossing spans the element's own height, so `calc(100% + 25vh)` ends the
+    // rail the moment its bottom reaches the line: the tip tracks it the whole way.
+    .timeline {
+      view-timeline-name: --timeline;
+    }
+
+    .timeline::before {
+      animation: timeline-draw linear both;
+      animation-timeline: --timeline;
+      animation-range: entry-crossing 25vh entry-crossing calc(100% + 25vh);
+    }
+
+    // Each dot lights as the rail's tip passes it.
+    .timeline-dot {
+      animation: timeline-dot-on linear both;
+      animation-timeline: view();
+      animation-range: entry-crossing 25vh entry-crossing calc(100% + 25vh);
+    }
+  }
+}
+
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translate(var(--reveal-x, 0px), 16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes timeline-draw {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes timeline-dot-on {
+  from {
+    opacity: 0.35;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
