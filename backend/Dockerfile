@@ -26,8 +26,10 @@ ENV NODE_ENV=production \
     JWT_SECRET=build \
     ENCRYPTION_KEY=build
 RUN pnpm build
-# The admin is pre-built into dist/ — drop devDependencies so the image fits a small disk.
-RUN CI=true pnpm prune --prod --ignore-scripts
+# The admin is pre-built into dist/ — reinstall production deps only so the image fits a
+# small disk. Not `pnpm prune --prod`: with the hoisted linker it hangs after "devDependencies:
+# skipped" and never exits. A fresh install from the cached store takes a few seconds.
+RUN --mount=type=cache,id=pnpm-be,target=/pnpm/store     rm -rf node_modules && CI=true pnpm install --prod --frozen-lockfile
 
 FROM node:${NODE_VERSION}-bookworm-slim AS runner
 ENV NODE_ENV=production \

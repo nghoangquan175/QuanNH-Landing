@@ -22,6 +22,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # A normal build takes a few minutes; a hung step should fail fast, not hold the queue.
+    timeout-minutes: 20
     permissions:
       contents: read
       packages: write
