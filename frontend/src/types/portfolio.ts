@@ -20,6 +20,16 @@ export type Project = {
   links: Link[];
   /** Home-page captures shown when expanded; `image` is a key in ProjectShots. */
   screenshots?: { image: string; alt: string }[];
+  /** Long-form write-up, served at /work/[slug]. */
+  caseStudy?: CaseStudy;
+};
+
+export type CaseStudy = {
+  slug: string;
+  context: string;
+  problem: string;
+  approach: string[];
+  results: string[];
 };
 
 export type PersonalProject = {

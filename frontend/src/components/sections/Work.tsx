@@ -1,6 +1,9 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ExpandGroup, Expandable } from "@/components/ui/Expandable";
 import { ProjectShots } from "@/components/ui/ProjectShots";
+import { ProjectTitle } from "@/components/ui/ProjectTitle";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import { Timeline } from "@/components/ui/Timeline";
@@ -14,9 +17,11 @@ function ProjectCard({ project }: { project: Project }) {
       header={
         <>
           <span className="flex flex-wrap items-center gap-x-[12px] gap-y-[6px]">
-            <span className="text-[18px] font-bold transition-colors duration-300 group-hover:text-accent 768:text-[20px]">
-              {project.title}
-            </span>
+            <ProjectTitle project={project}>
+              <span className="text-[18px] font-bold transition-colors duration-300 group-hover:text-accent 768:text-[20px]">
+                {project.title}
+              </span>
+            </ProjectTitle>
             <span className="whitespace-nowrap rounded-full border border-line px-[10px] py-[3px] font-mono text-[11px] text-muted">
               {project.role}
             </span>
@@ -29,6 +34,15 @@ function ProjectCard({ project }: { project: Project }) {
       footer={
         <div className="mt-[12px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
           <SiteLinks links={project.links} empty="pre-launch" />
+          {project.caseStudy && (
+            <Link
+              href={`/work/${project.caseStudy.slug}`}
+              className="inline-flex items-center gap-[3px] font-mono text-[12px] text-text underline-offset-[3px] hover:text-accent hover:underline"
+            >
+              Read case study
+              <ArrowRight className="size-[13px]" aria-hidden="true" />
+            </Link>
+          )}
         </div>
       }
     >

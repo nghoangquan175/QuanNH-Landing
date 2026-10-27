@@ -7,6 +7,8 @@ type Props = {
   footer: Portfolio["footer"];
   site: Portfolio["site"];
   contact: Portfolio["contact"];
+  /** Prefix for the section links, as in Nav. */
+  base?: string;
 };
 
 function Heading({ children }: { children: React.ReactNode }) {
@@ -15,7 +17,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 const linkClass = "inline-flex items-center gap-[4px] text-[14px] text-text opacity-80 transition-colors hover:text-accent hover:opacity-100";
 
-export function Footer({ footer, site, contact }: Props) {
+export function Footer({ footer, site, contact, base = "" }: Props) {
   return (
     <footer className="border-t border-line pt-[48px] 768:pt-[64px]">
       <Container>
@@ -34,7 +36,7 @@ export function Footer({ footer, site, contact }: Props) {
             <ul className="space-y-[8px]">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className={linkClass}>
+                  <a href={`${base}${item.href}`} className={linkClass}>
                     {item.label}
                   </a>
                 </li>

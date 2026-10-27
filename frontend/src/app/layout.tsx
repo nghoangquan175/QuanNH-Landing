@@ -17,7 +17,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+    // data-scroll-behavior: Next turns the smooth scrolling off while it jumps to the top of
+    // a new page, so a route change doesn't glide down from where the last page was.
+    <html lang="en" className={`${inter.variable} ${mono.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Theme first: the intro picks its variant from data-theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

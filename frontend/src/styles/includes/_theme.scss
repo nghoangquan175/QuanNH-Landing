@@ -78,8 +78,9 @@ body {
   transition: none !important;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
+// Scoped to the class so route changes (React's view transitions) keep their own crossfade.
+:root.theme-switching::view-transition-old(root),
+:root.theme-switching::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
@@ -94,7 +95,7 @@ body {
 
 // The circle's edge is a feathered band a quarter of the reach wide, so it reads as a
 // soft glow rather than a hard ring.
-::view-transition-new(root) {
+:root.theme-switching::view-transition-new(root) {
   --theme-feather: calc(var(--theme-reach, 100vmax) * 0.25);
   -webkit-mask: radial-gradient(
     circle at var(--theme-x, 100%) var(--theme-y, 0%),

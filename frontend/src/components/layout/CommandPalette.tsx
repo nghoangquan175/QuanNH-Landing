@@ -89,8 +89,14 @@ export function CommandPalette({ nav, contact }: Props) {
         label: link.label,
         icon: <ArrowRight className={iconClass} aria-hidden="true" />,
         // Scrolls (smoothly, via the page's scroll-behavior) even when the hash is already set.
+        // Off the home page the section isn't here, so go to it there.
         run: () => {
-          document.getElementById(link.href.slice(1))?.scrollIntoView();
+          const section = document.getElementById(link.href.split("#")[1]);
+          if (!section) {
+            window.location.href = link.href;
+            return;
+          }
+          section.scrollIntoView();
           history.replaceState(null, "", link.href);
         },
       })),

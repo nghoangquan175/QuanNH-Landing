@@ -1,0 +1,27 @@
+// Route changes (React <ViewTransition>, see Work.tsx and app/work/[slug]): a project's
+// title morphs between its card and the case study heading while the page crossfades.
+
+::view-transition-group(.morph) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+// The two snapshots are different sizes of the same words; a brief blur mid-flight hides
+// the stretch between them.
+::view-transition-image-pair(.morph) {
+  animation-name: morph-blur;
+}
+
+@keyframes morph-blur {
+  40% {
+    filter: blur(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

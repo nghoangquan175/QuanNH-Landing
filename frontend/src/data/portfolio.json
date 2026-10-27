@@ -125,7 +125,23 @@
           "Reached Lighthouse 86–99 performance and 96–100 accessibility on every page, mobile and desktop",
           "Deployed staging with Docker on the company's self-hosted server and shipped client change requests",
           "Worked directly with the client over Slack and ClickUp: requirements, UAT feedback, fixes in short cycles"
-        ]
+        ],
+        "caseStudy": {
+          "slug": "ready-quit-solid",
+          "context": "A quit-smoking and vaping platform for Aboriginal and Torres Strait Islander communities, built for an international client. I was the main contributor on the front end and the CMS.",
+          "problem": "The site had to work well on every device for the people it serves, stay easy for the client's team to update, and send contact and newsletter sign-ups straight into the marketing tools they already use.",
+          "approach": [
+            "Built the Next.js site from the Figma designs and designed the Strapi content models and APIs behind it",
+            "Connected HubSpot CRM so every contact and newsletter sign-up lands in the client's marketing tools",
+            "Deployed staging with Docker on the company's self-hosted server for review",
+            "Worked directly with the client over Slack and ClickUp: requirements, UAT feedback and fixes in short cycles"
+          ],
+          "results": [
+            "Lighthouse 86–99 for performance and 96–100 for accessibility on every page, mobile and desktop",
+            "Sign-ups flow into HubSpot with no manual step",
+            "Pre-launch: running on staging, with client change requests shipped as they come in"
+          ]
+        }
       },
       {
         "title": "House Nine & Nine and Found",
@@ -159,7 +175,23 @@
             "image": "nine-and-found",
             "alt": "Home page of nineandfound.com"
           }
-        ]
+        ],
+        "caseStudy": {
+          "slug": "house-nine",
+          "context": "An interior design studio with two sites: House Nine, its studio portfolio, and Nine and Found, its Shopify store. Both were rebuilt to run from one CMS.",
+          "problem": "Two public sites and a store meant content in several places, and the store pages depended on Shopify being up. The studio needed one place to manage everything and sites that hold up on their own.",
+          "approach": [
+            "Built features across 3 apps: the two public Next.js sites and the NestJS + React CMS they share",
+            "Developed the CMS admin: content editors, media library, and user and role management",
+            "Integrated the Shopify Storefront API for product listings, filters and search",
+            "Made the sites lighter and sturdier: smaller images, lazy loading, fewer API calls, and pages that keep working when Shopify is down"
+          ],
+          "results": [
+            "Both sites live at housenine.co.uk and nineandfound.com, managed from one CMS",
+            "Store pages stay up when Shopify is down",
+            "Delivered in 3 milestones agreed with the client: UI, CMS, then docs and user guides, reviewed over Slack and Google Meet"
+          ]
+        }
       },
       {
         "title": "Flip The Vape",
@@ -183,7 +215,22 @@
             "image": "flip-the-vape",
             "alt": "Home page of flipthevape.com"
           }
-        ]
+        ],
+        "caseStudy": {
+          "slug": "flip-the-vape",
+          "context": "A public-health campaign site for Aboriginal communities: a national site plus 8 state and territory subsites.",
+          "problem": "Nine sites had to look and behave like one campaign on desktop, tablet and mobile, without building each one from scratch.",
+          "approach": [
+            "Turned the Figma designs into a responsive front end",
+            "Built a set of reusable UI components shared by the national site and all 8 subsites",
+            "Built the animated, interactive sections that carry the campaign content",
+            "Delivered client change requests through to launch"
+          ],
+          "results": [
+            "The national site and 8 subsites live at flipthevape.com, built on one shared component set",
+            "Responsive across desktop, tablet and mobile, from the same designs"
+          ]
+        }
       },
       {
         "title": "Hatch Quarter",

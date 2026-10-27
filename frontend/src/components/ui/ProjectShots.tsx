@@ -22,11 +22,11 @@ const IMAGES: Record<string, StaticImageData> = {
 
 /**
  * Home-page captures inside a Selected Work card. Nothing is requested until the card is
- * first opened; after that they stay mounted. The intrinsic size keeps the space reserved
+ * first opened (or straight away when `eager`, on a case study page); after that they stay mounted. The intrinsic size keeps the space reserved
  * and the blur placeholder fills it, so the panel doesn't jump when the file arrives.
  */
-export function ProjectShots({ shots }: { shots: NonNullable<Project["screenshots"]> }) {
-  const open = useExpandableOpen();
+export function ProjectShots({ shots, eager = false }: { shots: NonNullable<Project["screenshots"]>; eager?: boolean }) {
+  const open = useExpandableOpen() || eager;
   const [opened, setOpened] = useState(open);
   if (open && !opened) setOpened(true);
 
