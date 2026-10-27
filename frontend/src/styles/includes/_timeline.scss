@@ -49,8 +49,29 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-// The entry being hovered lights its dot.
-li:hover > .timeline-dot {
+// The entry being hovered lights its dot — once the rail has reached it (TimelineReach).
+li[data-reached]:hover > .timeline-dot {
   background: var(--accent);
   box-shadow: 0 0 10px rgba(var(--glow), 0.45);
+}
+
+// Not reached yet: nothing to click, so no hover cues either. These selectors outrank
+// Tailwind's `.group:hover .group-hover:…` and the card's own :hover.
+.timeline > li:not([data-reached]) {
+  .expandable {
+    cursor: default;
+  }
+
+  .group-hover\:text-accent {
+    color: inherit;
+  }
+
+  .expand-toggle {
+    color: var(--muted);
+  }
+
+  .step-card:hover {
+    border-color: var(--line);
+    box-shadow: none;
+  }
 }

@@ -1,3 +1,4 @@
+import { TimelineReach } from "@/components/ui/TimelineReach";
 import { cn } from "@/lib/cn";
 
 type Item = { key: string; period: string; content: React.ReactNode };
@@ -24,11 +25,12 @@ const SIDES = {
  * from 1024 up the rail moves to the centre and entries alternate sides. The rail itself
  * is drawn by `.timeline::before` in styles/includes/_timeline.scss so it can follow the
  * dot column at each breakpoint; styles/includes/_scroll.scss draws it down as the page
- * scrolls, and with `alternate` the cards slide in from their own side.
+ * scrolls, and with `alternate` the cards slide in from their own side. An entry only
+ * responds (dot on hover, expanding) once the rail has reached it — see TimelineReach.
  */
 export function Timeline({ items, alternate = false }: { items: Item[]; alternate?: boolean }) {
   return (
-    <ol
+    <TimelineReach
       className={cn(
         "timeline relative flex flex-col gap-[18px] 768:gap-[22px]",
         alternate && "timeline--alternate",
@@ -60,6 +62,6 @@ export function Timeline({ items, alternate = false }: { items: Item[]; alternat
           </li>
         );
       })}
-    </ol>
+    </TimelineReach>
   );
 }

@@ -52,14 +52,18 @@ export function CommandPalette({ nav, contact }: Props) {
   };
 
   useEffect(() => {
+    // `code` is the physical key, so the shortcut survives non-Latin layouts and
+    // Vietnamese input methods; capture phase so nothing on the page can swallow it first.
+    // preventDefault keeps the browser's own Ctrl+K (focus the address bar) out of the way.
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() !== "k" || !(event.metaKey || event.ctrlKey)) return;
+      if (!(event.metaKey || event.ctrlKey) || event.altKey || event.shiftKey) return;
+      if (event.code !== "KeyK" && event.key.toLowerCase() !== "k") return;
       event.preventDefault();
       if (dialogRef.current?.open) close();
       else open();
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, { capture: true });
+    return () => document.removeEventListener("keydown", onKeyDown, { capture: true });
   }, []);
 
   const items = useMemo<Item[]>(
@@ -158,12 +162,13 @@ export function CommandPalette({ nav, contact }: Props) {
       <button
         type="button"
         onClick={open}
-        aria-label="Open command menu"
-        title={`Command menu (${shortcut})`}
-        className="glow-ring grid h-[40px] min-w-[40px] place-items-center rounded-full border border-line px-[10px] font-mono text-[12px] text-muted transition-[color,box-shadow] hover:text-text"
+        aria-label="Open quick menu"
+        aria-keyshortcuts="Control+K Meta+K"
+        title={`Quick menu (${shortcut})`}
+        className="glow-ring grid h-[40px] min-w-[40px] place-items-center rounded-full border border-line px-[10px] text-[13px] text-muted 768:px-[14px] transition-[color,box-shadow] hover:text-text"
       >
         <Command className="size-[16px] 768:hidden" aria-hidden="true" />
-        <span className="hidden 768:inline">{shortcut}</span>
+        <span className="hidden 768:inline">Quick menu</span>
       </button>
 
       <dialog
@@ -185,6 +190,18 @@ export function CommandPalette({ nav, contact }: Props) {
             }}
             onKeyDown={onKeyDown}
             placeholder="Type a command or section…"
+            // Not a form field: keep the browser's autofill and password managers out
+            // (Bitwarden, 1Password, LastPass each have their own opt-out attribute).
+            type="text"
+            name="quick-menu"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck={false}
+            data-bwignore="true"
+            data-1p-ignore="true"
+            data-lpignore="true"
+            data-form-type="other"
             aria-label="Search commands"
             aria-controls="palette-list"
             aria-activedescendant={visible[current] ? `palette-${visible[current].id}` : undefined}
