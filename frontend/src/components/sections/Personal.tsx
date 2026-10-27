@@ -4,7 +4,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SiteLinks } from "@/components/ui/SiteLinks";
 import type { Portfolio } from "@/types/portfolio";
 
-/** Accordion rows in the same spec-sheet style as the Stack section; all start closed. */
+/**
+ * Accordion rows in the same spec-sheet style as the Stack section; all start closed.
+ * Links sit under the header, always visible, as on the Selected Work cards.
+ */
 export function Personal({ personal }: { personal: Portfolio["personal"] }) {
   return (
     <section id="personal" className="py-[48px] 768:py-[64px] 1024:py-[72px]">
@@ -16,7 +19,7 @@ export function Personal({ personal }: { personal: Portfolio["personal"] }) {
               <li key={project.title} className="border-b border-line">
                 <Expandable
                   label={project.title}
-                  headerClassName="py-[20px] 768:py-[26px]"
+                  headerClassName="pt-[20px] 768:pt-[26px]"
                   header={
                     <span className="grid gap-y-[4px] 768:grid-cols-[150px_1fr] 768:gap-x-[24px]">
                       <span className="font-mono text-[12px] tracking-[0.06em] text-muted 768:mt-[10px]">{project.period}</span>
@@ -29,16 +32,18 @@ export function Personal({ personal }: { personal: Portfolio["personal"] }) {
                       </span>
                     </span>
                   }
-                  panelClassName="pb-[24px] 768:ml-[174px] 768:max-w-[680px] 768:pb-[30px]"
+                  panelClassName="pt-[14px] 768:ml-[174px] 768:max-w-[680px]"
+                  footer={
+                    <div className="mt-[10px] flex flex-wrap gap-x-[16px] gap-y-[4px] pb-[20px] 768:ml-[174px] 768:pb-[26px]">
+                      <SiteLinks links={project.links} empty="private repo" />
+                    </div>
+                  }
                 >
                   <ul className="ml-[18px] list-disc space-y-[6px] text-[15px] text-text marker:text-muted">
                     {project.details.map((detail) => (
                       <li key={detail}>{detail}</li>
                     ))}
                   </ul>
-                  <div className="mt-[14px] flex flex-wrap gap-x-[16px] gap-y-[4px]">
-                    <SiteLinks links={project.links} empty="private repo" />
-                  </div>
                 </Expandable>
               </li>
             ))}
