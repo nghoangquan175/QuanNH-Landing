@@ -71,7 +71,7 @@ body {
   }
 }
 
-// Theme swap (ThemeToggle): the new theme wipes in from the top over the old one.
+// Theme swap (ThemeToggle): the new theme spreads out from the toggle over the old one.
 :root.theme-switching *,
 :root.theme-switching *::before,
 :root.theme-switching *::after {
@@ -84,17 +84,33 @@ body {
   mix-blend-mode: normal;
 }
 
-// A mask taller than the page — opaque top, a soft feathered band, transparent below —
-// slides down, so the wipe's leading edge is a gradient rather than a hard line.
-::view-transition-new(root) {
-  -webkit-mask: linear-gradient(to bottom, #000 45%, transparent 55%) 0 100% / 100% 250% no-repeat;
-  mask: linear-gradient(to bottom, #000 45%, transparent 55%) 0 100% / 100% 250% no-repeat;
-  animation: theme-wipe 0.7s cubic-bezier(0.45, 0, 0.25, 1) forwards;
+// Registered so the radius can be animated; ThemeToggle sets --theme-x/-y (the button's
+// centre) and --theme-reach (distance to the farthest corner) just before the swap.
+@property --theme-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
 }
 
-@keyframes theme-wipe {
+// The circle's edge is a feathered band a quarter of the reach wide, so it reads as a
+// soft glow rather than a hard ring.
+::view-transition-new(root) {
+  --theme-feather: calc(var(--theme-reach, 100vmax) * 0.25);
+  -webkit-mask: radial-gradient(
+    circle at var(--theme-x, 100%) var(--theme-y, 0%),
+    #000 calc(var(--theme-radius) - var(--theme-feather)),
+    transparent var(--theme-radius)
+  );
+  mask: radial-gradient(
+    circle at var(--theme-x, 100%) var(--theme-y, 0%),
+    #000 calc(var(--theme-radius) - var(--theme-feather)),
+    transparent var(--theme-radius)
+  );
+  animation: theme-reveal 0.7s cubic-bezier(0.45, 0, 0.25, 1) forwards;
+}
+
+@keyframes theme-reveal {
   to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
+    --theme-radius: calc(var(--theme-reach, 100vmax) * 1.25);
   }
 }

@@ -14,7 +14,7 @@ function applyTheme(next: string) {
   }
 }
 
-function toggleTheme() {
+function toggleTheme(event: React.MouseEvent<HTMLButtonElement>) {
   const root = document.documentElement;
   const next = root.dataset.theme === "light" ? "dark" : "light";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -24,9 +24,18 @@ function toggleTheme() {
     return;
   }
 
-  // The whole page swaps as one snapshot wiped top to bottom (see _theme.scss), so the
-  // per-element colour transitions are switched off until it finishes — otherwise they
-  // would keep fading underneath the wipe.
+  // The new theme spreads out as a soft-edged circle from the centre of this button
+  // (see _theme.scss), wide enough at the end to cover the farthest corner.
+  const rect = event.currentTarget.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  const reach = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+  root.style.setProperty("--theme-x", `${x}px`);
+  root.style.setProperty("--theme-y", `${y}px`);
+  root.style.setProperty("--theme-reach", `${reach}px`);
+
+  // The whole page swaps as one snapshot, so the per-element colour transitions are
+  // switched off until it finishes — otherwise they would keep fading underneath.
   root.classList.add("theme-switching");
   const transition = document.startViewTransition(() => applyTheme(next));
   transition.finished.finally(() => root.classList.remove("theme-switching"));
