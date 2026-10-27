@@ -113,9 +113,10 @@ export function CommandPalette({ nav, contact }: Props) {
         group: "Actions",
         label: "Switch theme",
         icon: <SunMoon className={iconClass} aria-hidden="true" />,
-        // After the dialog has closed, so the swap's snapshot doesn't catch it.
+        // After the dialog's 0.14s fade-out (_palette.scss), so the swap's snapshot
+        // doesn't catch it half gone.
         run: () => {
-          window.setTimeout(() => switchTheme(document.querySelector("[data-theme-toggle]")), 0);
+          window.setTimeout(() => switchTheme(document.querySelector("[data-theme-toggle]")), 160);
         },
       },
       ...contact.links.map((link) => ({

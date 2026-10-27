@@ -1,5 +1,10 @@
 // Command menu (components/layout/CommandPalette.tsx): a dimmed backdrop and a panel that
-// drops in from a hair above.
+// drops in from a hair above, and eases back out the same way when it closes.
+//
+// Transitions rather than keyframes so closing animates too: `allow-discrete` on display
+// and overlay keeps the <dialog> rendered (and in the top layer) until the fade is done,
+// and @starting-style gives opening a state to come from. Browsers without them just
+// show and hide it.
 
 .palette::backdrop {
   background: rgba(0, 0, 0, 0.45);
@@ -11,31 +16,52 @@
   background: rgba(22, 20, 43, 0.18);
 }
 
-.palette[open] > div {
-  animation: palette-in 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+// Closed (and closing): a quicker, accelerating exit.
+.palette,
+.palette::backdrop {
+  opacity: 0;
+  transition:
+    opacity 0.14s ease-in,
+    display 0.14s allow-discrete,
+    overlay 0.14s allow-discrete;
 }
 
+.palette > div {
+  transform: translateY(-6px) scale(0.98);
+  transition: transform 0.14s ease-in;
+}
+
+// Open: a slightly longer, decelerating entrance.
+.palette[open],
 .palette[open]::backdrop {
-  animation: palette-fade 0.18s ease-out;
+  opacity: 1;
+  transition:
+    opacity 0.18s ease-out,
+    display 0.18s allow-discrete,
+    overlay 0.18s allow-discrete;
 }
 
-@keyframes palette-in {
-  from {
+.palette[open] > div {
+  transform: none;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@starting-style {
+  .palette[open],
+  .palette[open]::backdrop {
     opacity: 0;
+  }
+
+  .palette[open] > div {
     transform: translateY(-6px) scale(0.98);
   }
 }
 
-@keyframes palette-fade {
-  from {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .palette[open] > div,
-  .palette[open]::backdrop {
-    animation: none;
+  .palette,
+  .palette::backdrop,
+  .palette > div {
+    transition: none;
   }
 }
 
