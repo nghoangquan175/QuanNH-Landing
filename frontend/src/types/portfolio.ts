@@ -60,7 +60,6 @@ export type Portfolio = {
       date: string;
       overall: string;
       cefr: string;
-      scores: Stat[];
       imageAlt: string;
     };
     uses: { label: string; text: string }[];

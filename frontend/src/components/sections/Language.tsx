@@ -2,7 +2,10 @@ import ieltsCertificate from "@/assets/images/certificates/ielts-trf.webp";
 import { CertificateViewer } from "@/components/ui/CertificateViewer";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { cn } from "@/lib/cn";
 import type { Portfolio } from "@/types/portfolio";
+
+const CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 export function Language({ language }: { language: Portfolio["language"] }) {
   const cert = language.certificate;
@@ -13,26 +16,36 @@ export function Language({ language }: { language: Portfolio["language"] }) {
         <SectionHeading eyebrow={language.eyebrow} title={language.title} />
 
         <div className="grid gap-[32px] 1024:grid-cols-[360px_1fr] 1024:gap-[64px]">
-          {/* The certificate, summarised; the scan itself opens in the viewer. */}
-          <div className="self-start rounded-[16px] border border-line bg-panel p-[22px] 768:p-[26px]">
+          {/* The certificate, summarised; the scan itself opens in the viewer. From 1024 up
+              the card stretches to the height of the list beside it, with the CEFR scale and
+              the button settling at the bottom. */}
+          <div className="flex flex-col rounded-[16px] border border-line bg-panel p-[22px] 768:p-[26px]">
             <p className="font-mono text-[12px] tracking-[0.08em] text-muted">
               {cert.name.toUpperCase()} · {cert.date}
             </p>
             <div className="mt-[14px] flex items-end gap-[14px]">
-              <span className="text-[56px] font-extrabold leading-none tracking-[-0.03em]">{cert.overall}</span>
+              <span className="text-[56px] font-extrabold leading-none tracking-[-0.03em] 1024:text-[72px]">{cert.overall}</span>
               <span className="pb-[6px] text-[14px] text-muted">Overall band</span>
-              <span className="mb-[8px] ml-auto rounded-full border border-line px-[10px] py-[3px] font-mono text-[11px] text-accent">
-                CEFR {cert.cefr}
-              </span>
             </div>
-            <dl className="mt-[20px] grid grid-cols-4 gap-[8px] border-t border-line pt-[16px]">
-              {cert.scores.map((score) => (
-                <div key={score.label}>
-                  <dt className="font-mono text-[10px] tracking-[0.06em] text-muted">{score.label.toUpperCase()}</dt>
-                  <dd className="mt-[2px] text-[17px] font-semibold">{score.value}</dd>
-                </div>
-              ))}
-            </dl>
+
+            <div className="mt-[28px] border-t border-line pt-[18px] 1024:mt-auto">
+              <p className="font-mono text-[11px] tracking-[0.08em] text-muted">
+                CEFR LEVEL · <span className="text-accent">{cert.cefr}</span>
+              </p>
+              <ol className="mt-[12px] grid grid-cols-6 gap-[4px]" aria-label={`CEFR level ${cert.cefr} of A1 to C2`}>
+                {CEFR_LEVELS.map((level, i) => {
+                  const reached = i <= CEFR_LEVELS.indexOf(cert.cefr);
+                  const current = level === cert.cefr;
+                  return (
+                    <li key={level} aria-current={current ? "true" : undefined}>
+                      <span className={cn("block h-[6px] rounded-full", reached ? "bg-accent" : "bg-line", reached && !current && "opacity-50")} />
+                      <span className={cn("mt-[6px] block font-mono text-[10px]", current ? "text-accent" : "text-muted")}>{level}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+
             <div className="mt-[22px]">
               <CertificateViewer image={ieltsCertificate} alt={cert.imageAlt} label="View certificate" />
             </div>

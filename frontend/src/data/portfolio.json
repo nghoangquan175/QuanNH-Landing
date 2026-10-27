@@ -305,24 +305,6 @@
       "date": "DEC 2025",
       "overall": "6.5",
       "cefr": "B2",
-      "scores": [
-        {
-          "label": "Listening",
-          "value": "7.0"
-        },
-        {
-          "label": "Reading",
-          "value": "6.5"
-        },
-        {
-          "label": "Writing",
-          "value": "7.0"
-        },
-        {
-          "label": "Speaking",
-          "value": "5.5"
-        }
-      ],
       "imageAlt": "IELTS Academic Test Report Form, overall band 6.5 (personal ID and date of birth hidden)"
     },
     "uses": [
